@@ -108,3 +108,9 @@ example:
 "you", "me" | foreach-object { "sya $_" }
 "you", "me" | where-object { $_ -match "u" }
 ```
+
+## Extension
+
+[CmdletBinding()]
+
+[Parameter(Mandatory = $true)]
