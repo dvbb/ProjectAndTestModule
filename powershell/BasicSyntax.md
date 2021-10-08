@@ -114,3 +114,14 @@ example:
 [CmdletBinding()]
 
 [Parameter(Mandatory = $true)]
+
+## Moduele
+  
+Import-Module <name/path>
+
+$PSModulePath
+
+Get-Module
+
+在.ps1中加入了新的function，需要从新`Import-Module ./temp.ps1` 来加载Module
+Get-Module可以查看当前的Module List，然后就可以调用 `"string" | FuncName` 来调用(可Tab补齐)
