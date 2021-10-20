@@ -1,0 +1,10 @@
+Appreciate:101
+priority:5
+previously：11
+indicates：24
+majority:1
+criteria:3
+maintenance:12
+pattern:56
+mechanism:13
+individual:5

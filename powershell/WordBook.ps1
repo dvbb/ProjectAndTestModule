@@ -4,13 +4,13 @@
 process {
     $array = Get-Content .\WordBook.txt
     $append = $false
-    $array
     for ($i = 0; $i -lt $array.Count; $i++) 
     {
         $strlist = $array[$i].Split(":")
         if ($strlist[0].Equals($_)) {
             $append = $true
             $array[$i] = $strlist[0] + ":" + (1 + $strlist[1])
+            BREAK
         }
     }
     if ($append) 
