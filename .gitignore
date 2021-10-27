@@ -1,14 +1,33 @@
+## Ignore Visual Studio temporary files, build results
 
-csharp/ConsoleApp/.vs/ConsoleApp/v16/.suo
-csharp/ConsoleApp/.vs/ConsoleApp/v16/TestStore/0/000.testlog
-csharp/ConsoleApp/ConsoleApp/obj/ConsoleApp.csproj.nuget.dgspec.json
-csharp/ConsoleApp/.vs/ConsoleApp/v16/TestStore/0/testlog.manifest
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.AssemblyInfoInputs.cache
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.assets.cache
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.csproj.AssemblyReference.cache
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
-csharp/ConsoleApp/ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.AssemblyInfo.cs
-csharp/ConsoleApp/ConsoleApp/obj/project.nuget.cache
-csharp/ConsoleApp/ConsoleApp/obj/project.assets.json
-csharp/ConsoleApp/ConsoleApp/obj/ConsoleApp.csproj.nuget.g.targets
+# Visual Studio cache/options directory
+*.suo
+*.user
+*.sln.docstates
+.vs/
+*.lock.json
+developer/
+launch.json
+launchSettings.json
+
+# Rider cache/options directory
+.idea/
+
+# Build results
+bin/
+obj/
+TestResults/
+build/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+
+# Sensitive files
+*.keys
+*.pfx
+*.json.env
+*.bicep.env
+
+# MSBuild binary log files
+msbuild.binlog
