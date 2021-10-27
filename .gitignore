@@ -1,0 +1,33 @@
+## Ignore Visual Studio temporary files, build results
+
+# Visual Studio cache/options directory
+*.suo
+*.user
+*.sln.docstates
+.vs/
+*.lock.json
+developer/
+launch.json
+launchSettings.json
+
+# Rider cache/options directory
+.idea/
+
+# Build results
+bin/
+obj/
+TestResults/
+build/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+
+# Sensitive files
+*.keys
+*.pfx
+*.json.env
+*.bicep.env
+
+# MSBuild binary log files
+msbuild.binlog
