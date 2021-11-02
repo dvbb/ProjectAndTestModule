@@ -3,6 +3,8 @@
 # Visual Studio cache/options directory
 *.suo
 *.user
+*.tmp
+*.cache
 *.sln.docstates
 .vs/
 *.lock.json
@@ -14,10 +16,8 @@ launchSettings.json
 .idea/
 
 # Build results
-bin/
-obj/
-TestResults/
-build/
+csharp/ConsoleApp/ConsoleApp/bin/
+csharp/ConsoleApp/ConsoleApp/obj/
 
 # Visual Studio profiler
 *.psess
