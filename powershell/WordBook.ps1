@@ -8,7 +8,7 @@ process
     for ($i = 0; $i -lt $array.Count; $i++) 
     {
         $strlist = $array[$i].Split(":")
-        if ($strlist[0] -eq $_) 
+        if ($strlist[0].Trim(" ") -eq $_.Trim(" ")) 
         {
             $append = $true
             $array[$i] = $strlist[0] + ":" + (1 + $strlist[1])
@@ -21,6 +21,7 @@ process
     }
     else
     {
-        ($_ -replace ' ','')+":1" |  Out-File -FilePath WordBook.txt  -Append
+        ($_.Trim(" "))+":1" |  Out-File -FilePath WordBook.txt  -Append
     }
 }
+
