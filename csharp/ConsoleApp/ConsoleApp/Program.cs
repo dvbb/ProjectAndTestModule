@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -6,7 +7,13 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+        }
+
+        static void chage(int[] nums)
+        {
+            nums[1] = 0;
+            nums[2] = 0;
         }
     }
 }
