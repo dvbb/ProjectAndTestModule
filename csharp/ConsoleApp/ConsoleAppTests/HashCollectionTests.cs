@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ConsoleAppTests
 {
-    public class HashCollectionTest
+    public class HashCollectionTests
     {
         [Test]
         public void HashTableCommonTest()
