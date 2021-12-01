@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ConsoleApp
 {
-    public class ACLAction
+    public class AclAction
     {
-        public ACLAction(){}
+        public AclAction(){}
 
-        public ACLAction(string name)
+        public AclAction(string name)
         {
             System.Console.WriteLine(name);
         }
