@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace ConsoleAppTests
+namespace ConsoleAppTests.DataStructure
 {
     public class ArrayCollectionTests
     {

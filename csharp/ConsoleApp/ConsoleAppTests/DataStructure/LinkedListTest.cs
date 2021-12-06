@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleAppTests
+namespace ConsoleAppTests.DataStructure
 {
     public class LinkedListTest
     {
