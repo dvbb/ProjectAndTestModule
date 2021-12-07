@@ -67,5 +67,26 @@ namespace ConsoleApp.DataStructure
             }
             return result;
         }
+
+        public static List<string> DFS(Node root)
+        {
+            if (root is null )
+                return new List<string>();
+            List<string> result = new List<string>();
+            DFSSerch(ref result,root);
+            return result;
+        }
+
+        public static void  DFSSerch(ref List<string> list,Node node)
+        {
+            if (node.Left == null && node.Right == null)
+            {
+                list.Add(node.Value.ToString());
+                return;
+            }
+            list.Add(node.Value.ToString());
+            DFSSerch(ref list, node.Left);
+            DFSSerch(ref list, node.Right);
+        }
     }
 }
