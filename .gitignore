@@ -12,12 +12,12 @@ developer/
 launch.json
 launchSettings.json
 
-# Rider cache/options directory
-.idea/
 
 # Build results
 csharp/ConsoleApp/ConsoleApp/bin/
 csharp/ConsoleApp/ConsoleApp/obj/
+csharp/ConsoleApp/ConsoleAppTests/bin/
+csharp/ConsoleApp/ConsoleAppTests/obj/
 
 # Visual Studio profiler
 *.psess
@@ -28,6 +28,3 @@ csharp/ConsoleApp/ConsoleApp/obj/
 *.pfx
 *.json.env
 *.bicep.env
-
-# MSBuild binary log files
-msbuild.binlog
