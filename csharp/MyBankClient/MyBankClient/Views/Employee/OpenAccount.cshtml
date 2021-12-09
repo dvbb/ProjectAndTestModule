@@ -1,0 +1,115 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
+    <title>开户</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background: rgb(207, 215, 216);
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="./img/index/cat.gif" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="./index">首页</a></li>
+                    <li><a href="./SaveMoney">存钱</a></li>
+                    <li><a href="./Withdraw">取钱</a></li>
+                    <li class="active"><a href="./OpenAccount">开户</a></li>
+                    <li><a href="../Home/index">安全退出</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./UpdatePwdFrm">修改密码</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container" id="app">
+        <div class="jumbotron">
+            <div class="container">
+                <div class="jumbotron">
+                    <form>
+                        <div class="form-group">
+                            <label>储户号</label>
+                            <input class="form-control" id="dId">
+                        </div>
+
+                        <div class="form-group">
+                            <label>姓名</label>
+                            <input class="form-control" id="dName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input class="form-control" id="pwd">
+                        </div>
+
+                        <button class="btn btn-success" type="submit" v-on:click="mounted">开户</button>
+                        <button class="btn btn-warning" type="reset">重填</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            methods: {
+                mounted() {
+                    var _this = this
+                    var dId = $("#dId").val()
+                    var dName = $("#dName").val()
+                    var pwd = $("#pwd").val()
+                    console.log(dId)
+                    console.log(dName)
+                    console.log(pwd)
+                    axios.get('./OpenAmount?dId=' + dId + "&dName=" + dName + "&pwd=" + pwd)
+                        .then(function (response) {
+                            console.log(response.data);
+                            _this.amountList = response.data
+                        })
+                    alert("开户成功")
+                }
+
+            }
+        })
+    </script>
+
+
+</body>
+</html>

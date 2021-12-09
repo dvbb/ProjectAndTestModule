@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <title>主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background: rgb(207, 215, 216);
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="./img/index/cat.gif" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="./index">首页</a></li>
+                    <li><a href="./SaveMoney">存钱</a></li>
+                    <li><a href="./Withdraw">取钱</a></li>
+                    <li><a href="./OpenAccount">开户</a></li>
+                    <li><a href="../Home/index">安全退出</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./UpdatePwdFrm">修改密码</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+
+
+            <button class="btn btn-lg btn-success">打印</button>
+            <h1></h1>
+
+            <table class="table  table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <th colspan="6" style="font-size: 30px;">MyBank银行 &nbsp; (整整)储蓄存单</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">项目：@Session["save_pid"]</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3">储户号：@Session["save_did"]</th>
+                        <th colspan="3">存款人：@Session["save_dName"]</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">住址：@Session["save_addr"]</th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">币种：<span style="color: brown;">人民币</span></th>
+                    </tr>
+                    <tr>
+                        <th colspan="6">金额：@Session["save_deposit"]</th>
+                    </tr>
+                    <tr>
+                        <th>存入日：@Session["save_startTime"]</th>
+                        <th>起息日：@Session["save_startTime"]</th>
+                        <th>存款类型：@Session["save_dType"]</th>
+                        <th>利率：@Session["save_rate"]</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

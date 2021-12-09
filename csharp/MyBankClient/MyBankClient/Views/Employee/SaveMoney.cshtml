@@ -1,0 +1,150 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.min.js"></script>
+    <title>存钱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background: rgb(207, 215, 216);
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="./img/index/cat.gif" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="./index">首页</a></li>
+                    <li class="active"><a href="./SaveMoney">存钱</a></li>
+                    <li><a href="./Withdraw">取钱</a></li>
+                    <li><a href="./OpenAccount">开户</a></li>
+                    <li><a href="../Home/index">安全退出</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./UpdatePwdFrm">修改密码</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container" id="app">
+        <div class="jumbotron">
+            <form>
+                <div class="form-group">
+                    <label>储户号</label>
+                    <input class="form-control" id="dId">
+                </div>
+
+                <div class="form-group">
+                    <label>存款人</label>
+                    <input class="form-control" id="dName">
+                </div>
+
+                <div class="form-group">
+                    <label>住址</label>
+                    <input class="form-control" id="addr">
+                </div>
+
+                <div class="form-group">
+                    <label>存款类型</label>
+                    <select name="" id="dType" class="form-control">
+                        <option value="活期">活期</option>
+                        <option value="定期三月">定期三月</option>
+                        <option value="定期一年">定期一年</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>利率</label>
+                    <input class="form-control" id="rate" value="0.3" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>存款金额</label>
+                    <input class="form-control" id="deposit">
+                </div>
+
+                <button class="btn btn-success" type="button" v-on:click="mounted">提交</button>
+                <button class="btn btn-warning" type="reset">重填</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $("#dType").click(function () {
+                if ($("#dType").val() == "活期") {
+                    $("#rate").attr("value", 0.3)
+                }
+                if ($("#dType").val() == "定期三月") {
+                    $("#rate").attr("value", 1.35)
+                }
+                if ($("#dType").val() == "定期一年") {
+                    $("#rate").attr("value", 1.75)
+                }
+            })
+        })
+    </script>
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            },
+            methods: {
+                mounted() {
+                    var _this = this
+                    var dId = $("#dId").val()
+                    var dName = $("#dName").val()
+                    var addr = $("#addr").val()
+                    var dType = $("#dType").val()
+                    var rate = $("#rate").val()
+                    var deposit = $("#deposit").val()
+                    console.log(dId)
+                    console.log(dName)
+                    console.log(addr)
+                    console.log(dType)
+                    console.log(rate)
+                    console.log(deposit)
+                    axios.get('./PostSaveMoney?dId=' + dId + "&dName=" + dName + "&addr=" + addr + "&dType=" + dType + "&rate=" + rate + "&deposit=" + deposit)
+                        .then(function (response) {
+                            console.log(response.data);
+                            alert("存款成功")
+                            window.location = "./SaveMoneyForm";
+                        })
+                }
+
+            }
+        })
+    </script>
+
+</body>
+</html>

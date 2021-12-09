@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <title>欢迎使用计算机储蓄系统~</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background: rgb(207, 215, 216);
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="./img/index/cat.gif" alt=""></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="javascript:;">首页</a></li>
+                    <li><a href="javascript:;">查询余额</a></li>
+                    <li><a href="javascript:;"data-toggle="modal" data-target="#myModal">修改密码</a></li>
+                    <li><a href="../Home/index">安全退出</a></li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>欢迎您，@Session["dName"]</h1>
+            <P>您当前的余额为：@Session["deposit"]</P>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p><a class="btn btn-primary btn-lg" href="javascript:;" role="button">Learn more</a></p>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form>
+                        <table class="table  table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <th colspan="1">旧密码：</th>
+                                    <th colspan="5"><input type="password" id="oldpwd"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="1">新密码：</th>
+                                    <th colspan="5"><input type="password" id="pwd"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="1">再次输入新密码：</th>
+                                    <th colspan="5"><input type="password" id="pwd2"></th>
+                                </tr>
+                                <tr>
+                                    <th colspan="6">
+                                        <button class="btn btn-success" type="button" id="btn-update">修改密码</button>
+                                        <button class="btn btn-warning" type="reset">重填</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
