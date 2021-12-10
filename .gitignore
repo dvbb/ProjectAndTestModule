@@ -8,6 +8,8 @@
 *.sln.docstates
 *.lock.json
 .vs/
+launch.json
+launchSettings.json
 
 
 # Build results
