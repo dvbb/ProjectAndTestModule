@@ -6,18 +6,14 @@
 *.tmp
 *.cache
 *.sln.docstates
-.vs/
 *.lock.json
-developer/
-launch.json
-launchSettings.json
+.vs/
 
 
 # Build results
-csharp/ConsoleApp/ConsoleApp/bin/
-csharp/ConsoleApp/ConsoleApp/obj/
-csharp/ConsoleApp/ConsoleAppTests/bin/
-csharp/ConsoleApp/ConsoleAppTests/obj/
+csharp/*/*/bin
+csharp/*/*/obj
+csharp/*/packages
 
 # Visual Studio profiler
 *.psess
