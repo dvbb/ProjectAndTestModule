@@ -4,16 +4,20 @@
     word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
+
 a {
-    color: #0366d6;
+    text-decoration: none;
+    color: #458B74;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+li a{
+    color:azure;
 }
+
+li a:hover{
+    color:aquamarine;
+}
+
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
@@ -66,11 +70,13 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
+    padding-top:20px;
+    padding-bottom:10px;
     /*white-space: nowrap;*/
     background: rgb(46, 44, 44);
 }
 
     .footer p {
-        line-height: 40px;
-        padding-top: 20px;
+        height: auto;
+        /*margin-top:5px auto;*/
     }
