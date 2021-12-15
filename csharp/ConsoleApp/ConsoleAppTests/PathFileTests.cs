@@ -47,5 +47,25 @@ namespace ConsoleAppTests
             Console.WriteLine("GetDirectories() " + directoryList + " " + directoryList.Count()); //cur下的所有子目录
             Console.WriteLine();
         }
+
+        [Test]
+        public void FileTest()
+        {
+            string path1 = @"d:\newFile1.txt";
+            string path2 = @"d:\newFile2.txt";
+
+            // File.Open()
+            FileStream fileStream = File.Open(path1, FileMode.Append);
+            byte[] Info = { (byte)'h', (byte)'e', (byte)'l', (byte)'l', (byte)'o' };
+            fileStream.Write(Info, 0, Info.Length);
+            fileStream.Close();
+
+            // File.Create()
+            FileStream fileStream2 =  File.Create(path2);
+            fileStream2.Close();
+
+            // File.Exists()
+            Console.WriteLine(path1 + "does exists? " + File.Exists(path1));
+        }
     }
 }
