@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ConsoleAppTests
 {
-    internal class ProcessTests
+    public class ProcessTests
     {
         private static string DotNetExeName => GetDotnetExe();
         private static string S_DotNetExe => GetS_DotnetExe();

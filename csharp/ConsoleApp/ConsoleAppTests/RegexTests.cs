@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace ConsoleAppTests
 {
-    internal class RegexTests
+    public class RegexTests
     {
         #region Other char match rule
         //  \b  匹配一个单词边界，指单词和空格间的位置
