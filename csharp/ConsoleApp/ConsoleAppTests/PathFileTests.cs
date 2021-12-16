@@ -28,6 +28,14 @@ namespace ConsoleAppTests
             Console.WriteLine("GetFileNameWithoutExtension(): " + nameWithoutExtension);
             Console.WriteLine("GetDirectoryName(): " + dir);
             Console.WriteLine("GetPathRoot(): " + root);
+
+            Console.WriteLine("\ndiff with Combine() and Join()");
+            string tempPath1 = @"d:\repo\";
+            string tempPath2 = @"d:\repo\hello.txt";
+            Console.WriteLine($"path1: {tempPath1}");
+            Console.WriteLine($"path2: {tempPath2}");
+            Console.WriteLine("Combine(): " + Path.Combine(tempPath1, tempPath2));
+            Console.WriteLine("Join(): " + Path.Join(tempPath1, tempPath2));
         }
 
         [Test]
@@ -61,11 +69,19 @@ namespace ConsoleAppTests
             fileStream.Close();
 
             // File.Create()
-            FileStream fileStream2 =  File.Create(path2);
+            FileStream fileStream2 = File.Create(path2);
             fileStream2.Close();
 
             // File.Exists()
-            Console.WriteLine(path1 + "does exists? " + File.Exists(path1));
+            Console.WriteLine(path1 + " does exists? " + File.Exists(path1));
+
+            // File.Delete()
+            File.Delete(path1);
+            File.Delete(path2);
+            Console.WriteLine();
+            Console.WriteLine($"Delete:{path1}");
+            Console.WriteLine(path1 + " does exists? " + File.Exists(path1));
+
         }
     }
 }
