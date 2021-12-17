@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBankClient", "MyBankClient\MyBankClient.csproj", "{1975C120-D77F-4047-9E14-C427A3A9BFAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "link", "link\link.csproj", "{6C17025C-A85A-4D7A-9EEE-C6F44D03FE6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "link", "link\link.csproj", "{6C17025C-A85A-4D7A-9EEE-C6F44D03FE6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
