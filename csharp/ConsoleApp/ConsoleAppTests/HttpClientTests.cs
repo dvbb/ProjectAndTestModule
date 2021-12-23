@@ -37,5 +37,22 @@ namespace ConsoleAppTests
             var response = await client.SendAsync(message);
             Console.WriteLine(response.StatusCode);
         }
+
+        [Test]
+        public void UriTest()
+        {
+            Console.WriteLine(Uri.UriSchemeHttps);
+            Console.WriteLine(Uri.UriSchemeFile);
+            Console.WriteLine(Uri.UriSchemeFtp);
+            Console.WriteLine(Uri.UriSchemeGopher);
+            Console.WriteLine(Uri.UriSchemeHttp);
+            Console.WriteLine(Uri.UriSchemeHttps);
+            Console.WriteLine(Uri.UriSchemeMailto);
+            Console.WriteLine(Uri.UriSchemeNetPipe);
+            Console.WriteLine(Uri.UriSchemeNetTcp);
+            Console.WriteLine(Uri.UriSchemeNews);
+            Console.WriteLine(Uri.UriSchemeNntp);
+            Console.WriteLine();
+        }
     }
 }
