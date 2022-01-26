@@ -166,6 +166,195 @@
         <member name="P:ConsoleApp.Fakes.StubTips.InstanceObserver">
             <summary>Gets or sets the instance observer.</summary>
         </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.ShimDetail">
+            <summary>Shim type of ConsoleApp.FakesSample.Detail</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimDetail.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimDetail.#ctor(ConsoleApp.FakesSample.Detail)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.DescriptionGet">
+            <summary>Sets the Shim of Detail.get_Description(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.DescriptionSetString">
+            <summary>Sets the Shim of Detail.set_Description(Detail this, String value)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.NameGet">
+            <summary>Sets the Shim of Detail.get_Name(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.NameSetString">
+            <summary>Sets the Shim of Detail.set_Name(Detail this, String value)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.priceGet">
+            <summary>Sets the Shim of Detail.get_price(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.AllInstances.priceSetInt32">
+            <summary>Sets the Shim of Detail.set_price(Detail this, Int32 value)</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimDetail.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimDetail.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.Constructor">
+            <summary>Sets the Shim of Detail.Detail(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.DescriptionGet">
+            <summary>Sets the Shim of Detail.get_Description(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.DescriptionSetString">
+            <summary>Sets the Shim of Detail.set_Description(Detail this, String value)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.NameGet">
+            <summary>Sets the Shim of Detail.get_Name(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.NameSetString">
+            <summary>Sets the Shim of Detail.set_Name(Detail this, String value)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.priceGet">
+            <summary>Sets the Shim of Detail.get_price(Detail this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimDetail.priceSetInt32">
+            <summary>Sets the Shim of Detail.set_price(Detail this, Int32 value)</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.ShimStock">
+            <summary>Shim type of ConsoleApp.FakesSample.Stock</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimStock.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimStock.#ctor(ConsoleApp.FakesSample.Stock)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.ShimStock.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.AllInstances.GetCompanyString">
+            <summary>Sets the Shim of Stock.GetCompany(Stock this, String name)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.AllInstances.GetDetailString">
+            <summary>Sets the Shim of Stock.GetDetail(Stock this, String name)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.AllInstances.GetHighest">
+            <summary>Sets the Shim of Stock.GetHighest(Stock this)</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimStock.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimStock.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimStock.Bind(ConsoleApp.FakesSample.IStock)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.Constructor">
+            <summary>Sets the Shim of Stock.Stock(Stock this)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.GetCompanyString">
+            <summary>Sets the Shim of Stock.GetCompany(Stock this, String name)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.GetDetailString">
+            <summary>Sets the Shim of Stock.GetDetail(Stock this, String name)</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimStock.GetHighest">
+            <summary>Sets the Shim of Stock.GetHighest(Stock this)</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities">
+            <summary>Shim type of ConsoleApp.FakesSample.TestForFakesUtilities</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.GetRandomNumber">
+            <summary>Sets the Shim of TestForFakesUtilities.GetRandomNumber()</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.GetRandomString">
+            <summary>Sets the Shim of TestForFakesUtilities.GetRandomString()</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.ShimTestForFakesUtilities.GetRandomStringInt32">
+            <summary>Sets the Shim of TestForFakesUtilities.GetRandomString(Int32 count)</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.StubDetail">
+            <summary>Stub type of ConsoleApp.FakesSample.Detail</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubDetail.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubDetail.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubDetail.InitializeStub">
+            <summary>Initializes a new instance of type StubDetail</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubDetail.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubDetail.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.StubIStock">
+            <summary>Stub type of ConsoleApp.FakesSample.IStock</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubIStock.#ctor">
+            <summary>Initializes a new instance of type StubIStock</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubIStock.ConsoleApp#FakesSample#IStock#GetCompany(System.String)">
+            <summary>Sets the Stub of IStock.GetCompany(IStock this, String name)</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubIStock.ConsoleApp#FakesSample#IStock#GetDetail(System.String)">
+            <summary>Sets the Stub of IStock.GetDetail(IStock this, String name)</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubIStock.ConsoleApp#FakesSample#IStock#GetHighest">
+            <summary>Sets the Stub of IStock.GetHighest(IStock this)</summary>
+        </member>
+        <member name="F:ConsoleApp.FakesSample.Fakes.StubIStock.GetCompanyString">
+            <summary>Sets the stub of IStock.GetCompany(IStock this, String name)</summary>
+        </member>
+        <member name="F:ConsoleApp.FakesSample.Fakes.StubIStock.GetDetailString">
+            <summary>Sets the stub of IStock.GetDetail(IStock this, String name)</summary>
+        </member>
+        <member name="F:ConsoleApp.FakesSample.Fakes.StubIStock.GetHighest">
+            <summary>Sets the stub of IStock.GetHighest(IStock this)</summary>
+        </member>
+        <member name="T:ConsoleApp.FakesSample.Fakes.StubStock">
+            <summary>Stub type of ConsoleApp.FakesSample.Stock</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubStock.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubStock.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.FakesSample.Fakes.StubStock.InitializeStub">
+            <summary>Initializes a new instance of type StubStock</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubStock.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.FakesSample.Fakes.StubStock.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
         <member name="T:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll">
             <summary>Shim type of ConsoleApp.Multithreading.UseWaitAll</summary>
         </member>
