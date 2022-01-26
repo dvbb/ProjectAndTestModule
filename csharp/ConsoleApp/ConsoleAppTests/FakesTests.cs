@@ -63,14 +63,14 @@ namespace ConsoleAppTests
         }
 
         [Test]
-        public void Test()
+        public void WithoutShims()
         {
             int number = TestForFakesUtilities.GetRandomNumber();
             Assert.AreEqual(50, number);
         }
 
         [Test]
-        public void FakesTest1()
+        public void ShimsTest1()
         {
             using (ShimsContext.Create())
             {
