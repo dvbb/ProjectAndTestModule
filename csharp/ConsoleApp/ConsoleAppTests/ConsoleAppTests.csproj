@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FakesAssemblies\**" />
+    <EmbeddedResource Remove="FakesAssemblies\**" />
+    <None Remove="FakesAssemblies\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-preview-20211109-03" />
+    <PackageReference Include="Microsoft.QualityTools.Testing.Fakes" Version="16.11.230815" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit.Console" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
@@ -16,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp\ConsoleApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalDesignTimeBuildInput Remove="FakesAssemblies\**" />
   </ItemGroup>
 
 </Project>

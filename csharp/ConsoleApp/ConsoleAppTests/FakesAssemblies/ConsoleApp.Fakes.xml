@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConsoleApp.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:ConsoleApp.DataStructure.Fakes.ShimNode">
+            <summary>Shim type of ConsoleApp.DataStructure.Node</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.ShimNode.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.ShimNode.#ctor(ConsoleApp.DataStructure.Node)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.DataStructure.Fakes.ShimNode.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.BFSNode">
+            <summary>Sets the Shim of Node.BFS(Node root)</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.ShimNode.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.ShimNode.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.Constructor">
+            <summary>Sets the Shim of Node.Node(Node this)</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.ConstructorInt32NodeNode">
+            <summary>Sets the Shim of Node.Node(Node this, Int32 value, Node left, Node right)</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.CreateByIntArrayInt32Array">
+            <summary>Sets the Shim of Node.CreateByIntArray(Int32[] nums)</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.DFSNode">
+            <summary>Sets the Shim of Node.DFS(Node root)</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.ShimNode.DFSSerchListOfStringRefNode">
+            <summary>Sets the Shim of Node.DFSSerch(List`1* list, Node node)</summary>
+        </member>
+        <member name="T:ConsoleApp.DataStructure.Fakes.StubNode">
+            <summary>Stub type of ConsoleApp.DataStructure.Node</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.StubNode.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.StubNode.#ctor(System.Int32,ConsoleApp.DataStructure.Node,ConsoleApp.DataStructure.Node)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.StubNode.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.DataStructure.Fakes.StubNode.InitializeStub">
+            <summary>Initializes a new instance of type StubNode</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.StubNode.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.DataStructure.Fakes.StubNode.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.ShimAclAction">
+            <summary>Shim type of ConsoleApp.AclAction</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimAclAction.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimAclAction.#ctor(ConsoleApp.AclAction)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.ShimAclAction.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimAclAction.AllInstances.UseEnvironment">
+            <summary>Sets the Shim of AclAction.UseEnvironment(AclAction this)</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimAclAction.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimAclAction.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimAclAction.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimAclAction.Constructor">
+            <summary>Sets the Shim of AclAction.AclAction(AclAction this)</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimAclAction.ConstructorString">
+            <summary>Sets the Shim of AclAction.AclAction(AclAction this, String name)</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimAclAction.UseEnvironment">
+            <summary>Sets the Shim of AclAction.UseEnvironment(AclAction this)</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.ShimTips">
+            <summary>Shim type of ConsoleApp.Tips</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimTips.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimTips.#ctor(ConsoleApp.Tips)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.ShimTips.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimTips.AllInstances.UseEnvironment">
+            <summary>Sets the Shim of Tips.UseEnvironment(Tips this)</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimTips.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.ShimTips.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimTips.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimTips.Constructor">
+            <summary>Sets the Shim of Tips.Tips(Tips this)</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.ShimTips.UseEnvironment">
+            <summary>Sets the Shim of Tips.UseEnvironment(Tips this)</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.StubAclAction">
+            <summary>Stub type of ConsoleApp.AclAction</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.StubAclAction.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.StubAclAction.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubAclAction.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.StubAclAction.InitializeStub">
+            <summary>Initializes a new instance of type StubAclAction</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubAclAction.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubAclAction.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:ConsoleApp.Fakes.StubTips">
+            <summary>Stub type of ConsoleApp.Tips</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.StubTips.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubTips.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.Fakes.StubTips.InitializeStub">
+            <summary>Initializes a new instance of type StubTips</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubTips.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.Fakes.StubTips.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll">
+            <summary>Shim type of ConsoleApp.Multithreading.UseWaitAll</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.#ctor(ConsoleApp.Multithreading.UseWaitAll)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.AllInstances.ShowString">
+            <summary>Sets the Shim of UseWaitAll.Show(UseWaitAll this, String str)</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.Constructor">
+            <summary>Sets the Shim of UseWaitAll.UseWaitAll(UseWaitAll this)</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.ShimUseWaitAll.ShowString">
+            <summary>Sets the Shim of UseWaitAll.Show(UseWaitAll this, String str)</summary>
+        </member>
+        <member name="T:ConsoleApp.Multithreading.Fakes.StubUseWaitAll">
+            <summary>Stub type of ConsoleApp.Multithreading.UseWaitAll</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.StubUseWaitAll.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.StubUseWaitAll.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:ConsoleApp.Multithreading.Fakes.StubUseWaitAll.InitializeStub">
+            <summary>Initializes a new instance of type StubUseWaitAll</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.StubUseWaitAll.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:ConsoleApp.Multithreading.Fakes.StubUseWaitAll.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:ConsoleApp.Utilities.Fakes.ShimFormatting">
+            <summary>Shim type of ConsoleApp.Utilities.Formatting</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:ConsoleApp.Utilities.Fakes.ShimFormatting.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.ConvertMultipleListOf1IEnumerableOfIEnumerableOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}},System.Collections.Generic.List{System.String}})">
+            <summary>Sets the Shim of Formatting.ConvertMultipleList(IEnumerable`1 list)</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.ConvertOf1IEnumerableOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.IEnumerable{``0},System.String})">
+            <summary>Sets the Shim of Formatting.Convert(IEnumerable`1 list)</summary>
+        </member>
+        <member name="T:Microsoft.QualityTools.Testing.Fakes.Delegates.ConsoleAppDelegates">
+            <summary>Contains custom delegates used for the stubs and shims of ConsoleApp</summary>
+        </member>
+    </members>
+</doc>
