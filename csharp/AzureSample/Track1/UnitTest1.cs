@@ -1,8 +1,10 @@
+using AzureSample;
+using System;
 using NUnit.Framework;
 
 namespace Track1
 {
-    public class Tests
+    public class Tests : TestBase
     {
         [SetUp]
         public void Setup()
@@ -12,6 +14,7 @@ namespace Track1
         [Test]
         public void Test1()
         {
+            Console.WriteLine(subscription);
             Assert.Pass();
         }
     }
