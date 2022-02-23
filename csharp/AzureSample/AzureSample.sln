@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureSample", "AzureSample\AzureSample.csproj", "{8A0B795F-CA46-48F6-A543-6751F9A217BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureSample", "AzureSample\AzureSample.csproj", "{8A0B795F-CA46-48F6-A543-6751F9A217BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluent", "Fluent\Fluent.csproj", "{D65885BE-E797-465E-81ED-8A4D58DC43A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fluent", "Fluent\Fluent.csproj", "{D65885BE-E797-465E-81ED-8A4D58DC43A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Track1", "Track1\Track1.csproj", "{E7AEBB41-523D-4666-9DCF-5C7844547387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Track1", "Track1\Track1.csproj", "{E7AEBB41-523D-4666-9DCF-5C7844547387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Track2", "Track2\Track2.csproj", "{4031A33D-753E-4387-A01C-C95D5D06F8C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E7AEBB41-523D-4666-9DCF-5C7844547387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7AEBB41-523D-4666-9DCF-5C7844547387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7AEBB41-523D-4666-9DCF-5C7844547387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
