@@ -424,6 +424,12 @@
         <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.ConvertOf1IEnumerableOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.IEnumerable{``0},System.String})">
             <summary>Sets the Shim of Formatting.Convert(IEnumerable`1 list)</summary>
         </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.ConvertOf1M0Array``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{``0[],System.String})">
+            <summary>Sets the Shim of Formatting.Convert(!!0[] nums)</summary>
+        </member>
+        <member name="M:ConsoleApp.Utilities.Fakes.ShimFormatting.ConvertOf1M0ArrayInt32``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{``0[],System.Int32,System.String})">
+            <summary>Sets the Shim of Formatting.Convert(!!0[] nums, Int32 length)</summary>
+        </member>
         <member name="T:Microsoft.QualityTools.Testing.Fakes.Delegates.ConsoleAppDelegates">
             <summary>Contains custom delegates used for the stubs and shims of ConsoleApp</summary>
         </member>

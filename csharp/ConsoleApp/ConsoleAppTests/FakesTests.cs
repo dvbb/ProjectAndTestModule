@@ -12,6 +12,7 @@ namespace ConsoleAppTests
     public class FakesTests
     {
         [Test]
+        [Ignore("Error sample")]
         public void WithoutWtubTest()
         {
             Stock stock = new Stock();
@@ -63,6 +64,7 @@ namespace ConsoleAppTests
         }
 
         [Test]
+        [Ignore("Error sample")]
         public void WithoutShims()
         {
             int number = TestForFakesUtilities.GetRandomNumber();
