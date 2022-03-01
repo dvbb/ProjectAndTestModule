@@ -25,11 +25,11 @@ namespace YamlTranslator
                     stack.Push(chars[i]);
                     continue;
                 }
-                if ((chars[i] == '}' && stack.Peek() != '{') || (chars[i] == ']' && stack.Peek() != ']'))
+                if ((chars[i] == '}' && stack.Peek() != '{') || (chars[i] == ']' && stack.Peek() != '['))
                 {
                     throw new Exception($"Unexpected String.");
                 }
-                if (chars[i] == '}' || stack.Peek() != ']')
+                if (chars[i] == '}' || chars[i] == ']')
                 {
                     stack.Pop();
                     continue;

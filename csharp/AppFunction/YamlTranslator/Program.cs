@@ -17,6 +17,9 @@ namespace YamlTranslator
                 str += sr.ReadLine();
             }
             Console.WriteLine(str);
+
+            Analyzer analyzer = new Analyzer();
+            analyzer.Start(str);
             //var json = JsonConvert.SerializeObject(str);
             //Console.WriteLine();
             //Console.WriteLine(json);
