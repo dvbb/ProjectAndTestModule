@@ -3,9 +3,9 @@
 * 可以对某一段线性提交历史进行编辑、删除
 ##### 指令
 * git rebase -i  [startpoint]  [endpoint]
-> -i(--interactive): 弹出交互式的界面让用户编辑完成合并操作
-[startpoint]: 指定了一个编辑区的起点
-[endpoint]: 默认是当前分支HEAD所指向的commit
+> -i(--interactive): 弹出交互式的界面让用户编辑完成合并操作  
+[startpoint]: 指定了一个编辑区的起点  
+[endpoint]: 默认是当前分支HEAD所指向的commit  
 * git rebase -i 299d113
 * git rebase -i Head~5
 
@@ -84,13 +84,13 @@ pick 7d94bec third commit
 ```
 
 > 指令说明：
-pick：保留该commit（缩写:p）
-reword：保留该commit，但我需要修改该commit的注释（缩写:r）
-edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）
-squash：将该commit和前一个commit合并（缩写:s）
-fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）
-exec：执行shell命令（缩写:x）
-drop：我要丢弃该commit（缩写:d）
+pick：保留该commit（缩写:p）  
+reword：保留该commit，但我需要修改该commit的注释（缩写:r）  
+edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）  
+squash：将该commit和前一个commit合并（缩写:s）  
+fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）  
+exec：执行shell命令（缩写:x）  
+drop：我要丢弃该commit（缩写:d）  
 
 VIM界面I键进入
 修改为：
