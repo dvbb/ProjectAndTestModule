@@ -11,14 +11,14 @@
 
 ##### sample
 
-``` log
+``` powershell
 $ ls
 firstgit.txt second.txt  third.txt
 ```
 将三个txt文件分别`git add [file]`, `git commit -m "[ordinal] commit"`
 
 可以使用`git log`指令查看提交记录
-``` log
+``` powershell
 $ git log
 commit 7d94bec554e278ae449a41c2f3355b12573243ed (HEAD -> main)
 Author: dvbb
@@ -49,7 +49,7 @@ Date:   Tue Mar 8 13:56:44 2022 +0800
 使用`rebase`将前三个记录合并(下方两个指令效果相同)
 * git rebase -i ca14c3a5da6997bf4bd69e710ee1dde690a1dfe1
 * git rebase -i head~3
-``` log
+``` powershell
 pick b9a4dc5 first commit
 pick e273fa4 second commit
 pick 7d94bec third commit
@@ -94,7 +94,7 @@ drop：我要丢弃该commit（缩写:d）
 
 VIM界面I键进入
 修改为：
-``` log
+``` powershell
 r b9a4dc5 commit all txt
 s e273fa4 second commit
 s 7d94bec third commit
@@ -108,6 +108,6 @@ s 7d94bec third commit
 ##### 推送到远程仓库
 若rebase了远程仓库中存在的commit，则无法直接push到remote(因为远程仓库存在本地没有的commit，本地版本落后)
 可使用force push修改远程仓库的提交记录
-``` log
+``` powershell
 & git push --force
 ```
