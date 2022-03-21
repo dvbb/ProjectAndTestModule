@@ -19,7 +19,7 @@
 6. `git add` 将工作区文件提交到暂存区
 7. `git commit`将暂存区内的所有文件提交到本地仓库
 8. `git push`将本地仓库的变动提交到远程仓库
-
+![img](https://github.com/dvbb/ProjectAndTestModule/blob/main/GitTutorial/concept.png)
 
 ## Command
 ### 增加/删除文件
