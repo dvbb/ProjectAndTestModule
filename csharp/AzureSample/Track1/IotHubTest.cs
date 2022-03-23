@@ -15,6 +15,10 @@ namespace Track1
         {
         }
 
+        /// <summary>
+        /// Prerequisites:
+        ///     Have a resource group named [IOT-RG-0000] and an IotHub named [iot-0000] in the corresponding subscription
+        /// </summary>
         [Test]
         public void Test1()
         {

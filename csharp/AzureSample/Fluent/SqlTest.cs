@@ -17,6 +17,11 @@ namespace Fluent
         {
         }
 
+        /// <summary>
+        /// Prerequisites:
+        ///     Have a resource group named [Sql-RG-0000] and a Server named [server-0000] in the corresponding subscription
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task Get_Server()
         {
