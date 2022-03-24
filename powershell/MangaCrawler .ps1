@@ -1,13 +1,13 @@
 function Get-Manga {
     param(
         [Parameter(Mandatory)]
-        [string] $Uri,
+        [string] $ResourceUri,
 
         [Parameter(Mandatory)]
-        [string] $folder,
+        [string] $StoreFolder,
 
         [Parameter(Mandatory)]
-        [int] $count,
+        [int] $total,
 
         [Parameter()]
         [bool] $ClearOutFolder = $false
@@ -26,11 +26,11 @@ function Get-Manga {
     }
     process{
         if ($ClearOutFolder -eq $true) {
-            Get-ChildItem $folder | Remove-Item -Recurse
+            Get-ChildItem $StoreFolder | Remove-Item -Recurse
         }
         for ($i = 1; $i -lt $count; $i++) {
-            $curUri = $Uri + "${i}.png"
-            $fileName = $folder + "\${i}.png"
+            $curUri = $ResourceUri + "${i}.png"
+            $fileName = $StoreFolder + "\${i}.png"
             Invoke-WebRequest -Uri $curUri -PassThru -TimeoutSec 10000 -OutFile $fileName -ErrorAction SilentlyContinue -Headers $header
         }
     }
@@ -39,5 +39,7 @@ function Get-Manga {
     }
 }
 
-
-Get-Manga -Uri "MangaWebSite" -folder E:\tempstore -count 18
+$ResourceUri = ""
+$StoreFolder = ""
+$total = 20
+Get-Manga -ResourceUri $ResourceUri -StoreFolder $StoreFolder -total $total
