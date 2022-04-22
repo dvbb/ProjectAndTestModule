@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Track1
 {
-    internal class dns : TestBase
+    internal class DnsTests : TestBase
     {
         [Test]
         public async Task DnsTest()
@@ -28,13 +28,13 @@ namespace Track1
             DelegatingHandler[] handlers = new DelegatingHandler[] { };
 
             // craete a dns zone
-            DnsManagementClient dnsManagementClient = new DnsManagementClient(credentials,handlers);
+            DnsManagementClient dnsManagementClient = new DnsManagementClient(credentials, handlers);
             dnsManagementClient.SubscriptionId = subscription;
             Zone zone = new Zone()
             {
                 Location = "global"
             };
-            var iothub = await dnsManagementClient.Zones.CreateOrUpdateAsync("Dns-RG-5107","dns5951.com",zone);
+            var dnsZone = await dnsManagementClient.Zones.CreateOrUpdateAsync("Dns-RG-5107", "dns5951.com", zone);
 
         }
 
