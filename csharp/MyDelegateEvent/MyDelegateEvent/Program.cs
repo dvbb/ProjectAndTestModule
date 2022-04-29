@@ -8,9 +8,8 @@ namespace MyDelegateEvent
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            DelegateTest delegateTest = new DelegateTest();
-            NoReturnNoPara noReturnNoPara = new NoReturnNoPara(delegateTest.DoNothing);
-            noReturnNoPara.Invoke();
+LambdaTest lambdaTest = new LambdaTest();
+            lambdaTest.Start();
         }
     }
 }
