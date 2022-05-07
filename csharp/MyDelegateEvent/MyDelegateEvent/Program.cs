@@ -7,9 +7,9 @@ namespace MyDelegateEvent
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            LambdaTest lambdaTest = new LambdaTest();
-            lambdaTest.Start();
+            //Console.WriteLine("Hello World!");
+            //LambdaTest lambdaTest = new LambdaTest();
+            //lambdaTest.Start();
 
             LinqTest linqTest = new LinqTest();
             linqTest.CustomWhereTest();
