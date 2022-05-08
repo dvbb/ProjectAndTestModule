@@ -41,7 +41,7 @@ namespace MyDelegateEvent
             // 基于lambda表达式注册的多播委托无法移除
             // 例如：
             //  method4 定义了5个一模一样的lambda表达式，但实际上IL中是五个独立的方法
-            //  也无法被 += -=
+            //  也无法被 += -= (因为是五个不同的方法，所以无法被 -= 移除)
             Console.WriteLine("基于lambda表达式注册的多播委托无法移除:");
             NoReturnNoPara method4 = (num, name) => Console.WriteLine($"[4] Hello,{num}-{name}."); ;
             method4 += (num, name) => Console.WriteLine($"[4] Hello,{num}-{name}."); ;

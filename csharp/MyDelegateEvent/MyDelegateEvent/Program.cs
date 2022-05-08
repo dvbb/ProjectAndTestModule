@@ -11,8 +11,11 @@ namespace MyDelegateEvent
             //LambdaTest lambdaTest = new LambdaTest();
             //lambdaTest.Start();
 
-            LinqTest linqTest = new LinqTest();
-            linqTest.CustomWhereTest();
+            //LinqTest linqTest = new LinqTest();
+            //linqTest.CustomWhereTest();
+
+            MulticastDelegate eventTest = new MulticastDelegate();
+            eventTest.Start();
         }
     }
 }

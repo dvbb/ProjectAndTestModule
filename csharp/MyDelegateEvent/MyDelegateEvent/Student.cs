@@ -27,6 +27,16 @@ namespace MyDelegateEvent
             students.Add(new Student() { Number = 20201122, Name = "mike", Sex = Sex.Male, Age = 32});
             return students;
         }
+
+        public void SayHello()
+        {
+            Console.WriteLine("Hello Student.");
+        }
+
+        public static void SayHelloStatic()
+        {
+            Console.WriteLine("Hello Student Static.");
+        }
     }
     internal enum Sex
     {
