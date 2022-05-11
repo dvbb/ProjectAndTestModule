@@ -14,6 +14,10 @@ namespace CommenUtilities
         [SetUp]
         public void Setup()
         {
+            // use Microsoft.Graph need the Application have corresponding api permission
+            //  step:
+            //     azure portal => search [App registrations] => click your want to get the application
+            //     => Api permission => click [Add a permission] button => ... => click [Grant admin consent for default derectory] button  
         }
 
         [Test]
