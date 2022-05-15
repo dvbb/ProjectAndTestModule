@@ -30,5 +30,21 @@ namespace MyDelegateEvent.Character
                 this.SayStartHandler.Invoke();
             }
         }
+
+        // 委托和事件的区别：
+        //  委托：委托是一个类
+        //  事件：事件是委托的一个具体实例，且有安全限制
+
+        // event 关键字是对委托的修饰
+        //  添加了安全限制，使外部只能对该委托 += -= ，无法 = 或 invoke
+        public event Action SayStartHandlerEvnet;
+        public void SayStartVerEvent()
+        {
+            if (this.SayStartHandlerEvnet != null)
+            {
+                Console.WriteLine("MC: Start!");
+                this.SayStartHandlerEvnet.Invoke();
+            }
+        }
     }
 }
