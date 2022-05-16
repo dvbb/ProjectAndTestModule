@@ -1,4 +1,6 @@
-﻿using AzureSample;
+﻿using Azure.Core;
+using Azure.Identity;
+using AzureSample;
 using Microsoft.Azure.Management.Dns;
 using Microsoft.Azure.Management.Dns.Models;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -6,6 +8,7 @@ using Microsoft.Rest;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -18,24 +21,25 @@ namespace Track1
         [Test]
         public async Task DnsTest()
         {
-            // get token
-            ClientCredential cc = new ClientCredential(clientId, clientSecret);
-            var context = new AuthenticationContext("https://login.microsoftonline.com/" + tenantId);
-            var result = context.AcquireTokenAsync("https://management.azure.com/", cc);
-            string AccessToken = result.Result.AccessToken;
-            var bauthCredentials = new TokenCredentials(AccessToken);
+            // Get AccessToken with Azure.Identity
+            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            string[] scopes = { "https://management.core.windows.net/.default" };
+            TokenRequestContext tokenRequestContext = new TokenRequestContext(scopes, "");
+            var response = await clientSecretCredential.GetTokenAsync(tokenRequestContext);
+            string accessToken = response.Token;
+            TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
             ServiceClientCredentials credentials = bauthCredentials;
-            DelegatingHandler[] handlers = new DelegatingHandler[] { };
 
             // craete a dns zone
-            DnsManagementClient dnsManagementClient = new DnsManagementClient(credentials, handlers);
+            DnsManagementClient dnsManagementClient = new DnsManagementClient(credentials);
             dnsManagementClient.SubscriptionId = subscription;
             Zone zone = new Zone()
             {
                 Location = "global"
             };
-            var dnsZone = await dnsManagementClient.Zones.CreateOrUpdateAsync("Dns-RG-5107", "dns5951.com", zone);
-
+            //var dnsZone = await dnsManagementClient.Zones.CreateOrUpdateAsync("Dns-RG-5107", "dns5951.com", zone);
+            var list = (await dnsManagementClient.Zones.ListAsync()).ToList();
+            Console.WriteLine(list.Count);
         }
 
     }
