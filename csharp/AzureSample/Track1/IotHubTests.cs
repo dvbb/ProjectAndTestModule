@@ -29,16 +29,8 @@ namespace Track1
             string resourceGroupName = "IOT-RG-0000";
             string iotHubName = "iot-0000";
 
-            // Get AccessToken with Azure.Identity
-            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            string[] scopes = { "https://management.core.windows.net/.default" };
-            TokenRequestContext tokenRequestContext = new TokenRequestContext(scopes, "");
-            var response = await clientSecretCredential.GetTokenAsync(tokenRequestContext);
-            string accessToken = response.Token;
-            TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
-            ServiceClientCredentials credentials = bauthCredentials;
-
             // crud iot hub
+            ServiceClientCredentials credentials = await GetDefaultCredentialAsync();
             IotHubClient iotHubClient = new IotHubClient(credentials);
             iotHubClient.SubscriptionId = subscription;
             

@@ -14,17 +14,7 @@ namespace Track1
         [Test]
         public async Task AdfTest()
         {
-
-            // Get AccessToken with Azure.Identity
-            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            string[] scopes = { "https://management.core.windows.net/.default" };
-            TokenRequestContext tokenRequestContext = new TokenRequestContext(scopes, "");
-            var response = await clientSecretCredential.GetTokenAsync(tokenRequestContext);
-            string accessToken = response.Token;
-
-            // Get a existing an ADF pipeline
-            TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
-            ServiceClientCredentials credentials = bauthCredentials;
+            ServiceClientCredentials credentials = await GetDefaultCredentialAsync();
             string rgName = "ADF-RG-0000";
             string factoryName = "adf-0000";
             string pipelineName = "CopyPipeline";

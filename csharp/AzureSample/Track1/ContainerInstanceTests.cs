@@ -2,6 +2,7 @@
 using Azure.Identity;
 using AzureSample;
 using Microsoft.Azure.Management.ContainerInstance;
+using Microsoft.Azure.Management.ContainerInstance.Models;
 using Microsoft.Rest;
 using NUnit.Framework;
 using System;
@@ -15,34 +16,61 @@ namespace Track1
     internal class ContainerInstanceTests : TestBase
     {
         [Test]
-        public async Task ContainerInstanceTestAsync()
+        public async Task ListCapabilities()
         {
-            // Get AccessToken with Azure.Identity
-            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            string[] scopes = { "https://management.core.windows.net/.default" };
-            TokenRequestContext tokenRequestContext = new TokenRequestContext(scopes, "");
-            var response = await clientSecretCredential.GetTokenAsync(tokenRequestContext);
-            string accessToken = response.Token;
-
-            // Get a existing an ADF pipeline
-            TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
-            ServiceClientCredentials credentials = bauthCredentials;
-
-            string rgName = "graph-rg-0000";
+            // Get region capabilities
+            ServiceClientCredentials credentials = await GetDefaultCredentialAsync();
             ContainerInstanceManagementClient client = new ContainerInstanceManagementClient(credentials);
             client.SubscriptionId = subscription;
-            //var data  = await client.Containers.ListLogsAsync();
-            var list1 =(await client.Location.ListCapabilitiesAsync("ukwest")).ToList();
+            var list1 = (await client.Location.ListCapabilitiesAsync("ukwest")).ToList();
             var list2 = (await client.Location.ListCapabilitiesAsync("eastus")).ToList();
+            Console.WriteLine($"Gpu\t\tIpAddressType\tLocation\tOsType\t\tResourceType");
             foreach (var item in list1)
             {
-                Console.WriteLine($"{item.Gpu}\t{item.IpAddressType}\t{item.Location}\t{item.OsType}\t{item.ResourceType}");
+                Console.WriteLine($"{item.Gpu}\t{item.IpAddressType}\t\t\t{item.Location}\t\t{item.OsType}\t{item.ResourceType}");
             }
             Console.WriteLine();
             foreach (var item in list2)
             {
-                Console.WriteLine($"{item.Gpu}\t{item.IpAddressType}\t{item.Location}\t{item.OsType}\t{item.ResourceType}");
+                Console.WriteLine($"{item.Gpu}\t{item.IpAddressType}\t\t\t{item.Location}\t\t{item.OsType}\t{item.ResourceType}");
             }
+        }
+
+        [Test]
+        public async Task CreateContainerInstanceGroup()
+        {
+            // Create a Container Instance
+            ServiceClientCredentials credentials = await GetDefaultCredentialAsync();
+            ContainerInstanceManagementClient client = new ContainerInstanceManagementClient(credentials);
+            client.SubscriptionId = subscription; 
+            string rgName = "ContainerInstance-RG-0000";
+            string containerGroupName = GetRandomNumber("eastus-containerinstance");
+            var aci = await client.ContainerGroups.CreateOrUpdateAsync(rgName, containerGroupName, new ContainerGroup()
+            {
+                Location = "eastus",
+                Containers = new List<Container> {
+                    new Container() {
+                        Name = containerGroupName,
+                        Ports = new List<ContainerPort>{ new ContainerPort { Protocol = "TCP", Port = 80} },
+                        Image = "mcr.microsoft.com/azuredocs/aci-helloworld:latest",
+                        Resources = new ResourceRequirements
+                        {
+                            Requests = new ResourceRequests
+                            {
+                                MemoryInGB = 1,
+                                Cpu = 1,
+                                Gpu =  new GpuResource
+                                {
+                                    Count = 1,
+                                    Sku = "k80"
+                                }
+                            }
+                        },
+                    }
+                },
+                OsType = "Linux"
+            });
+            Console.WriteLine(aci.Id);
         }
     }
 }
