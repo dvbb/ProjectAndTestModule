@@ -25,20 +25,20 @@ namespace Fluent
         [Test]
         public async Task Get_Server()
         {
-            string resourceGroupName = "Sql-RG-0000";
-            string serverName = "server-0000";
+            //string resourceGroupName = "Sql-RG-0000";
+            //string serverName = "server-0000";
 
-            var creds = new AzureCredentialsFactory().FromServicePrincipal(clientId, clientSecret, tenantId, AzureEnvironment.AzureGlobalCloud);
-            var azure = Azure.Authenticate(creds).WithSubscription(subscription);
-            var server = azure.SqlServers.GetByResourceGroup(resourceGroupName, serverName);
-            Console.WriteLine(server.Name);
-            Console.WriteLine(server.RegionName);
+            //var creds = new AzureCredentialsFactory().FromServicePrincipal(clientId, clientSecret, tenantId, AzureEnvironment.AzureGlobalCloud);
+            //var azure = Azure.Authenticate(creds).WithSubscription(subscription);
+            //var server = azure.SqlServers.GetByResourceGroup(resourceGroupName, serverName);
+            //Console.WriteLine(server.Name);
+            //Console.WriteLine(server.RegionName);
 
-            var sqlManager = SqlManager.Authenticate(creds, subscription);
-            SqlManagementClient client = new SqlManagementClient(sqlManager.RestClient);
-            client.SubscriptionId = subscription;
-            var policy = await client.ExtendedServerBlobAuditingPolicies.GetWithHttpMessagesAsync("Sql-RG-0000", "server-0000");
-            Console.WriteLine("server-0000: " + policy.Body.State);
+            //var sqlManager = SqlManager.Authenticate(creds, subscription);
+            //SqlManagementClient client = new SqlManagementClient(sqlManager.RestClient);
+            //client.SubscriptionId = subscription;
+            //var policy = await client.ExtendedServerBlobAuditingPolicies.GetWithHttpMessagesAsync("Sql-RG-0000", "server-0000");
+            //Console.WriteLine("server-0000: " + policy.Body.State);
         }
     }
 }
