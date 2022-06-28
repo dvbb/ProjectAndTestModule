@@ -44,7 +44,17 @@ namespace AzureSample
             // Get a existing an ADF pipeline
             TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
             return bauthCredentials;
-        } 
+        }
+
+        public async Task<string> GetToken()
+        {
+            // Get AccessToken with Azure.Identity
+            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            string[] scopes = { "https://management.core.windows.net/.default" };
+            TokenRequestContext tokenRequestContext = new TokenRequestContext(scopes, "");
+            var response = await clientSecretCredential.GetTokenAsync(tokenRequestContext);
+            return response.Token;
+        }
 
         public string GetRandomNumber(string resource)
         {
