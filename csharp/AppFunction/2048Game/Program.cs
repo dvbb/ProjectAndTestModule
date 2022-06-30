@@ -13,24 +13,23 @@ namespace _2048Game
             {
                 Show(array);
                 string key = (Console.ReadKey()).Key.ToString();
-                NumberAppear(ref array);
                 switch (key)
                 {
                     case "S":
                     case "DownArrow":
-                        Console.WriteLine("down Arrow event");
+                        DownArrowEvent(ref array);
                         break;
                     case "W":
                     case "UpArrow":
-                        Console.WriteLine("upArrow Arrow event");
+                        UpArrowEvent(ref array);
                         break;
                     case "A":
                     case "LeftArrow":
-                        Console.WriteLine("LeftArrow Arrow event");
+                        LeftArrowEvent(ref array);
                         break;
                     case "D":
                     case "RightArrow":
-                        Console.WriteLine("RightArrow Arrow event");
+                        RightArrowEvent(ref array);
                         break;
                     default:
                         break;
