@@ -117,17 +117,20 @@ namespace _2048Game
 
         public static void DownArrowEvent(ref int[,] array)
         {
-
+            // The move ends, generate a new number in a random position
+            NumberAppear(ref array);
         }
 
         public static void LeftArrowEvent(ref int[,] array)
         {
-
+            // The move ends, generate a new number in a random position
+            NumberAppear(ref array);
         }
 
         public static void RightArrowEvent(ref int[,] array)
         {
-
+            // The move ends, generate a new number in a random position
+            NumberAppear(ref array);
         }
     }
 }
