@@ -34,14 +34,6 @@ namespace _2048Game
             }
         }
 
-        public static void Move(ref int[,] array, int i, int j)
-        {
-            if (array[i - 1, j] == array[i, j])
-            {
-
-            }
-        }
-
         public static void NumberAppear(ref int[,] array)
         {
             int length = (int)Math.Sqrt(array.Length);
@@ -93,7 +85,7 @@ namespace _2048Game
                     int j = i;
                     while (++j < length)
                     {
-                        if (array[i, column] == 0)
+                        if (array[i, column] == 0 && array[j, column] != 0)
                         {
                             array[i, column] = array[j, column];
                             array[j, column] = 0;
@@ -117,18 +109,99 @@ namespace _2048Game
 
         public static void DownArrowEvent(ref int[,] array)
         {
+            int length = (int)Math.Sqrt(array.Length);
+            // Iterate through each column
+            for (int column = 0; column < length; column++)
+            {
+                for (int i = length - 1; i > 0; i--)
+                {
+                    int j = i;
+                    while (--j >= 0)
+                    {
+                        if (array[i, column] == 0 && array[j, column] != 0)
+                        {
+                            array[i, column] = array[j, column];
+                            array[j, column] = 0;
+                            continue;
+                        }
+                        if (array[i, column] == array[j, column])
+                        {
+                            array[i, column] += array[j, column];
+                            array[j, column] = 0;
+                        }
+                        if (array[i, column] != 0 && array[j, column] != 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
             // The move ends, generate a new number in a random position
             NumberAppear(ref array);
         }
 
         public static void LeftArrowEvent(ref int[,] array)
         {
+            int length = (int)Math.Sqrt(array.Length);
+            // Iterate through each column
+            for (int row = 0; row < length; row++)
+            {
+                for (int i = 0; i < length - 1; i++)
+                {
+                    int j = i;
+                    while (++j < length)
+                    {
+                        if (array[row, i] == 0 && array[row, j] != 0)
+                        {
+                            array[row, i] = array[row, j];
+                            array[row, j] = 0;
+                            continue;
+                        }
+                        if (array[row, i] == array[row, j])
+                        {
+                            array[row, i] += array[row, j];
+                            array[row, j] = 0;
+                        }
+                        if (array[row, i] != 0 && array[row, j] != 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
             // The move ends, generate a new number in a random position
             NumberAppear(ref array);
         }
 
         public static void RightArrowEvent(ref int[,] array)
         {
+            int length = (int)Math.Sqrt(array.Length);
+            // Iterate through each column
+            for (int row = 0; row < length; row++)
+            {
+                for (int i = length - 1; i > 0; i--)
+                {
+                    int j = i;
+                    while (--j >= 0)
+                    {
+                        if (array[row, i] == 0 && array[row, j] != 0)
+                        {
+                            array[row, i] = array[row, j];
+                            array[row, j] = 0;
+                            continue;
+                        }
+                        if (array[row, i] == array[row, j])
+                        {
+                            array[row, i] += array[row, j];
+                            array[row, j] = 0;
+                        }
+                        if (array[row, i] != 0 && array[row, j] != 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
             // The move ends, generate a new number in a random position
             NumberAppear(ref array);
         }
