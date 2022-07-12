@@ -19,10 +19,12 @@ namespace RestClientRuntime
         {
             var serializer = JsonSerializer.Create(new JsonSerializerSettings()
             {
+                ContractResolver = new DefaultContractResolver(),
                 Converters = new List<JsonConverter>() { new PolymorphicDeserializeJsonConverter<Animal>("$type") }
             });
 
             //  System.NullReferenceException : Object reference not set to an instance of an object.
+            //  because: `contract.DefaultCreator` is null.
             var dog = serializer.Deserialize<Animal>(new JsonTextReader(new StringReader(@"{""$type"":""Dog"",""Name"":""Bello""}")));
             Assert.IsNotNull(dog);
             Assert.AreEqual("Bello", dog.Name);
@@ -40,6 +42,22 @@ namespace RestClientRuntime
             var cat = serializer.Deserialize<Animal>(new JsonTextReader(new StringReader(@"{""$type"":""Cat"",""Name"":""Felix""}")));
             Assert.IsNotNull(cat);
             Assert.AreEqual("Felix", cat.Name);
+        }
+
+        [Test]
+        public void Can_deserialize_type_sheep_in_json()
+        {
+            Student student = new Student();
+
+            var serializer = JsonSerializer.Create(new JsonSerializerSettings()
+            {
+                ContractResolver = new DefaultContractResolver(),
+                Converters = new List<JsonConverter>() { new PolymorphicDeserializeJsonConverter<Animal>("$type") }
+            });
+
+            Animal sheep = serializer.Deserialize<Animal>(new JsonTextReader(new StringReader(@"{""$type"":""Sheep"",""Name"":""Felix""}")));
+            Assert.IsNotNull(sheep);
+            Assert.AreEqual("Felix", sheep.Name);
         }
     }
 }

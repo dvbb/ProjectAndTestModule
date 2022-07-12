@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace RestClientRuntime
@@ -21,7 +22,11 @@ namespace RestClientRuntime
 
     public class Dog : Animal
     {
-        [JsonConstructor]
+        //public Dog()
+        //{
+        //}
+
+        [JsonConstructor()]
         public Dog(string name) : base(name)
         {
         }
@@ -32,5 +37,27 @@ namespace RestClientRuntime
         public Cat() : base(string.Empty)
         {
         }
+    }
+
+    public class Sheep : Animal
+    {
+        public Sheep() { }
+
+        [JsonConstructor()]
+        public Sheep(string name) : base(name)
+        {
+        }
+    }
+
+    public class Rabbit : Animal
+    {
+        public Rabbit() { }
+
+        [JsonConstructor()]
+        public Rabbit(string name) : base(name)
+        {
+        }
+
+        public int Age { get; set; }
     }
 }
