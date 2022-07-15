@@ -1,13 +1,15 @@
+using System;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Network;
+using Azure.ResourceManager.Network.Models;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using AzureSample;
 using NUnit.Framework;
-using System;
-using System.Threading.Tasks;
-using Azure.ResourceManager.Network.Models;
 
 namespace Track2
 {
@@ -26,6 +28,7 @@ namespace Track2
         /// </summary>
         /// <returns></returns>
         [Test]
+        [Ignore("Need to investigate how to create a vnet")]
         public async Task Network_Create()
         {
             string rgName = "Network-RG-0000";
@@ -38,26 +41,22 @@ namespace Track2
             // Create a resource group
             ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
             ResourceGroupData rgData = new ResourceGroupData(AzureLocation.EastUS){};
-            var rgLro = await rgCollection.CreateOrUpdateAsync(true, rgName, rgData);
-            ResourceGroup resourceGroup = rgLro.Value;
+            var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
+            ResourceGroupResource resourceGroup = rgLro.Value;
             Assert.IsNotNull(resourceGroup);
             Assert.AreEqual(rgName, resourceGroup.Data.Name);
 
             // Create network
-            VirtualNetworkData networkData = new VirtualNetworkData()
+            var vnetName = "vnet-0000";
+            VirtualNetworkData data = new VirtualNetworkData()
             {
-                Location = "eastus",
-                AddressSpace = new AddressSpace()
-                {
-                    AddressPrefixes = { "10.10.0.0/16", }
-                },
-                Subnets =
-                {
-                    new SubnetData() { Name = "subnet01", AddressPrefix = "10.10.1.0/24", },
-                    new SubnetData() { Name = "subnet02", AddressPrefix = "10.10.2.0/24", PrivateEndpointNetworkPolicies = "Disabled", }
-                },
+                Location = resourceGroup.Data.Location,
             };
-            var vnet = await resourceGroup.GetVirtualNetworks().CreateOrUpdateAsync(networkName,networkData);
+            data.AddressPrefixes.Add("10.10.0.0/16");
+            data.Subnets.Add(new SubnetData() { Name = "subnet1", AddressPrefix = "10.10.1.0/24" });
+            data.Subnets.Add(new SubnetData() { Name = "subnet2", AddressPrefix = "10.10.2.0/24" });
+            var vnet = await resourceGroup.GetVirtualNetworks().CreateOrUpdateAsync(WaitUntil.Completed, vnetName, data);
+
             Assert.IsNotNull(vnet);
             Assert.AreEqual(networkName, vnet.Value.Data.Name);
         }

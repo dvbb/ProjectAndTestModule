@@ -47,8 +47,6 @@ namespace RestClientRuntime
         [Test]
         public void Can_deserialize_type_sheep_in_json()
         {
-            Student student = new Student();
-
             var serializer = JsonSerializer.Create(new JsonSerializerSettings()
             {
                 ContractResolver = new DefaultContractResolver(),
