@@ -20,15 +20,7 @@ namespace Track2
         {
         }
 
-        /// <summary>
-        /// Attention:
-        ///     Referenced SDK [Azure.Resourcemanager.Network] is beta version.
-        ///     The version of the [Azure.Resourcemanager] on which the [Azure.Resourcemanager.Network] depends may not match it,
-        ///     therefore the SDK maybe do not work.
-        /// </summary>
-        /// <returns></returns>
         [Test]
-        [Ignore("Need to investigate how to create a vnet")]
         public async Task Network_Create()
         {
             string rgName = "Network-RG-0000";
