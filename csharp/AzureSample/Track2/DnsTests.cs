@@ -95,8 +95,8 @@ namespace Track2
             var getResponse = await collection.GetAsync("aaaa");
             Assert.IsNotNull(getResponse);
             Assert.AreEqual(name, getResponse.Value.Data.Name);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -132,8 +132,8 @@ namespace Track2
             Assert.AreEqual(name, getResponse.Value.Data.Name);
             Assert.AreEqual("Succeeded", getResponse.Value.Data.ProvisioningState);
             Assert.AreEqual("dnszones/A", getResponse.Value.Data.ResourceType.Type);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -166,8 +166,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -200,8 +200,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -234,8 +234,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -268,8 +268,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(_recordSetName);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -302,8 +302,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -330,8 +330,8 @@ namespace Track2
             Assert.AreEqual("@", getResponse.Value.Data.Name);
             Assert.AreEqual("Succeeded", getResponse.Value.Data.ProvisioningState);
             Assert.AreEqual("dnszones/SOA", getResponse.Value.Data.ResourceType.Type);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in _dnsZone.GetRecordSetSoas().GetAllAsync())
@@ -359,8 +359,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
@@ -393,8 +393,8 @@ namespace Track2
             // get
             var getResponse = await collection.GetAsync(name);
             Assert.IsNotNull(getResponse);
-            Assert.IsNotNull(getResponse.Value.Data.TtlInSenconds);
-            Console.WriteLine(getResponse.Value.Data.TtlInSenconds);
+            Assert.IsNotNull(getResponse.Value.Data.TtlInSeconds);
+            Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
             await foreach (var item in collection.GetAllAsync())
