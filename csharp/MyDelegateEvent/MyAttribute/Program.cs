@@ -23,6 +23,18 @@ namespace MyAttribute
             teacher.SelfIntroduction("something");
 
             #endregion
+
+            Console.WriteLine("\n***********\n");
+
+            Dustman dustman1 = new Dustman();
+            bool flag1 = dustman1.Validate();
+            Dustman dustman2 = new Dustman() { Id = "d5128xvda8452s"};
+            bool flag2 = dustman2.Validate();
+            Dustman dustman3 = new Dustman() { Id = "    " };
+            bool flag3 = dustman3.Validate();
+            Console.WriteLine(flag1);
+            Console.WriteLine(flag2);
+            Console.WriteLine(flag3);
         }
     }
 }

@@ -38,4 +38,9 @@ namespace MyAttribute
             Console.WriteLine($"Hello, this is {this.GetType().Name}");
         }
     }
+
+    internal class DataRequiredAttribute : Attribute
+    {
+
+    }
 }
