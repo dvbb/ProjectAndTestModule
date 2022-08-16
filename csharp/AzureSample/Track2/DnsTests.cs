@@ -76,11 +76,20 @@ namespace Track2
         }
 
         [Test]
+        public async Task GetAllRecordSets()
+        {
+            await foreach (var item in _dnsZone.GetAllRecordSetsAsync())
+            {
+                Console.WriteLine(item.Id);
+            }
+        }
+
+        [Test]
         public async Task AaaaRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetAaaas();
+            var collection = _dnsZone.GetAaaaRecords();
             string name = "aaaa";
-            var recordSetAaaaResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new AaaaRecordSetData() { });
+            var recordSetAaaaResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new AaaaRecordData() { });
             Assert.IsNotNull(recordSetAaaaResource);
             Assert.IsNotNull(recordSetAaaaResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetAaaaResource.Value.Data.Name);
@@ -109,13 +118,13 @@ namespace Track2
             flag = await collection.ExistsAsync("aaaa");
             Assert.IsFalse(flag);
         }
-   
+
         [Test]
         public async Task ARecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetACollections();
+            var collection = _dnsZone.GetARecords();
             string name = "a";
-            var recordSetAResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new ARecordSetData() { });
+            var recordSetAResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new ARecordData() { });
             Assert.IsNotNull(recordSetAResource);
             Assert.IsNotNull(recordSetAResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetAResource.Value.Data.Name);
@@ -150,9 +159,9 @@ namespace Track2
         [Test]
         public async Task CaaRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetCaas();
+            var collection = _dnsZone.GetCaaRecords();
             string name = "caa";
-            var recordSetCaaResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new CaaRecordSetData() { });
+            var recordSetCaaResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new CaaRecordData() { });
             Assert.IsNotNull(recordSetCaaResource);
             Assert.IsNotNull(recordSetCaaResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetCaaResource.Value.Data.Name);
@@ -184,9 +193,9 @@ namespace Track2
         [Test]
         public async Task CnameRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetCnames();
+            var collection = _dnsZone.GetCnameRecords();
             string name = "cname";
-            var recordSetCnameResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new CnameRecordSetData() { });
+            var recordSetCnameResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new CnameRecordData() { });
             Assert.IsNotNull(recordSetCnameResource);
             Assert.IsNotNull(recordSetCnameResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetCnameResource.Value.Data.Name);
@@ -216,11 +225,11 @@ namespace Track2
         }
 
         [Test]
-        public async Task MxRecordE2E()
+        public async Task MXRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetMXes();
+            var collection = _dnsZone.GetMXRecords();
             string name = "mx";
-            var recordSetMXResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new MXRecordSetData() { });
+            var recordSetMXResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new MXRecordData() { });
             Assert.IsNotNull(recordSetMXResource);
             Assert.IsNotNull(recordSetMXResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetMXResource.Value.Data.Name);
@@ -250,11 +259,11 @@ namespace Track2
         }
 
         [Test]
-        public async Task NsRecordE2E()
+        public async Task NSRecordE2E()
         {
             string _recordSetName = "ns";
-            var collection = _dnsZone.GetRecordSetNS();
-            var recordSetNSResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, _recordSetName, new NSRecordSetData() { });
+            var collection = _dnsZone.GetNSRecords();
+            var recordSetNSResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, _recordSetName, new NSRecordData() { });
             Assert.IsNotNull(recordSetNSResource);
             Assert.IsNotNull(recordSetNSResource.Value.Data.ETag);
             Assert.AreEqual(_recordSetName, recordSetNSResource.Value.Data.Name);
@@ -286,9 +295,9 @@ namespace Track2
         [Test]
         public async Task PtrRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetPtrs();
+            var collection = _dnsZone.GetPtrRecords();
             string name = "ptr";
-            var recordSetPtrResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new PtrRecordSetData() { });
+            var recordSetPtrResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new PtrRecordData() { });
             Assert.IsNotNull(recordSetPtrResource);
             Assert.IsNotNull(recordSetPtrResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetPtrResource.Value.Data.Name);
@@ -320,12 +329,13 @@ namespace Track2
         [Test]
         public async Task SoaRecordE2E()
         {
+            var collection = _dnsZone.GetSoaRecords();
             // exist
-            bool result = await _dnsZone.GetRecordSetSoas().ExistsAsync("@");
+            bool result = await collection.ExistsAsync("@");
             Assert.IsTrue(result);
 
             // get
-            var getResponse = await _dnsZone.GetRecordSetSoas().GetAsync("@");
+            var getResponse = await collection.GetAsync("@");
             Assert.IsNotNull(getResponse);
             Assert.AreEqual("@", getResponse.Value.Data.Name);
             Assert.AreEqual("Succeeded", getResponse.Value.Data.ProvisioningState);
@@ -334,7 +344,7 @@ namespace Track2
             Console.WriteLine(getResponse.Value.Data.TtlInSeconds);
 
             // getall
-            await foreach (var item in _dnsZone.GetRecordSetSoas().GetAllAsync())
+            await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Name);
             }
@@ -343,9 +353,9 @@ namespace Track2
         [Test]
         public async Task SrvRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetSrvs();
+            var collection = _dnsZone.GetSrvRecords();
             string name = "srv";
-            var recordSetSrvResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new SrvRecordSetData() { });
+            var recordSetSrvResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new SrvRecordData() { });
             Assert.IsNotNull(recordSetSrvResource);
             Assert.IsNotNull(recordSetSrvResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetSrvResource.Value.Data.Name);
@@ -377,9 +387,9 @@ namespace Track2
         [Test]
         public async Task TxtRecordE2E()
         {
-            var collection = _dnsZone.GetRecordSetTxts();
+            var collection = _dnsZone.GetTxtRecords();
             string name = "txt";
-            var recordSetTxtResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new TxtRecordSetData() { });
+            var recordSetTxtResource = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new TxtRecordData() { });
             Assert.IsNotNull(recordSetTxtResource);
             Assert.IsNotNull(recordSetTxtResource.Value.Data.ETag);
             Assert.AreEqual(name, recordSetTxtResource.Value.Data.Name);
