@@ -65,6 +65,15 @@ namespace Track2
         public async Task LiveEvent_GetAll()
         {
             var collection = _mediaService.GetLiveEvents();
+
+            //LiveEventData data = new LiveEventData(_mediaService.Data.Location)
+            //{
+            //    Input = new LiveEventInput(LiveEventInputProtocol.Rtmp),
+            //};
+            //string liveEventName = "liveEvent15482";
+            //var liveEvent = await collection.CreateOrUpdateAsync(WaitUntil.Completed, liveEventName, data);
+            //Assert.IsNotNull(liveEvent);
+
             await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Id);
@@ -147,6 +156,70 @@ namespace Track2
             var job = await jobCollection.CreateOrUpdateAsync(WaitUntil.Completed, "customjob1", jobdata);
 
             await foreach (var item in jobCollection.GetAllAsync())
+            {
+                Console.WriteLine(item.Data.Id);
+            }
+        }
+
+
+        [Test]
+        public async Task StreamingEndpoint_E2E()
+        {
+            var collection = _mediaService.GetStreamingEndpoints();
+
+            StreamingEndpointData data = new StreamingEndpointData(_resourceGroup.Data.Location);
+            var streamingEndpoint = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "streamEndpoint00584", data);
+
+            await foreach (var item in collection.GetAllAsync())
+            {
+                Console.WriteLine(item.Data.Id);
+            }
+        }
+
+        [Test]
+        public async Task StreamingLocator_E2E()
+        {
+            var collection = _mediaService.GetStreamingLocators();
+
+            var mediaAsset1 = await _mediaService.GetMediaAssets().CreateOrUpdateAsync(WaitUntil.Completed, "empty-asset-for-locator-1542", new MediaAssetData());
+
+            StreamingLocatorData data = new StreamingLocatorData()
+            {
+                AssetName = mediaAsset1.Value.Data.Name,
+                StreamingPolicyName = "Predefined_ClearStreamingOnly"
+            };
+            var locator = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "streamingLocator2154", data);
+
+            await foreach (var item in collection.GetAllAsync())
+            {
+                Console.WriteLine(item.Data.Id);
+            }
+        }
+
+        [Test]
+        public async Task StreamingPolicy_E2E()
+        {
+            var collection = _mediaService.GetStreamingPolicies();
+
+            StreamingPolicyData data = new StreamingPolicyData()
+            {
+                EnvelopeEncryption = new EnvelopeEncryption()
+                {
+                    EnabledProtocols = new MediaEnabledProtocols(false, true, true, true)
+                },
+            };
+            var policy = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "streamingPolicy152224", data);
+
+            await foreach (var item in collection.GetAllAsync())
+            {
+                Console.WriteLine(item.Data.Id);
+            }
+
+            await policy.Value.DeleteAsync(WaitUntil.Completed);
+
+            Console.WriteLine("\n\n");
+
+            await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Id);
             }
