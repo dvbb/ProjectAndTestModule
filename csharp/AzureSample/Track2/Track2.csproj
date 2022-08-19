@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.6.0" />
+    <PackageReference Include="Azure.ResourceManager.KeyVault" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.Network" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.Resources" Version="1.2.0" />
     <PackageReference Include="Azure.ResourceManager.Storage" Version="1.0.0-beta.11" />
@@ -18,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj" />
+	<ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj" />
     <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\mediaservices\Azure.ResourceManager.Media\src\Azure.ResourceManager.Media.csproj" />
+    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj" />
     <ProjectReference Include="..\AzureSample\AzureSample.csproj" />
   </ItemGroup>
 
