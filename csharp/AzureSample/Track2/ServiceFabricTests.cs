@@ -10,6 +10,7 @@ using Azure.ResourceManager.KeyVault;
 using Azure.ResourceManager.KeyVault.Models;
 using NUnit.Framework;
 using System;
+using Azure.ResourceManager.ServiceFabric.Models;
 
 namespace Track2
 {
@@ -27,7 +28,7 @@ namespace Track2
             // Create a resource group
             string rgName = "ServiceFabric-RG-0000";
             ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
-            ResourceGroupData rgData = new ResourceGroupData(AzureLocation.WestUS2) { };
+            ResourceGroupData rgData = new ResourceGroupData(AzureLocation.UKWest) { };
             var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
             _resourceGroup = rgLro.Value;
         }
@@ -72,22 +73,28 @@ namespace Track2
         }
 
         [Test]
-        public async Task Cluster_E2E()
+        public async Task Cluster_Create()
         {
             var collection = _resourceGroup.GetServiceFabricClusters();
 
-            //string clusterName = "cluster0000";
-            //ServiceFabricClusterData data = new ServiceFabricClusterData(_resourceGroup.Data.Location)
-            //{
-            //};
-            //ClusterNodeTypeDescription clusterNodeTypeDescription = new ClusterNodeTypeDescription();
-            //data.NodeTypes.Add(clusterNodeTypeDescription);
-            //var cluster = await collection.CreateOrUpdateAsync(WaitUntil.Completed, clusterName, data);
+            string clusterName = "cluster00001111";
+            string certKey = "";
+            ServiceFabricClusterData data = new ServiceFabricClusterData(_resourceGroup.Data.Location)
+            {
+                //Certificate = new ClusterCertificateDescription(new BinaryData(certKey)),
+                ManagementEndpoint = new Uri("https://cluster00001111.ukwest.cloudapp.azure.com:19080/"),
+            };
+            //string name, int clientConnectionEndpointPort, int httpGatewayEndpointPort, bool isPrimary, int vmInstanceCount)
+            ClusterNodeTypeDescription clusterNodeTypeDescription = new ClusterNodeTypeDescription("Type812", 19000, 19080, true, 5);
+            data.NodeTypes.Add(clusterNodeTypeDescription);
+            var cluster = await collection.CreateOrUpdateAsync(WaitUntil.Completed, clusterName, data);
+            Console.WriteLine(cluster.Value.Data.Id);
+        }
 
-
-            //var xx = await collection.GetAsync("newcluster0000");
-            //Console.WriteLine(xx.Value.Data.Id);
-
+        [Test]
+        public async Task Cluster_GetAll()
+        {
+            var collection = _resourceGroup.GetServiceFabricClusters();
             await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Id);
