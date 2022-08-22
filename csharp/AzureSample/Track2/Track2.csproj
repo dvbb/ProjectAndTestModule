@@ -19,9 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj" />
-    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\mediaservices\Azure.ResourceManager.Media\src\Azure.ResourceManager.Media.csproj" />
-    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj" />
+    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj" />
     <ProjectReference Include="..\AzureSample\AzureSample.csproj" />
   </ItemGroup>
 
