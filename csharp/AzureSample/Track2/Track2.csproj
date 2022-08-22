@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj" />
+    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\logic\Azure.ResourceManager.Logic\src\Azure.ResourceManager.Logic.csproj" />
     <ProjectReference Include="..\AzureSample\AzureSample.csproj" />
   </ItemGroup>
 
