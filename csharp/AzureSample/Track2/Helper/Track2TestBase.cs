@@ -2,8 +2,10 @@
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager.Network;
+using Azure.ResourceManager.Network.Models;
 using Azure.ResourceManager.Resources;
 using Microsoft.Rest;
+using NUnit.Framework.Internal.Execution;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -59,7 +61,7 @@ namespace Track2.Helper
             return $"{resource}-{random.Next(9999)}";
         }
 
-        protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup,string vnetName)
+        protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup, string vnetName)
         {
             VirtualNetworkData data = new VirtualNetworkData()
             {
@@ -68,6 +70,10 @@ namespace Track2.Helper
             data.AddressPrefixes.Add("10.10.0.0/16");
             data.Subnets.Add(new SubnetData() { Name = "subnet1", AddressPrefix = "10.10.1.0/24" });
             data.Subnets.Add(new SubnetData() { Name = "subnet2", AddressPrefix = "10.10.2.0/24" });
+            data.Subnets.Add(new SubnetData() { Name = "subnet3", AddressPrefix = "10.10.3.0/24" });
+            data.Subnets.Add(new SubnetData() { Name = "subnet4", AddressPrefix = "10.10.4.0/24" });
+            data.Subnets.Add(new SubnetData() { Name = "subnet5", AddressPrefix = "10.10.5.0/24" });
+            data.Subnets[0].Delegations.Add(new ServiceDelegation() { Name = "integrationServiceEnvironments", ServiceName = "Microsoft.Logic/integrationServiceEnvironments" });
             var vnet = await resourceGroup.GetVirtualNetworks().CreateOrUpdateAsync(WaitUntil.Completed, vnetName, data);
             return vnet.Value;
         }
