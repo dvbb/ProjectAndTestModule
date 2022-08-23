@@ -6,12 +6,12 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Network;
 using Azure.ResourceManager.Resources;
-using AzureSample;
 using NUnit.Framework;
+using Track2.Helper;
 
 namespace Track2
 {
-    internal class iothub : TestBase
+    internal class iothub : Track2TestBase
     {
         [SetUp]
         public void Setup()

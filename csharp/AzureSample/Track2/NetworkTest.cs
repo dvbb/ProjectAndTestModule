@@ -8,12 +8,12 @@ using Azure.ResourceManager.Network;
 using Azure.ResourceManager.Network.Models;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
-using AzureSample;
 using NUnit.Framework;
+using Track2.Helper;
 
 namespace Track2
 {
-    public class Tests : TestBase
+    public class NetworkTests : Track2TestBase
     {
         [SetUp]
         public void Setup()
@@ -32,7 +32,7 @@ namespace Track2
 
             // Create a resource group
             ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
-            ResourceGroupData rgData = new ResourceGroupData(AzureLocation.EastUS){};
+            ResourceGroupData rgData = new ResourceGroupData(AzureLocation.EastUS) { };
             var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
             ResourceGroupResource resourceGroup = rgLro.Value;
             Assert.IsNotNull(resourceGroup);
