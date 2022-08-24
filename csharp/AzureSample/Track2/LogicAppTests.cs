@@ -14,6 +14,7 @@ using System.Text;
 using Azure.ResourceManager.Logic.Models;
 using Track2.Helper;
 using Azure.ResourceManager.Network;
+using Azure.ResourceManager.KeyVault;
 
 namespace Track2
 {
@@ -107,26 +108,25 @@ namespace Track2
         {
             var collection = _resourceGroup.GetIntegrationServiceEnvironments();
 
-           var v =await  _resourceGroup.GetVirtualNetworks().GetAsync("vnet-0000");
-
-            //string serviceEnviromentName = "serviceEnviroment0000";
-            //IntegrationServiceEnvironmentData data = new IntegrationServiceEnvironmentData(_commonLocation)
-            //{
-            //    Sku = new IntegrationServiceEnvironmentSku()
-            //    {
-            //        Capacity = 0,
-            //        Name = IntegrationServiceEnvironmentSkuName.Developer
-            //    },
-            //    Properties = new IntegrationServiceEnvironmentProperties()
-            //    {
-            //        NetworkConfiguration = new IntegrationServiceNetworkConfiguration(),
-            //    }
-            //};
-            //data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[0].Id });
-            //data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[1].Id });
-            //data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[2].Id });
-            //data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[3].Id });
-            //var serviceEnviroment = await collection.CreateOrUpdateAsync(WaitUntil.Completed, serviceEnviromentName, data);
+            // It will cost 6 hours..
+            string serviceEnviromentName = "serviceEnviroment0000";
+            IntegrationServiceEnvironmentData data = new IntegrationServiceEnvironmentData(_commonLocation)
+            {
+                Sku = new IntegrationServiceEnvironmentSku()
+                {
+                    Capacity = 0,
+                    Name = IntegrationServiceEnvironmentSkuName.Developer
+                },
+                Properties = new IntegrationServiceEnvironmentProperties()
+                {
+                    NetworkConfiguration = new IntegrationServiceNetworkConfiguration(),
+                }
+            };
+            data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[0].Id });
+            data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[1].Id });
+            data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[2].Id });
+            data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[3].Id });
+            var serviceEnviroment = await collection.CreateOrUpdateAsync(WaitUntil.Completed, serviceEnviromentName, data);
 
             // GetAll
             await foreach (var item in collection.GetAllAsync())
