@@ -22,6 +22,7 @@ namespace Track2
     {
         private ResourceGroupResource _resourceGroup;
         private VirtualNetworkResource _vnet;
+        private IntegrationAccountResource _integrationAccount;
         private AzureLocation _commonLocation = AzureLocation.CentralUS;
 
         [OneTimeSetUp]
@@ -38,9 +39,18 @@ namespace Track2
             var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
             _resourceGroup = rgLro.Value;
 
-            // Create virtual network
-            string networkName = "vnet-0000";
-            //_vnet = await CreateDefaultNetwork(_resourceGroup, networkName);
+            // Create Integration Account
+            _integrationAccount = await CreateIntegrationAccount(_resourceGroup, "integration0000");
+        }
+
+        private async Task<IntegrationAccountResource> CreateIntegrationAccount(ResourceGroupResource resourceGroup, string integrationAccountName)
+        {
+            IntegrationAccountData data = new IntegrationAccountData(resourceGroup.Data.Location)
+            {
+                SkuName = IntegrationAccountSkuName.Standard,
+            };
+            var integrationAccount = await resourceGroup.GetIntegrationAccounts().CreateOrUpdateAsync(WaitUntil.Completed, integrationAccountName, data);
+            return integrationAccount.Value;
         }
 
         [Test]
@@ -73,27 +83,16 @@ namespace Track2
         {
             var collection = _resourceGroup.GetLogicWorkflows();
 
-            string curDirectory = Directory.GetCurrentDirectory();
-            string filepath = curDirectory + @"..\..\..\..\definition.json";
-
-            StreamReader sr = new StreamReader(filepath, Encoding.Default);
-            string definition = "";
-            string content;
-            while ((content = sr.ReadLine()) != null)
-            {
-                Console.WriteLine(content.ToString());
-                definition += content.ToString();
-            }
-
-            LogicWorkflowData data = new LogicWorkflowData(_commonLocation)
+            // Create - takes 30 seconds
+            string workflowName = "workflow0000";
+            string filepath = Directory.GetCurrentDirectory() + @"..\..\..\..\definitionV2.json";
+            byte[] definition = File.ReadAllBytes(filepath);
+            LogicWorkflowData data = new LogicWorkflowData(_resourceGroup.Data.Location)
             {
                 Definition = new BinaryData(definition),
-                IntegrationAccount = new LogicResourceReference()
-                {
-                    Id = new ResourceIdentifier("")
-                },
+                IntegrationAccount = new LogicResourceReference() { Id = _integrationAccount.Data.Id },
             };
-            var workflow = await collection.CreateOrUpdateAsync(WaitUntil.Completed, "workflowxfd", data);
+            var workflow = await collection.CreateOrUpdateAsync(WaitUntil.Completed, workflowName, data);
 
             // GetAll
             await foreach (var item in collection.GetAllAsync())
@@ -132,6 +131,36 @@ namespace Track2
             await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Id);
+            }
+        }
+
+        [Test]
+        public async Task P1_IntegrationAccount_Maps()
+        {
+            var collection = _integrationAccount.GetIntegrationAccountMaps();
+            string mapName = "map0000";
+            IntegrationAccountMapData data = new IntegrationAccountMapData(_integrationAccount.Data.Location, IntegrationAccountMapType.Xslt30)
+            {
+                Content = Xslt30MapContent,
+                ContentType = "application/xml"
+            };
+            var map = await collection.CreateOrUpdateAsync(WaitUntil.Completed, mapName, data);
+        }
+
+        private string Xslt30MapContent
+        {
+            get
+            {
+                return @"<xsl:stylesheet xmlns:xsl='http://www.w3.org/1999/XSL/Transform' xmlns:xs='http://www.w3.org/2001/XMLSchema' version='3.0'>
+	                        <xsl:output method='text'/>
+	                        <xsl:template match='/'>
+		                        <xsl:value-of select='company/employee/name'/>
+		                        <xsl:variable name='test'>
+			                        <xsl:text>company/employee/name</xsl:text>
+		                        </xsl:variable>
+		                        <xsl:evaluate xpath='$test'/>
+	                        </xsl:template>
+                        </xsl:stylesheet>";
             }
         }
     }

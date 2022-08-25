@@ -1,35 +1,25 @@
 {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-      "$connections": {
-        "defaultValue": {},
-        "type": "Object"
-      }
-    },
-    "triggers": {
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "triggers": {
       "manual": {
-        "type": "Request",
-        "kind": "Http",
-        "inputs": {
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
           "schema": {}
-        }
+          }
       }
-    },
-    "actions": {
-      "Find_pet_by_ID": {
-        "runAfter": {},
-        "type": "ApiConnection",
-        "inputs": {
-          "host": {
-            "connection": {
-              "name": "@parameters('$connections')['test-custom-connector']['connectionId']"
-            }
-          },
-          "method": "get",
-          "path": "/pet/@{encodeURIComponent('1')}"
-        }
+  },
+  "actions": {
+      "Response": {
+          "runAfter": {},
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+          "statusCode": 200
+          }
       }
-    },
-    "outputs": {}
-  }
+  },
+  "outputs": {}
+}
