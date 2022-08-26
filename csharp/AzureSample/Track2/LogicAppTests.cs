@@ -33,7 +33,7 @@ namespace Track2
             ArmClient armClient = new ArmClient(clientSecretCredential, subscription);
 
             // Create a resource group
-            string rgName = "LogicAppRG-Custom-0000";
+            string rgName = "LogicAppRG-Custom-1000";
             ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
             ResourceGroupData rgData = new ResourceGroupData(_commonLocation) { };
             var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
@@ -105,6 +105,7 @@ namespace Track2
         [Test]
         public async Task P0_IntegrationServiceEnvironment_E2E()
         {
+            _vnet = await CreateDefaultNetwork(_resourceGroup, "vnet1000");
             var collection = _resourceGroup.GetIntegrationServiceEnvironments();
 
             // It will cost 6 hours..
@@ -125,13 +126,26 @@ namespace Track2
             data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[1].Id });
             data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[2].Id });
             data.Properties.NetworkConfiguration.Subnets.Add(new LogicResourceReference() { Id = _vnet.Data.Subnets[3].Id });
-            var serviceEnviroment = await collection.CreateOrUpdateAsync(WaitUntil.Completed, serviceEnviromentName, data);
+            //var serviceEnviroment = await collection.CreateOrUpdateAsync(WaitUntil.Completed, serviceEnviromentName, data);
+
+            // Exist
+            bool flag = await collection.ExistsAsync(serviceEnviromentName);
+            Console.WriteLine(flag);
+
+            // Get 
+            var get = await collection.GetAsync(serviceEnviromentName);
+            Console.WriteLine($"get: {get.Value.Data.Name}");
 
             // GetAll
             await foreach (var item in collection.GetAllAsync())
             {
                 Console.WriteLine(item.Data.Id);
             }
+
+            // Delete
+            await get.Value.DeleteAsync(WaitUntil.Completed);
+            flag = await collection.ExistsAsync(serviceEnviromentName);
+            Console.WriteLine(flag);
         }
 
         [Test]
