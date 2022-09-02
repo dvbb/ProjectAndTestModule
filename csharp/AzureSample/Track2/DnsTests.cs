@@ -9,12 +9,12 @@
 //using Azure.ResourceManager.Network.Models;
 //using Azure.ResourceManager.Resources;
 //using Azure.ResourceManager.Resources.Models;
-//using AzureSample;
 //using NUnit.Framework;
+//using Track2.Helper;
 
 //namespace Track2
 //{
-//    internal class DnsTests : TestBase
+//    internal class DnsTests : Track2TestBase
 //    {
 //        private ResourceGroupResource _resourceGroup;
 //        private DnsZoneResource _dnsZone;
@@ -22,22 +22,13 @@
 //        [OneTimeSetUp]
 //        public async Task GlobalSetUp()
 //        {
-//            // Create ArmClient
-//            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-//            ArmClient armClient = new ArmClient(clientSecretCredential, subscription);
-
 //            // Create a resource group
 //            string rgName = "Dns-Custom-RG-0000";
-//            ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
-//            ResourceGroupData rgData = new ResourceGroupData(AzureLocation.WestUS2) { };
-//            var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, rgName, rgData);
-//            _resourceGroup = rgLro.Value;
+//            _resourceGroup = await CreateResourceGroup(rgName, DefaultLocation);
 
 //            //Create DnsZone
-//            string dnsZoneName = "220726sample0000.com";
-//            DnsZoneData data = new DnsZoneData("Global")
-//            {
-//            };
+//            string dnsZoneName = "220901sample0000.com";
+//            DnsZoneData data = new DnsZoneData("Global") { };
 //            var dnsLro = await _resourceGroup.GetDnsZones().CreateOrUpdateAsync(WaitUntil.Completed, dnsZoneName, data);
 //            _dnsZone = dnsLro.Value;
 //        }
@@ -78,7 +69,7 @@
 //        [Test]
 //        public async Task GetAllRecordSets()
 //        {
-//            await foreach (var item in _dnsZone.GetAllRecordSetsAsync())
+//            await foreach (var item in _dnsZone.GetAllRecordsAsync())
 //            {
 //                Console.WriteLine(item.Id);
 //            }

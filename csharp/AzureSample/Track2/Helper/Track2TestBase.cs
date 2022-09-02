@@ -1,11 +1,14 @@
 ﻿using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Azure.ResourceManager;
 using Azure.ResourceManager.KeyVault;
 using Azure.ResourceManager.KeyVault.Models;
 using Azure.ResourceManager.Network;
 using Azure.ResourceManager.Network.Models;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Storage;
+using Azure.ResourceManager.Storage.Models;
 using Microsoft.Rest;
 using NUnit.Framework.Internal.Execution;
 using System;
@@ -21,6 +24,8 @@ namespace Track2.Helper
         protected string clientSecret => Environment.GetEnvironmentVariable("CLIENT_SECRET");
         protected string tenantId => Environment.GetEnvironmentVariable("TENANT_ID");
         protected string subscription => Environment.GetEnvironmentVariable("SUBSCRIPTION_ID");
+
+        protected AzureLocation DefaultLocation = AzureLocation.EastUS;
 
         protected Track2TestBase()
         {
@@ -63,6 +68,15 @@ namespace Track2.Helper
             return $"{resource}-{random.Next(9999)}";
         }
 
+        protected async Task<ResourceGroupResource> CreateResourceGroup(string resourceGroupName, AzureLocation location)
+        {
+            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+            ArmClient armClient = new ArmClient(clientSecretCredential, subscription);
+            ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
+            var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, resourceGroupName, new ResourceGroupData(location));
+            return rgLro.Value;
+        }
+
         protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup, string vnetName)
         {
             VirtualNetworkData data = new VirtualNetworkData()
@@ -87,6 +101,16 @@ namespace Track2.Helper
             KeyVaultCreateOrUpdateContent data = new KeyVaultCreateOrUpdateContent(resourceGroup.Data.Location, properties);
             var keyvault = await resourceGroup.GetKeyVaults().CreateOrUpdateAsync(WaitUntil.Completed, keyvaultName, data);
             return keyvault.Value;
+        }
+
+        protected async Task<StorageAccountResource> CreateDefaultStorage(ResourceGroupResource resourceGroup, string storageAccountName)
+        {
+            StorageAccountCreateOrUpdateContent storagedata = new StorageAccountCreateOrUpdateContent(new StorageSku(StorageSkuName.StandardLrs), StorageKind.BlobStorage, resourceGroup.Data.Location)
+            {
+                AccessTier = StorageAccountAccessTier.Hot,
+            };
+            var storage = await resourceGroup.GetStorageAccounts().CreateOrUpdateAsync(WaitUntil.Completed, storageAccountName, storagedata);
+            return storage.Value;
         }
     }
 }

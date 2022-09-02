@@ -19,9 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationSample", "Automat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestClientRuntime", "RestClientRuntime\RestClientRuntime.csproj", "{CA7110BC-C07D-43DA-A466-4D346C52C6C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.ServiceFabric", "..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj", "{65A721E2-F751-421E-9E02-2585B78BE4DF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.Logic", "..\..\..\azure-sdk-for-net\sdk\logic\Azure.ResourceManager.Logic\src\Azure.ResourceManager.Logic.csproj", "{2836718F-B30A-4BC5-B3B0-16E387D2EEAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.HDInsight", "..\..\..\azure-sdk-for-net\sdk\hdinsight\Azure.ResourceManager.HDInsight\src\Azure.ResourceManager.HDInsight.csproj", "{E3341FA2-7CC7-4781-B9C0-66874FECD7BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,14 +59,10 @@ Global
 		{CA7110BC-C07D-43DA-A466-4D346C52C6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7110BC-C07D-43DA-A466-4D346C52C6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA7110BC-C07D-43DA-A466-4D346C52C6C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65A721E2-F751-421E-9E02-2585B78BE4DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65A721E2-F751-421E-9E02-2585B78BE4DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65A721E2-F751-421E-9E02-2585B78BE4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65A721E2-F751-421E-9E02-2585B78BE4DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2836718F-B30A-4BC5-B3B0-16E387D2EEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2836718F-B30A-4BC5-B3B0-16E387D2EEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2836718F-B30A-4BC5-B3B0-16E387D2EEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2836718F-B30A-4BC5-B3B0-16E387D2EEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3341FA2-7CC7-4781-B9C0-66874FECD7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3341FA2-7CC7-4781-B9C0-66874FECD7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3341FA2-7CC7-4781-B9C0-66874FECD7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3341FA2-7CC7-4781-B9C0-66874FECD7BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
