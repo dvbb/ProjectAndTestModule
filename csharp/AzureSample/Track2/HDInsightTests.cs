@@ -1,4 +1,5 @@
-﻿using Azure.Core;
+﻿using Azure;
+using Azure.Core;
 using Azure.ResourceManager.HDInsight;
 using Azure.ResourceManager.HDInsight.Models;
 using Azure.ResourceManager.Resources;
@@ -6,8 +7,10 @@ using Azure.ResourceManager.Storage;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Track2.Helper;
 
@@ -22,17 +25,21 @@ namespace Track2
         public async Task GlobalSetUp()
         {
             string resourceGroupName = "HDInsightRG-0000";
-            string storageAccountName = "storageacoount220902";
+            string storageAccountName = "storageacoount220905";
             _resourceGroup = await CreateResourceGroup(resourceGroupName, AzureLocation.EastUS);
-            //_storageAccount = await CreateDefaultStorage(_resourceGroup, storageAccountName);
-            _storageAccount = await _resourceGroup.GetStorageAccounts().GetAsync("cluster0000hdistorage ");
+            _storageAccount = await CreateDefaultStorage(_resourceGroup, storageAccountName);
+            //_storageAccount = await _resourceGroup.GetStorageAccounts().GetAsync("cluster0000hdistorage ");
         }
 
         [Test]
         public async Task Cluster_LinuxHadoopSshPassword()
         {
+            // Create Storage Container 
+            string containerName = "container1000";
+            var container = await _storageAccount.GetBlobService().GetBlobContainers().CreateOrUpdateAsync(WaitUntil.Completed, containerName, new BlobContainerData());
+
             var collection = _resourceGroup.GetHDInsightClusters();
-            string clusterName = "hadoopcluster0000222";
+            string clusterName = "hadoopcluster1000000";
             string common_user = "sshuser5951";
             string common_passwork = "Password!5951";
             string key = (await _storageAccount.GetKeysAsync()).Value.Keys.FirstOrDefault().Value;
@@ -84,22 +91,131 @@ namespace Track2
             });
             properties.StorageAccounts.Add(new HDInsightStorageAccountInfo()
             {
-                Name = $"cluster0000hdistorage.blob.core.windows.net",
+                Name = $"{_storageAccount.Data.Name}.blob.core.windows.net",
                 IsDefault = true,
-                Container = "container8000",
+                Container = container.Value.Data.Name,
                 Key = key,
             });
-
-
             var data = new HDInsightClusterCreateOrUpdateContent()
             {
                 Properties = properties,
                 Location = _resourceGroup.Data.Location,
             };
-            data.Tags.Add(new KeyValuePair<string,string>("key0","value0"));
+            data.Tags.Add(new KeyValuePair<string, string>("key0", "value0"));
             var cluster = await collection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
 
             Console.WriteLine(cluster.Value.Data.Name);
+            Console.WriteLine(cluster.Value.Data.Tags.Count);
+            Console.WriteLine(cluster.Value.Data.Properties.OSType.ToString());
+            Console.WriteLine(cluster.Value.Data.Properties.StorageAccounts.Count);
+            Console.WriteLine(cluster.Value.Data.Properties.Tier.ToString());
+            Console.WriteLine(cluster.Value.Data.Properties.IsEncryptionInTransitEnabled);
+        }
+
+        [Test]
+        public async Task Cluster_Extension()
+        {
+            string clusterName = "hadoopcluster1000000";
+            var clusterLro = await _resourceGroup.GetHDInsightClusters().GetAsync(clusterName);
+            var cluster = clusterLro.Value;
+
+            // get
+            var extension = await cluster.GetExtensionAsync("azuremonitor");
+
+            Console.WriteLine(extension);
+            Console.WriteLine(extension.Value.IsClusterMonitoringEnabled);
+            Console.WriteLine(extension.Value.WorkspaceId); // null
+
+            // create
+            //var data = new HDInsightClusterCreateExtensionContent()
+            //{
+            //    WorkspaceId = "00000000-0000-0000-0000-000000000000",
+            //    PrimaryKey = "primarykey"
+            //};
+            //var extension2 = await cluster.CreateExtensionAsync(WaitUntil.Completed,"customextension",data);
+            //Console.WriteLine(extension2);
+        }
+
+        [Test]
+        public async Task Cluster_GetAzureMonitorExtensionStatus()
+        {
+            string clusterName = "hadoopcluster1000000";
+            var clusterLro = await _resourceGroup.GetHDInsightClusters().GetAsync(clusterName);
+            var cluster = clusterLro.Value;
+
+            // get
+            var response = await cluster.GetAzureMonitorExtensionStatusAsync();
+
+            Console.WriteLine(response.Value);
+            Console.WriteLine(response.Value.IsClusterMonitoringEnabled);
+            Console.WriteLine(response.Value.SelectedConfigurations); //null
+            Console.WriteLine(response.Value.WorkspaceId); // null
+        }
+
+        [Test]
+        public async Task Cluster_Application_Create()
+        {
+            string clusterName = "hadoopcluster1000000";
+            var cluster = await _resourceGroup.GetHDInsightClusters().GetAsync(clusterName);
+
+            var collection = cluster.Value.GetHDInsightApplications();
+            string applicationName = "app200000";
+            var properties = new HDInsightApplicationProperties() { };
+
+            var uri = new Uri("https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh");
+            var roles  = new[] { "edgenode" };
+            properties.InstallScriptActions.Add(new RuntimeScriptAction("InstallHue2", uri, roles)
+            {
+                Parameters = "-version latest -port 20000"
+            });
+            properties.ApplicationType = "CustomApplication";
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "edgenode",
+                TargetInstanceCount = 1,
+                HardwareVmSize = "Large"
+            });
+
+            var data = new HDInsightApplicationData()
+            {
+                Properties = properties,
+            };
+            data.Tags.Add("kyes","values");
+            var app = await collection.CreateOrUpdateAsync(WaitUntil.Completed, applicationName, data);
+
+            Console.WriteLine(app.Value.Data.Name);
+            Console.WriteLine(app.Value.Data.Properties.ApplicationState);
+            Console.WriteLine(app.Value.Data.Properties.ApplicationType);
+            Console.WriteLine(app.Value.Data.Properties.InstallScriptActions.Count);
+            Console.WriteLine(app.Value.Data.Properties.ProvisioningState);
+            Console.WriteLine(app.Value.Data.Properties.CreatedDate);
+        }
+
+        [Test]
+        public async Task Cluster_Application_GetAll()
+        {
+            string clusterName = "hadoopcluster1000000";
+            var cluster = await _resourceGroup.GetHDInsightClusters().GetAsync(clusterName);
+
+            var collection = cluster.Value.GetHDInsightApplications();
+            await foreach (var item in collection.GetAllAsync())
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        [Test]
+        [Ignore("Private link is not enabled for this cluster")]
+        public async Task Cluster_PrivateConnect_GetAll()
+        {
+            string clusterName = "hadoopcluster1000000";
+            var cluster = await _resourceGroup.GetHDInsightClusters().GetAsync(clusterName);
+
+            var collection = cluster.Value.GetHDInsightPrivateEndpointConnections();
+            await foreach (var item in collection.GetAllAsync())
+            {
+                Console.WriteLine(item);
+            }
         }
 
         [Test]

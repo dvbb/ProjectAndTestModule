@@ -105,9 +105,12 @@ namespace Track2.Helper
 
         protected async Task<StorageAccountResource> CreateDefaultStorage(ResourceGroupResource resourceGroup, string storageAccountName)
         {
-            StorageAccountCreateOrUpdateContent storagedata = new StorageAccountCreateOrUpdateContent(new StorageSku(StorageSkuName.StandardLrs), StorageKind.BlobStorage, resourceGroup.Data.Location)
+            StorageSku sku = new StorageSku(StorageSkuName.StandardGrs);
+            StorageKind kind = StorageKind.Storage;
+            var location = resourceGroup.Data.Location;
+            StorageAccountCreateOrUpdateContent storagedata = new StorageAccountCreateOrUpdateContent(sku, kind, location)
             {
-                AccessTier = StorageAccountAccessTier.Hot,
+                //AccessTier = StorageAccountAccessTier.Hot,
             };
             var storage = await resourceGroup.GetStorageAccounts().CreateOrUpdateAsync(WaitUntil.Completed, storageAccountName, storagedata);
             return storage.Value;
