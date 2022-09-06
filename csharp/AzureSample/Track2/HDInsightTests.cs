@@ -7,11 +7,13 @@ using Azure.ResourceManager.Storage;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using Track2.Helper;
 
 namespace Track2
@@ -126,14 +128,6 @@ namespace Track2
             Console.WriteLine(extension.Value.IsClusterMonitoringEnabled);
             Console.WriteLine(extension.Value.WorkspaceId); // null
 
-            // create
-            //var data = new HDInsightClusterCreateExtensionContent()
-            //{
-            //    WorkspaceId = "00000000-0000-0000-0000-000000000000",
-            //    PrimaryKey = "primarykey"
-            //};
-            //var extension2 = await cluster.CreateExtensionAsync(WaitUntil.Completed,"customextension",data);
-            //Console.WriteLine(extension2);
         }
 
         [Test]
@@ -163,7 +157,7 @@ namespace Track2
             var properties = new HDInsightApplicationProperties() { };
 
             var uri = new Uri("https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh");
-            var roles  = new[] { "edgenode" };
+            var roles = new[] { "edgenode" };
             properties.InstallScriptActions.Add(new RuntimeScriptAction("InstallHue2", uri, roles)
             {
                 Parameters = "-version latest -port 20000"
@@ -180,7 +174,7 @@ namespace Track2
             {
                 Properties = properties,
             };
-            data.Tags.Add("kyes","values");
+            data.Tags.Add("kyes", "values");
             var app = await collection.CreateOrUpdateAsync(WaitUntil.Completed, applicationName, data);
 
             Console.WriteLine(app.Value.Data.Name);
@@ -236,6 +230,99 @@ namespace Track2
                 Console.WriteLine(item.Data.Properties.StorageAccounts[0].Container.ToString());
                 Console.WriteLine();
             }
+        }
+
+        [Test]
+        public async Task TestCreateClusterWithAutoScaleLoadBasedType()
+        {
+            var collection = _resourceGroup.GetHDInsightClusters();
+
+            string clusterName = "hdisdk-premium";
+
+            string containerName = "hdisdk-premium-container";
+            var container = await _storageAccount.GetBlobService().GetBlobContainers().CreateOrUpdateAsync(WaitUntil.Completed, containerName, new BlobContainerData());
+            string key = (await _storageAccount.GetKeysAsync()).Value.Keys.FirstOrDefault().Value;
+
+            var properties = PrepareClusterCreateParams(_storageAccount.Data.Name, containerName, key);
+            var workerNode = properties.ComputeRoles.First(role => role.Name.Equals("workernode"));
+
+            //Add auto scale configuration Load-based type
+            workerNode.AutoScaleConfiguration = new HDInsightAutoScaleConfiguration()
+            {
+                Capacity = new HDInsightAutoScaleCapacity()
+                {
+                    MinInstanceCount = 4,
+                    MaxInstanceCount = 5
+                }
+            };
+
+            var data = new HDInsightClusterCreateOrUpdateContent()
+            {
+                Properties = properties,
+                Location = _resourceGroup.Data.Location,
+            };
+            data.Tags.Add(new KeyValuePair<string, string>("key0", "value0"));
+            var cluster = await collection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
+        }
+
+        private HDInsightClusterCreateOrUpdateProperties PrepareClusterCreateParams(string storageAccountName, string containerName, string accessKey)
+        {
+            string common_user = "sshuser5951";
+            string common_passwork = "Password!5951";
+            string clusterDeifnitionConfigurations = "{         \"gateway\": {             \"restAuthCredential.isEnabled\": \"true\",             \"restAuthCredential.username\": \"admin4468\",             \"restAuthCredential.password\": \"Password1!9688\"         }     } ";
+            var properties = new HDInsightClusterCreateOrUpdateProperties()
+            {
+                ClusterVersion = "3.6",
+                OSType = HDInsightOSType.Linux,
+                Tier = HDInsightTier.Standard,
+                ClusterDefinition = new HDInsightClusterDefinition()
+                {
+                    Kind = "Hadoop",
+                    Configurations = new BinaryData(clusterDeifnitionConfigurations),
+                },
+                IsEncryptionInTransitEnabled = true,
+            };
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "headnode",
+                TargetInstanceCount = 2,
+                HardwareVmSize = "Large",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "workernode",
+                TargetInstanceCount = 3,
+                HardwareVmSize = "Large",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "zookeepernode",
+                TargetInstanceCount = 3,
+                HardwareVmSize = "Small",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.StorageAccounts.Add(new HDInsightStorageAccountInfo()
+            {
+                Name = $"{storageAccountName}.blob.core.windows.net",
+                IsDefault = true,
+                Container = containerName,
+                Key = accessKey,
+            });
+            return properties;
         }
     }
 }
