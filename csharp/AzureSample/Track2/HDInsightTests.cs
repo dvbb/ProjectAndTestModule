@@ -22,6 +22,7 @@ namespace Track2
     {
         private ResourceGroupResource _resourceGroup;
         private StorageAccountResource _storageAccount;
+        private HDInsightClusterCollection _clusterCollection => _resourceGroup.GetHDInsightClusters();
 
         [OneTimeSetUp]
         public async Task GlobalSetUp()
@@ -31,6 +32,19 @@ namespace Track2
             _resourceGroup = await CreateResourceGroup(resourceGroupName, AzureLocation.EastUS);
             _storageAccount = await CreateDefaultStorage(_resourceGroup, storageAccountName);
             //_storageAccount = await _resourceGroup.GetStorageAccounts().GetAsync("cluster0000hdistorage ");
+        }
+
+        [Test]
+        public void StringParse()
+        {
+            string str = null;
+            bool flag = default;
+
+            str = "true";
+            flag = bool.Parse(str);
+
+            str = "false";
+            flag = bool.Parse(str);
         }
 
         [Test]
@@ -265,6 +279,66 @@ namespace Track2
             var cluster = await collection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
         }
 
+        [Test]
+        public async Task TestCreateClusterWithEncryptionInTransit()
+        {
+            // 200: AzureResourceCreationFailedErrorCode","message":"Internal server error occurred while processing the request. Please retry the request or contact support
+            string clusterName = "hdisdk-encryption";
+            var properties = await PrepareClusterCreateParams(_storageAccount);
+            properties.ClusterDefinition.Kind = "Spark";
+            properties.IsEncryptionInTransitEnabled = true;
+
+            var data = new HDInsightClusterCreateOrUpdateContent()
+            {
+                Properties = properties,
+                Location = _resourceGroup.Data.Location,
+            };
+            data.Tags.Add(new KeyValuePair<string, string>("key0", "value0"));
+            var cluster = await _clusterCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
+            Assert.IsNotNull(cluster);
+        }
+
+        [Test]
+        public async Task TestCreateWithAdditionalStorageAccount()
+        {
+            string clusterName = "hdisdk-additional";
+            var properties = await PrepareClusterCreateParams(_storageAccount);
+
+            // Add additional storage account
+            string secondaryStorageAccountName = "azstorageforcluster8000";
+            string containerName = "container8000";
+            var secondaryStorageAccount = await CreateDefaultStorage(_resourceGroup, secondaryStorageAccountName);
+            string accessKey = (await secondaryStorageAccount.GetKeysAsync()).Value.Keys.FirstOrDefault().Value;
+            await secondaryStorageAccount.GetBlobService().GetBlobContainers().CreateOrUpdateAsync(WaitUntil.Completed, containerName, new BlobContainerData());
+
+            properties.StorageAccounts.Add(new HDInsightStorageAccountInfo()
+            {
+                Name = $"{secondaryStorageAccount.Data.Name}.blob.core.windows.net",
+                IsDefault = false,
+                Container = containerName,
+                Key = accessKey,
+            });
+
+            var data = new HDInsightClusterCreateOrUpdateContent()
+            {
+                Properties = properties,
+                Location = _resourceGroup.Data.Location,
+            };
+            data.Tags.Add(new KeyValuePair<string, string>("key0", "value0"));
+            var cluster = await _clusterCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
+            Assert.IsNotNull(cluster);
+        }
+
+        [Test]
+        public async Task TestCreateWithEmptyExtendedParameters()
+        {
+            string clusterName = "hdisdk-empty";
+            var data = new HDInsightClusterCreateOrUpdateContent()
+            {
+            };
+            Assert.ThrowsAsync<RequestFailedException>(() => _clusterCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data));
+        }
+
         private HDInsightClusterCreateOrUpdateProperties PrepareClusterCreateParams(string storageAccountName, string containerName, string accessKey)
         {
             string common_user = "sshuser5951";
@@ -318,6 +392,69 @@ namespace Track2
             properties.StorageAccounts.Add(new HDInsightStorageAccountInfo()
             {
                 Name = $"{storageAccountName}.blob.core.windows.net",
+                IsDefault = true,
+                Container = containerName,
+                Key = accessKey,
+            });
+            return properties;
+        }
+
+        protected async Task<HDInsightClusterCreateOrUpdateProperties> PrepareClusterCreateParams(StorageAccountResource storageAccount)
+        {
+            string common_user = "sshuser5951";
+            string common_passwork = "Password!5951";
+            string containerName = GetRandomNumber("container");
+            string accessKey = (await _storageAccount.GetKeysAsync()).Value.Keys.FirstOrDefault().Value;
+            await storageAccount.GetBlobService().GetBlobContainers().CreateOrUpdateAsync(WaitUntil.Completed, containerName, new BlobContainerData());
+            string clusterDeifnitionConfigurations = "{         \"gateway\": {             \"restAuthCredential.isEnabled\": \"true\",             \"restAuthCredential.username\": \"admin4468\",             \"restAuthCredential.password\": \"Password1!9688\"         }     } ";
+            var properties = new HDInsightClusterCreateOrUpdateProperties()
+            {
+                ClusterVersion = "3.6",
+                OSType = HDInsightOSType.Linux,
+                Tier = HDInsightTier.Standard,
+                ClusterDefinition = new HDInsightClusterDefinition()
+                {
+                    Kind = "Hadoop",
+                    Configurations = new BinaryData(clusterDeifnitionConfigurations),
+                },
+                IsEncryptionInTransitEnabled = true,
+            };
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "headnode",
+                TargetInstanceCount = 2,
+                HardwareVmSize = "Large",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "workernode",
+                TargetInstanceCount = 3,
+                HardwareVmSize = "Large",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.ComputeRoles.Add(new HDInsightClusterRole()
+            {
+                Name = "zookeepernode",
+                TargetInstanceCount = 3,
+                HardwareVmSize = "Small",
+                OSLinuxProfile = new HDInsightLinuxOSProfile()
+                {
+                    Username = common_user,
+                    Password = common_passwork
+                }
+            });
+            properties.StorageAccounts.Add(new HDInsightStorageAccountInfo()
+            {
+                Name = $"{storageAccount.Data.Name}.blob.core.windows.net",
                 IsDefault = true,
                 Container = containerName,
                 Key = accessKey,

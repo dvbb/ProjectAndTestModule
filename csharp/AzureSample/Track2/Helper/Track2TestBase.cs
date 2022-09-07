@@ -65,7 +65,7 @@ namespace Track2.Helper
         protected string GetRandomNumber(string resource)
         {
             Random random = new Random();
-            return $"{resource}-{random.Next(9999)}";
+            return $"{resource}{random.Next(9999)}";
         }
 
         protected async Task<ResourceGroupResource> CreateResourceGroup(string resourceGroupName, AzureLocation location)
