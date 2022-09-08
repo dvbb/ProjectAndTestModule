@@ -28,10 +28,9 @@ namespace Track2
         public async Task GlobalSetUp()
         {
             string resourceGroupName = "HDInsightRG-0000";
-            string storageAccountName = "storageacoount220905";
+            string storageAccountName = "storageacoount220908";
             _resourceGroup = await CreateResourceGroup(resourceGroupName, AzureLocation.EastUS);
             _storageAccount = await CreateDefaultStorage(_resourceGroup, storageAccountName);
-            //_storageAccount = await _resourceGroup.GetStorageAccounts().GetAsync("cluster0000hdistorage ");
         }
 
         [Test]
@@ -337,6 +336,48 @@ namespace Track2
             {
             };
             Assert.ThrowsAsync<RequestFailedException>(() => _clusterCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data));
+        }
+
+        [Test]
+        [Ignore("200: Azure.RequestFailedException : Internal server error occurred while processing the request")]
+        public async Task TestCreateClusterWithOutboundAndPrivateLink()
+        {
+            string clusterName = "hdisdk-outboundpl1000";
+            var properties = await PrepareClusterCreateParams(_storageAccount);
+            properties.StorageAccounts.FirstOrDefault().ResourceId = _storageAccount.Data.Id;
+            properties.NetworkProperties = new HDInsightClusterNetworkProperties()
+            {
+                ResourceProviderConnection = HDInsightResourceProviderConnection.Outbound,
+                PrivateLink = HDInsightPrivateLinkState.Enabled
+            };
+
+            var vnet = await CreateDefaultNetwork(_resourceGroup,"vnet8000");
+            foreach (var role in properties.ComputeRoles)   
+            {
+                role.VirtualNetworkProfile = new HDInsightVirtualNetworkProfile()
+                {
+                    Id = vnet.Data.Id,
+                    Subnet = vnet.Data.Subnets.FirstOrDefault().Id.ToString()
+                };
+            }
+
+            var data = new HDInsightClusterCreateOrUpdateContent()
+            {
+                Properties = properties,
+                Location = _resourceGroup.Data.Location,
+            };
+            data.Tags.Add(new KeyValuePair<string, string>("key0", "value0"));
+            var cluster = await _clusterCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, clusterName, data);
+            Assert.IsNotNull(cluster);
+        }
+
+        [Test]
+        public async Task TestCreateClusterWithOutboundAndPrivateLink_Get()
+        {
+            string clusterName = "hdisdk-outboundpl";
+            var cluster = await _clusterCollection.GetAsync(clusterName);
+            Assert.IsNotNull(cluster);
+            Console.WriteLine(cluster.Value.Data.Name);
         }
 
         private HDInsightClusterCreateOrUpdateProperties PrepareClusterCreateParams(string storageAccountName, string containerName, string accessKey)

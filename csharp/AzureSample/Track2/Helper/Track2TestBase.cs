@@ -10,9 +10,11 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Storage;
 using Azure.ResourceManager.Storage.Models;
 using Microsoft.Rest;
+using NUnit.Framework;
 using NUnit.Framework.Internal.Execution;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -79,17 +81,18 @@ namespace Track2.Helper
 
         protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup, string vnetName)
         {
+            // Create a NSG
+            string nsgName = "nsg1245";
+            var nsgData = new NetworkSecurityGroupData() { Location = resourceGroup.Data.Location, };
+            var nsg = await resourceGroup.GetNetworkSecurityGroups().CreateOrUpdateAsync(WaitUntil.Completed, nsgName, nsgData);
+
             VirtualNetworkData data = new VirtualNetworkData()
             {
                 Location = resourceGroup.Data.Location,
             };
             data.AddressPrefixes.Add("10.10.0.0/16");
-            data.Subnets.Add(new SubnetData() { Name = "subnet1", AddressPrefix = "10.10.1.0/24" });
+            data.Subnets.Add(new SubnetData() { Name = "subnet1", AddressPrefix = "10.10.1.0/24", PrivateLinkServiceNetworkPolicy = VirtualNetworkPrivateLinkServiceNetworkPolicy.Disabled, NetworkSecurityGroup = nsg.Value.Data });
             data.Subnets.Add(new SubnetData() { Name = "subnet2", AddressPrefix = "10.10.2.0/24" });
-            data.Subnets.Add(new SubnetData() { Name = "subnet3", AddressPrefix = "10.10.3.0/24" });
-            data.Subnets.Add(new SubnetData() { Name = "subnet4", AddressPrefix = "10.10.4.0/24" });
-            data.Subnets.Add(new SubnetData() { Name = "subnet5", AddressPrefix = "10.10.5.0/24" });
-            data.Subnets[0].Delegations.Add(new ServiceDelegation() { Name = "integrationServiceEnvironments", ServiceName = "Microsoft.Logic/integrationServiceEnvironments" });
             var vnet = await resourceGroup.GetVirtualNetworks().CreateOrUpdateAsync(WaitUntil.Completed, vnetName, data);
             return vnet.Value;
         }
