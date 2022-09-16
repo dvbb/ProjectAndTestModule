@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\hdinsight\Azure.ResourceManager.HDInsight\src\Azure.ResourceManager.HDInsight.csproj" />
+    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\peering\Azure.ResourceManager.Peering\src\Azure.ResourceManager.Peering.csproj" />
   </ItemGroup>
 
   <ItemGroup>
