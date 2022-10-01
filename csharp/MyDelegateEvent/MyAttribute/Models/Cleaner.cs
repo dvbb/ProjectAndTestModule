@@ -4,9 +4,9 @@ using System.Text;
 
 namespace MyAttribute.Models
 {
-    internal class Dustman : Person
+    internal class Cleaner : Person
     {
-        public Dustman()
+        public Cleaner()
         {
             Salary = 5000;
             AnnualLeaveOnHours = 40;

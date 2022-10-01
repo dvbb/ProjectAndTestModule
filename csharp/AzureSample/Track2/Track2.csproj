@@ -13,16 +13,20 @@
     <PackageReference Include="Azure.ResourceManager.Resources" Version="1.2.0" />
     <PackageReference Include="Azure.ResourceManager.Storage" Version="1.0.0-beta.11" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-	<ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj" />
-    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\mediaservices\Azure.ResourceManager.Media\src\Azure.ResourceManager.Media.csproj" />
-    <ProjectReference Include="..\..\..\..\..\azure-sdk-for-net\sdk\servicefabric\Azure.ResourceManager.ServiceFabric\src\Azure.ResourceManager.ServiceFabric.csproj" />
-    <ProjectReference Include="..\AzureSample\AzureSample.csproj" />
+    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\peering\Azure.ResourceManager.Peering\src\Azure.ResourceManager.Peering.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestData\definition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
