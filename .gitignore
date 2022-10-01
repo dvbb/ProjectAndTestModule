@@ -26,3 +26,8 @@ csharp/*/packages
 *.pfx
 *.json.env
 *.bicep.env
+
+# Unity Asset file
+Unity/*/Asset
+Unity/*/Library
+Unity/*/Temp
