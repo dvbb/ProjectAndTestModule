@@ -28,6 +28,7 @@ csharp/*/packages
 *.bicep.env
 
 # Unity Asset file
-Unity/*/Asset
+Unity/*/Assets/Art
+Unity/*/Assets/Audio
 Unity/*/Library
 Unity/*/Temp
