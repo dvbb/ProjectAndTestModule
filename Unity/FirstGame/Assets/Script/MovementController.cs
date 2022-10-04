@@ -24,5 +24,6 @@ public class MovementController : MonoBehaviour
         Vector2 position = transform.position;
         position.x += moveX * Speed * Time.deltaTime;
         position.y += moveY * Speed * Time.deltaTime;
+        transform.position = position;
     }
 }
