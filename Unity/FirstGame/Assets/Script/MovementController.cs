@@ -15,6 +15,14 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.right * Speed * Time.deltaTime);
+        // Horizontal movement to the right
+        //transform.Translate(transform.right * Speed * Time.deltaTime);
+
+        // Arror keys to control movement
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        Vector2 position = transform.position;
+        position.x += moveX * Speed * Time.deltaTime;
+        position.y += moveY * Speed * Time.deltaTime;
     }
 }
