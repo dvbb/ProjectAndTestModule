@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.6.0" />
+    <PackageReference Include="Azure.ResourceManager.Compute" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.KeyVault" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.Network" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.Resources" Version="1.2.0" />
@@ -20,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\peering\Azure.ResourceManager.Peering\src\Azure.ResourceManager.Peering.csproj" />
+    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\securitycenter\Azure.ResourceManager.SecurityCenter\src\Azure.ResourceManager.SecurityCenter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

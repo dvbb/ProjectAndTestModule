@@ -2,6 +2,8 @@
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Compute.Models;
+using Azure.ResourceManager.Compute;
 using Azure.ResourceManager.KeyVault;
 using Azure.ResourceManager.KeyVault.Models;
 using Azure.ResourceManager.Network;
@@ -81,11 +83,12 @@ namespace Track2.Helper
 
         protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup, string vnetName)
         {
-            // Create a NSG
+            // Create NSG
             string nsgName = "nsg1245";
             var nsgData = new NetworkSecurityGroupData() { Location = resourceGroup.Data.Location, };
             var nsg = await resourceGroup.GetNetworkSecurityGroups().CreateOrUpdateAsync(WaitUntil.Completed, nsgName, nsgData);
 
+            // Create Network
             VirtualNetworkData data = new VirtualNetworkData()
             {
                 Location = resourceGroup.Data.Location,
@@ -95,6 +98,14 @@ namespace Track2.Helper
             data.Subnets.Add(new SubnetData() { Name = "subnet2", AddressPrefix = "10.10.2.0/24" });
             var vnet = await resourceGroup.GetVirtualNetworks().CreateOrUpdateAsync(WaitUntil.Completed, vnetName, data);
             return vnet.Value;
+        }
+
+        protected async Task<VirtualNetworkResource> CreateDefaultNetworkInterface(ResourceGroupResource resourceGroup, string nicName)
+        {
+            var data = new NetworkInterfaceData()
+            {
+            };
+            resourceGroup.GetNetworkInterfaces().CreateOrUpdateAsync(WaitUntil.Completed, nicName, data);
         }
 
         protected async Task<KeyVaultResource> CreateDefaultKeyVault(ResourceGroupResource resourceGroup, string keyvaultName)
@@ -117,6 +128,67 @@ namespace Track2.Helper
             };
             var storage = await resourceGroup.GetStorageAccounts().CreateOrUpdateAsync(WaitUntil.Completed, storageAccountName, storagedata);
             return storage.Value;
+        }
+
+        protected async Task<VirtualMachineResource> CreateDefaultVirtualMachine(ResourceGroupResource resourceGroup, string vmName)
+        {
+
+            VirtualMachineCollection vmCollection = resourceGroup.GetVirtualMachines();
+            VirtualMachineData input = new VirtualMachineData(resourceGroup.Data.Location)
+            {
+                HardwareProfile = new VirtualMachineHardwareProfile()
+                {
+                    VmSize = VirtualMachineSizeType.StandardF2
+                },
+                OSProfile = new VirtualMachineOSProfile()
+                {
+                    AdminUsername = "adminUser",
+                    ComputerName = "myVM",
+                    LinuxConfiguration = new LinuxConfiguration()
+                    {
+                        DisablePasswordAuthentication = true,
+                        SshPublicKeys = {
+                            new SshPublicKeyConfiguration()
+                            {
+                                Path = $"/home/adminUser/.ssh/authorized_keys",
+                                KeyData = "<value of the public ssh key>",
+                            }
+                        }
+                    }
+                },
+                NetworkProfile = new VirtualMachineNetworkProfile()
+                {
+                    NetworkInterfaces =
+                    {
+                        new VirtualMachineNetworkInterfaceReference()
+                        {
+                            Id = new ResourceIdentifier("/subscriptions/<subscriptionId>/resourceGroups/<rgName>/providers/Microsoft.Network/networkInterfaces/<nicName>"),
+                            Primary = true,
+                        }
+                    }
+                },
+                StorageProfile = new VirtualMachineStorageProfile()
+                {
+                    OSDisk = new VirtualMachineOSDisk(DiskCreateOptionType.FromImage)
+                    {
+                        OSType = SupportedOperatingSystemType.Linux,
+                        Caching = CachingType.ReadWrite,
+                        ManagedDisk = new VirtualMachineManagedDisk()
+                        {
+                            StorageAccountType = StorageAccountType.StandardLrs
+                        }
+                    },
+                    ImageReference = new ImageReference()
+                    {
+                        Publisher = "Canonical",
+                        Offer = "UbuntuServer",
+                        Sku = "16.04-LTS",
+                        Version = "latest",
+                    }
+                }
+            };
+            ArmOperation<VirtualMachineResource> lro = await vmCollection.CreateOrUpdateAsync(WaitUntil.Completed, vmName, input);
+            return lro.Value;
         }
     }
 }
