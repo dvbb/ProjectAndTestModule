@@ -5,12 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float Speed = 5f;
+    private float MaxHealth = 8;
+    private float CurrentHealth;
 
     public Rigidbody2D rbody;
+
+    public float GetCureentHealth() => CurrentHealth;
+    public float GetMaxHealth() => MaxHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        CurrentHealth = 5;
         rbody = GetComponent<Rigidbody2D>();
     }
 
@@ -27,5 +33,21 @@ public class PlayerController : MonoBehaviour
         position.x += moveX * Speed * Time.fixedDeltaTime;
         position.y += moveY * Speed * Time.fixedDeltaTime;
         rbody.MovePosition(position);
+    }
+
+
+    public bool IsMaxHealth()
+    {
+        if (this.MaxHealth == this.CurrentHealth)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public void ChangeHealth(float ammount)
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + ammount, 0, MaxHealth);
+        Debug.Log($"HP:{this.GetCureentHealth()}/{this.GetMaxHealth()}...");
     }
 }
