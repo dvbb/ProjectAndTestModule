@@ -19,13 +19,17 @@ namespace Track2
         public async Task TestSetUp()
         {
             _resourceGroup = await CreateResourceGroup("SecurityCenterRG-0000", AzureLocation.EastUS);
-            var vm = await CreateDefaultVirtualMachine(_resourceGroup, "vm0000");
+            var vnet = await CreateDefaultNetwork(_resourceGroup, "vnet0000");
+            var networkInterface = await CreateDefaultNetworkInterface(_resourceGroup, vnet, "networkInterface0000");
+            var vm = await CreateDefaultVirtualMachine(_resourceGroup, networkInterface.Data.Id, "vm0000");
         }
 
         [Test]
         public async Task AdaptiveNetworkHardeningE2E()
         {
-            var Collection = _resourceGroup.GetAdaptiveNetworkHardenings(_resourceGroup.Data.Name, "Microsoft.Compute", "vm0000");
+            var Collection = _resourceGroup.GetAdaptiveNetworkHardenings("Microsoft.Compute", "virtualMachines", "vm0000");
+            var list = await Collection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(list.Count);
         }
     }
 }

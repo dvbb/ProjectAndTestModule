@@ -24,6 +24,7 @@ namespace Track2.Helper
 {
     public class Track2TestBase
     {
+        private const string dummySSHKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+wWK73dCr+jgQOAxNsHAnNNNMEMWOHYEccp6wJm2gotpr9katuF/ZAdou5AaW1C61slRkHRkpRRX9FA9CYBiitZgvCCz+3nWNN7l/Up54Zps/pHWGZLHNJZRYyAB6j5yVLMVHIHriY49d/GZTZVNB8GoJv9Gakwc/fuEZYYl4YDFiGMBP///TzlI4jhiJzjKnEvqPFki5p2ZRJqcbCiF4pJrxUQR/RXqVFQdbRLZgYfJ8xGB878RENq3yQ39d8dVOkq4edbkzwcUmwwwkYVPIoDGsYLaRHnG+To7FvMeyO7xDVQkMKzopTQV8AuKpyvpqu0a9pWOMaiCyDytO7GGN you@me.com";
         protected string clientId => Environment.GetEnvironmentVariable("CLIENT_ID");
         protected string clientSecret => Environment.GetEnvironmentVariable("CLIENT_SECRET");
         protected string tenantId => Environment.GetEnvironmentVariable("TENANT_ID");
@@ -100,12 +101,43 @@ namespace Track2.Helper
             return vnet.Value;
         }
 
-        protected async Task<VirtualNetworkResource> CreateDefaultNetworkInterface(ResourceGroupResource resourceGroup, string nicName)
+        protected async Task<NetworkInterfaceResource> CreateDefaultNetworkInterface(ResourceGroupResource resourceGroup, VirtualNetworkResource network, string nicName)
         {
+            // Create Public IP
+            string publicIPName = "publicIP0000";
+            var publicIPData = new PublicIPAddressData()
+            {
+                Location = resourceGroup.Data.Location,
+                PublicIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
+            };
+            var publicIP = await resourceGroup.GetPublicIPAddresses().CreateOrUpdateAsync(WaitUntil.Completed, publicIPName, publicIPData);
+
+            // Get subnet id AsyncPageable<SubnetResource>
+            var list = await network.GetSubnets().GetAllAsync().ToEnumerableAsync();
+            var subnetId = list.FirstOrDefault().Id;
+
             var data = new NetworkInterfaceData()
             {
+                Location = resourceGroup.Data.Location,
+                IPConfigurations =
+                {
+                    new NetworkInterfaceIPConfigurationData()
+                    {
+                        Name = "ipconfig0000",
+                        PrivateIPAllocationMethod = NetworkIPAllocationMethod.Dynamic,
+                        PublicIPAddress = new PublicIPAddressData()
+                        {
+                            Id = publicIP.Value.Id
+                        },
+                        Subnet = new SubnetData()
+                        {
+                            Id = subnetId
+                        }
+                    }
+                }
             };
-            resourceGroup.GetNetworkInterfaces().CreateOrUpdateAsync(WaitUntil.Completed, nicName, data);
+            var networkInterface = await resourceGroup.GetNetworkInterfaces().CreateOrUpdateAsync(WaitUntil.Completed, nicName, data);
+            return networkInterface.Value;
         }
 
         protected async Task<KeyVaultResource> CreateDefaultKeyVault(ResourceGroupResource resourceGroup, string keyvaultName)
@@ -130,9 +162,9 @@ namespace Track2.Helper
             return storage.Value;
         }
 
-        protected async Task<VirtualMachineResource> CreateDefaultVirtualMachine(ResourceGroupResource resourceGroup, string vmName)
+        protected async Task<VirtualMachineResource> CreateDefaultVirtualMachine(ResourceGroupResource resourceGroup, ResourceIdentifier networkInterfaceIP, string vmName)
         {
-
+            string adminUsername = "adminUser";
             VirtualMachineCollection vmCollection = resourceGroup.GetVirtualMachines();
             VirtualMachineData input = new VirtualMachineData(resourceGroup.Data.Location)
             {
@@ -142,16 +174,16 @@ namespace Track2.Helper
                 },
                 OSProfile = new VirtualMachineOSProfile()
                 {
-                    AdminUsername = "adminUser",
-                    ComputerName = "myVM",
+                    AdminUsername = adminUsername,
+                    ComputerName = vmName,
                     LinuxConfiguration = new LinuxConfiguration()
                     {
                         DisablePasswordAuthentication = true,
                         SshPublicKeys = {
                             new SshPublicKeyConfiguration()
                             {
-                                Path = $"/home/adminUser/.ssh/authorized_keys",
-                                KeyData = "<value of the public ssh key>",
+                                Path = $"/home/{adminUsername}/.ssh/authorized_keys",
+                                KeyData = dummySSHKey,
                             }
                         }
                     }
@@ -162,7 +194,7 @@ namespace Track2.Helper
                     {
                         new VirtualMachineNetworkInterfaceReference()
                         {
-                            Id = new ResourceIdentifier("/subscriptions/<subscriptionId>/resourceGroups/<rgName>/providers/Microsoft.Network/networkInterfaces/<nicName>"),
+                            Id = networkInterfaceIP,
                             Primary = true,
                         }
                     }
