@@ -29,8 +29,10 @@ namespace Track2.Helper
         protected string clientSecret => Environment.GetEnvironmentVariable("CLIENT_SECRET");
         protected string tenantId => Environment.GetEnvironmentVariable("TENANT_ID");
         protected string subscription => Environment.GetEnvironmentVariable("SUBSCRIPTION_ID");
-
         protected AzureLocation DefaultLocation = AzureLocation.EastUS;
+
+        protected ArmClient Client { get; }
+        protected SubscriptionResource DefaultSubscription { get; }
 
         protected Track2TestBase()
         {
@@ -38,6 +40,9 @@ namespace Track2.Helper
             CheckEffective(clientSecret);
             CheckEffective(tenantId);
             CheckEffective(subscription);
+
+            Client = new ArmClient(new ClientSecretCredential(tenantId, clientId, clientSecret), subscription);
+            DefaultSubscription = Client.GetDefaultSubscriptionAsync().Result;
         }
 
         protected void CheckEffective(string value)
@@ -75,10 +80,7 @@ namespace Track2.Helper
 
         protected async Task<ResourceGroupResource> CreateResourceGroup(string resourceGroupName, AzureLocation location)
         {
-            ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            ArmClient armClient = new ArmClient(clientSecretCredential, subscription);
-            ResourceGroupCollection rgCollection = armClient.GetDefaultSubscriptionAsync().Result.GetResourceGroups();
-            var rgLro = await rgCollection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, resourceGroupName, new ResourceGroupData(location));
+            var rgLro = await DefaultSubscription.GetResourceGroups().CreateOrUpdateAsync(Azure.WaitUntil.Completed, resourceGroupName, new ResourceGroupData(location));
             return rgLro.Value;
         }
 

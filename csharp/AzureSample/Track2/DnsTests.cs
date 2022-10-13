@@ -304,7 +304,7 @@
 //        {
 //            var collection = _dnsZone.GetPtrRecords();
 //            string name = "ptr";
-//            var ptrRecord = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new PtrRecordData() { });
+//            var ptrRecord = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, new PtrRecordData() { TtlInSeconds = 3600 });
 //            Assert.IsNotNull(ptrRecord);
 //            Assert.IsNotNull(ptrRecord.Value.Data.ETag);
 //            Assert.AreEqual(name, ptrRecord.Value.Data.Name);
