@@ -19,6 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.ResourceManager.EventHubs;
+using Azure.ResourceManager.Logic.Models;
+using Azure.ResourceManager.Logic;
+using System.IO;
 
 namespace Track2.Helper
 {
@@ -223,6 +227,41 @@ namespace Track2.Helper
             };
             ArmOperation<VirtualMachineResource> lro = await vmCollection.CreateOrUpdateAsync(WaitUntil.Completed, vmName, input);
             return lro.Value;
+        }
+
+        protected async Task<EventHubResource> CreateEventHub(ResourceGroupResource resourceGroup,string namespaceName= "aztestNamespace0000", string eventhubName= "aztesteventhub0000")
+        {
+            // create namespace
+            var namespaceCollection = resourceGroup.GetEventHubsNamespaces();
+            var namespaceData = new EventHubsNamespaceData(resourceGroup.Data.Location);
+            var eventhubNamespace = await namespaceCollection.CreateOrUpdateAsync(WaitUntil.Completed, namespaceName, namespaceData);
+
+            // create eventHub
+            var eventhubCollection = eventhubNamespace.Value.GetEventHubs();
+            var eventhubData = new EventHubData();
+            var eventhub  =await eventhubCollection.CreateOrUpdateAsync(WaitUntil.Completed, eventhubName, eventhubData);
+
+            return eventhub.Value;
+        }
+
+        protected async Task<LogicWorkflowResource> CreateLogicWorkFlow(ResourceGroupResource resourceGroup, string integrationAccountName = "integration0000", string logicWorkflowName = "logicworkflow0000")
+        {
+            // create integration Account
+            IntegrationAccountData integrationAccountData = new IntegrationAccountData(resourceGroup.Data.Location)
+            {
+                SkuName = IntegrationAccountSkuName.Standard,
+            };
+            var integrationAccount = await resourceGroup.GetIntegrationAccounts().CreateOrUpdateAsync(WaitUntil.Completed, integrationAccountName, integrationAccountData);
+            
+            // create logic work flow
+            byte[] definition = File.ReadAllBytes(@"TestData/WorkflowDefinition.json");
+            LogicWorkflowData logicWorkflowData = new LogicWorkflowData(resourceGroup.Data.Location)
+            {
+                Definition = new BinaryData(definition),
+                IntegrationAccount = new LogicResourceReference() { Id = integrationAccount.Value.Data.Id },
+            };
+            var workflow = await resourceGroup.GetLogicWorkflows().CreateOrUpdateAsync(WaitUntil.Completed, logicWorkflowName, logicWorkflowData);
+            return workflow.Value;
         }
     }
 }

@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.Peeri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.SecurityCenter", "..\..\..\azure-sdk-for-net\sdk\securitycenter\Azure.ResourceManager.SecurityCenter\src\Azure.ResourceManager.SecurityCenter.csproj", "{32FF6EB4-B68C-4322-B292-6F72E7D4E776}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.ResourceManager.Dns", "..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj", "{C1936BA4-1005-4498-9C36-5B64A41DBFE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{32FF6EB4-B68C-4322-B292-6F72E7D4E776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32FF6EB4-B68C-4322-B292-6F72E7D4E776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32FF6EB4-B68C-4322-B292-6F72E7D4E776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1936BA4-1005-4498-9C36-5B64A41DBFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1936BA4-1005-4498-9C36-5B64A41DBFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1936BA4-1005-4498-9C36-5B64A41DBFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1936BA4-1005-4498-9C36-5B64A41DBFE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

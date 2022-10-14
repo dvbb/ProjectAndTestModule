@@ -11,6 +11,9 @@ using Track2.Helper;
 using Azure.ResourceManager.SecurityCenter.Models;
 using System.Linq;
 using System.Threading;
+using Azure.ResourceManager.Logic;
+using Azure.ResourceManager.Logic.Models;
+using System.IO;
 
 namespace Track2
 {
@@ -22,9 +25,7 @@ namespace Track2
         public async Task TestSetUp()
         {
             _resourceGroup = await CreateResourceGroup("SecurityCenterRG-0000", AzureLocation.EastUS);
-            //var vnet = await CreateDefaultNetwork(_resourceGroup, "vnet0000");
-            //var networkInterface = await CreateDefaultNetworkInterface(_resourceGroup, vnet, "networkInterface0000");
-            //var vm = await CreateDefaultVirtualMachine(_resourceGroup, networkInterface.Data.Id, "vm0000");
+
         }
 
         [Test]
@@ -40,9 +41,11 @@ namespace Track2
         {
             var allowedConnectionsResourceCollection = _resourceGroup.GetAllowedConnectionsResources();
 
-            Console.WriteLine(DateTime.Now);
+            // prerequisites
+            var vnet = await CreateDefaultNetwork(_resourceGroup, "vnet0000");
+            var networkInterface = await CreateDefaultNetworkInterface(_resourceGroup, vnet, "networkInterface0000");
+            var vm = await CreateDefaultVirtualMachine(_resourceGroup, networkInterface.Data.Id, "vm0000");
             //Thread.Sleep(30*60*1000); // Sleep 30 mins, wait for vm auto connect
-            Console.WriteLine(DateTime.Now);
 
             // GetAll
             var list = await DefaultSubscription.GetAllowedConnectionsResourcesAsync().ToEnumerableAsync();
@@ -61,6 +64,39 @@ namespace Track2
         public async Task AutomationOperation()
         {
             var collection = _resourceGroup.GetAutomations();
+
+            // prerequisites
+            var workflow = await CreateLogicWorkFlow(_resourceGroup);
+
+            // Create
+            string automationName = "automation0000";
+            AutomationData data = new AutomationData(_resourceGroup.Data.Location)
+            {
+                Scopes =
+                {
+                    new AutomationScope()
+                    {
+                        Description = "A description that helps to identify this scope",
+                        ScopePath = $"{_resourceGroup.Data.Id}"
+                    }
+                },
+                Sources =
+                {
+                    new AutomationSource()
+                    {
+                        EventSource = "Assessments",
+                    }
+                },
+                Actions =
+                {
+                    new AutomationActionLogicApp()
+                    {
+                        LogicAppResourceId = workflow.Data.Id,
+                        Uri = new Uri("https://justtestsample.azurewebsites.net"),
+                    }
+                }
+            };
+            var automation = await collection.CreateOrUpdateAsync(WaitUntil.Completed, automationName, data);
 
             // GetAll
             var list = await collection.GetAllAsync().ToEnumerableAsync();
