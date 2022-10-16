@@ -41,6 +41,19 @@ namespace Assets.Script
             }
         }
 
+        /// <summary>
+        /// two rigid body collisions detect
+        /// </summary>
+        /// <param name="collision"></param>
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.ChangeHealth(-1);
+            }
+        }
+
         private void RandomMoveDerection()
         {
             int number = random.Next(4);
