@@ -14,12 +14,14 @@ namespace Assets.Script
         private Rigidbody2D rbody;
         private float MoveActionChangeTimer;
         private Vector2 moveDerection;
+        private Animator animator;
 
         private System.Random random => new System.Random();
 
         public void Start()
         {
             rbody = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
             MoveActionChangeTimer = 2;
             RandomMoveDerection();
         }
@@ -31,6 +33,8 @@ namespace Assets.Script
             position.x += moveDerection.x * Speed * Time.fixedDeltaTime;
             position.y += moveDerection.y * Speed * Time.fixedDeltaTime;
             rbody.MovePosition(position);
+            animator.SetFloat("MoveX", moveDerection.x);
+            animator.SetFloat("MoveY", moveDerection.y);
 
             // change move derection
             MoveActionChangeTimer -= Time.deltaTime;
