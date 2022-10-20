@@ -1,3 +1,4 @@
+using Assets.Script;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
 
     // Player Directions
     private Vector2 playerDirection = new Vector2(0, 1);
+
+    // bullet
+    public GameObject bulletPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +63,18 @@ public class PlayerController : MonoBehaviour
         if (isInvincible && invincibleTimer <= 0)
         {
             isInvincible = false;
+        }
+
+        // bullet launch
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            animator.SetTrigger("Launch");
+            GameObject bullet = Instantiate(bulletPrefab, rbody.position + Vector2.up * 0.5f, Quaternion.identity);
+            BulletController bulletController = bullet.GetComponent<BulletController>();
+            if (bulletController != null)
+            {
+                bulletController.Move(playerDirection, 300);
+            }
         }
     }
 

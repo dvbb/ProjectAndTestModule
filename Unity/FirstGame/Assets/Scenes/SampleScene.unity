@@ -9973,7 +9973,7 @@ GameObject:
   - component: {fileID: 1100533462}
   - component: {fileID: 1100533467}
   - component: {fileID: 1100533466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ruby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9994,6 +9994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   rbody: {fileID: 0}
+  bulletPrefab: {fileID: 3474913810429336172, guid: cde44380f9c1f5f41a54038a15df9daf, type: 3}
 --- !u!95 &1100533463
 Animator:
   serializedVersion: 4
