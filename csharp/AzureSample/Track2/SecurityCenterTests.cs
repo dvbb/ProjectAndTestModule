@@ -14,6 +14,7 @@ using System.Threading;
 using Azure.ResourceManager.Logic;
 using Azure.ResourceManager.Logic.Models;
 using System.IO;
+using System.Reflection;
 
 namespace Track2
 {
@@ -24,8 +25,7 @@ namespace Track2
         [SetUp]
         public async Task TestSetUp()
         {
-            _resourceGroup = await CreateResourceGroup("SecurityCenterRG-0000", AzureLocation.EastUS);
-
+            _resourceGroup = await CreateResourceGroup("IotSecurityRG0000", AzureLocation.EastUS);
         }
 
         [Test]
@@ -66,39 +66,126 @@ namespace Track2
             var collection = _resourceGroup.GetAutomations();
 
             // prerequisites
-            var workflow = await CreateLogicWorkFlow(_resourceGroup);
+            //var workflow = await CreateLogicWorkFlow(_resourceGroup);
 
-            // Create
-            string automationName = "automation0000";
-            AutomationData data = new AutomationData(_resourceGroup.Data.Location)
-            {
-                Scopes =
-                {
-                    new AutomationScope()
-                    {
-                        Description = "A description that helps to identify this scope",
-                        ScopePath = $"{_resourceGroup.Data.Id}"
-                    }
-                },
-                Sources =
-                {
-                    new AutomationSource()
-                    {
-                        EventSource = "Assessments",
-                    }
-                },
-                Actions =
-                {
-                    new AutomationActionLogicApp()
-                    {
-                        LogicAppResourceId = workflow.Data.Id,
-                        Uri = new Uri("https://justtestsample.azurewebsites.net"),
-                    }
-                }
-            };
-            var automation = await collection.CreateOrUpdateAsync(WaitUntil.Completed, automationName, data);
 
             // GetAll
+            var list = await collection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(list.Count);
+        }
+
+        [Test]
+        public async Task ComplianceResult()
+        {
+            var collection = Client.GetComplianceResults(DefaultSubscription.Id);
+
+            var response = await collection.GetAsync("DesignateMoreThanOneOwner");
+            Console.WriteLine(response);
+
+            // issue: 21144
+            //var list = await collection.GetAllAsync().ToEnumerableAsync();
+            //Console.WriteLine(list.Count);
+        }
+
+        [Test]
+        public async Task ConnectSetting()
+        {
+            var collection = DefaultSubscription.GetConnectorSettings();
+
+            // create
+            string connectionSettingName = "connectionSetting0000";
+            var data = new ConnectorSettingData()
+            {
+
+            };
+            var connectionSetting = await collection.CreateOrUpdateAsync(WaitUntil.Completed, connectionSettingName, data);
+
+            var list = await collection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(list.Count);
+        }
+
+        [Test]
+        public async Task IotSecurity()
+        {
+            string solutionName = "solution0000";
+            IotSecuritySolutionModelData data = new IotSecuritySolutionModelData(_resourceGroup.Data.Location)
+            {
+
+            };
+            //var newSolution  =  await _resourceGroup.GetIotSecuritySolutionModels().CreateOrUpdateAsync(WaitUntil.Completed, solutionName,data);
+
+            var solutionlist = await _resourceGroup.GetIotSecuritySolutionModels().GetAllAsync().ToEnumerableAsync();
+
+            var iotModelList = await DefaultSubscription.GetIotSecuritySolutionModelsAsync().ToEnumerableAsync();
+            Console.WriteLine(iotModelList.First().Data.Id);
+            Console.WriteLine();
+
+            var xx = iotModelList.First().GetIotSecuritySolutionAnalyticsModel();
+
+            var alertCollection = xx.GetIotSecurityAggregatedAlerts();
+            var alertList = await alertCollection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(alertList.Count);
+            Console.WriteLine();
+
+            var recommendationList = await xx.GetIotSecurityAggregatedRecommendations().GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(recommendationList.Count);
+            //Console.WriteLine(xx.Id);
+            //Console.WriteLine(xx.Data.Name);
+        }
+
+        [Test]
+        public async Task SecureScoreItems()
+        {
+            var collection = DefaultSubscription.GetSecureScoreItems();
+            var list = await collection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(list);
+        }
+
+        [Test]
+        public async Task SecurityConnector()
+        {
+            var collection = _resourceGroup.GetSecurityConnectors();
+
+            // create
+            string securityConnectorName = "securityConnector0000";
+            SecurityConnectorData data = new SecurityConnectorData(_resourceGroup.Data.Location)
+            {
+                Offerings =
+                {
+                    new CspmMonitorAwsOffering()
+                    {
+                        CloudRoleArn  =  "arn:aws:iam::00000000:role/ASCMonitor",
+                    }
+                },
+                EnvironmentName = "AWS",
+                EnvironmentData = new AWSEnvironmentData(),
+                HierarchyIdentifier = "exampleHierarchyId",
+            };
+            var securityConnector = await collection.CreateOrUpdateAsync(WaitUntil.Completed, securityConnectorName, data);
+
+            // getall
+            var list = await collection.GetAllAsync().ToEnumerableAsync();
+            Console.WriteLine(list.Count);
+        }
+
+        [Test]
+        public async Task SecuritySolutions()
+        {
+            var list = await DefaultSubscription.GetSecuritySolutionsAsync().ToEnumerableAsync();
+            Console.WriteLine(list.Count);
+        }
+
+        [Test]
+        public async Task Software()
+        {
+            // prerequisites
+            var vnet = await CreateDefaultNetwork(_resourceGroup, "vnet0000");
+            var networkInterface = await CreateDefaultNetworkInterface(_resourceGroup, vnet, "networkInterface0000");
+            var vm = await CreateDefaultVirtualMachine(_resourceGroup, networkInterface.Data.Id, "vm0000");
+
+            var collection = _resourceGroup.GetSoftwares("Microsoft.Compute", "virtualMachines", vm.Data.Name);
+
+            // getall
             var list = await collection.GetAllAsync().ToEnumerableAsync();
             Console.WriteLine(list.Count);
         }
