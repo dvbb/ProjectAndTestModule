@@ -37,6 +37,7 @@ namespace Track2.Helper
 
         protected ArmClient Client { get; }
         protected SubscriptionResource DefaultSubscription { get; }
+        protected TenantResource DefaultTenant => GetTenant().Result;
 
         protected Track2TestBase()
         {
@@ -49,7 +50,13 @@ namespace Track2.Helper
             DefaultSubscription = Client.GetDefaultSubscriptionAsync().Result;
         }
 
-        protected void CheckEffective(string value)
+        private async Task<TenantResource> GetTenant()
+        {
+            var tenants = await Client.GetTenants().GetAllAsync().ToEnumerableAsync();
+            return tenants.FirstOrDefault();
+        }
+
+        private void CheckEffective(string value)
         {
             if (value == null || string.IsNullOrEmpty(value))
             {
@@ -229,7 +236,7 @@ namespace Track2.Helper
             return lro.Value;
         }
 
-        protected async Task<EventHubResource> CreateEventHub(ResourceGroupResource resourceGroup,string namespaceName= "aztestNamespace0000", string eventhubName= "aztesteventhub0000")
+        protected async Task<EventHubResource> CreateEventHub(ResourceGroupResource resourceGroup, string namespaceName = "aztestNamespace0000", string eventhubName = "aztesteventhub0000")
         {
             // create namespace
             var namespaceCollection = resourceGroup.GetEventHubsNamespaces();
@@ -239,7 +246,7 @@ namespace Track2.Helper
             // create eventHub
             var eventhubCollection = eventhubNamespace.Value.GetEventHubs();
             var eventhubData = new EventHubData();
-            var eventhub  =await eventhubCollection.CreateOrUpdateAsync(WaitUntil.Completed, eventhubName, eventhubData);
+            var eventhub = await eventhubCollection.CreateOrUpdateAsync(WaitUntil.Completed, eventhubName, eventhubData);
 
             return eventhub.Value;
         }
@@ -252,7 +259,7 @@ namespace Track2.Helper
                 SkuName = IntegrationAccountSkuName.Standard,
             };
             var integrationAccount = await resourceGroup.GetIntegrationAccounts().CreateOrUpdateAsync(WaitUntil.Completed, integrationAccountName, integrationAccountData);
-            
+
             // create logic work flow
             byte[] definition = File.ReadAllBytes(@"TestData/WorkflowDefinition.json");
             LogicWorkflowData logicWorkflowData = new LogicWorkflowData(resourceGroup.Data.Location)
