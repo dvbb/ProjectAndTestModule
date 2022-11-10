@@ -11,6 +11,7 @@ namespace Assets.Script
     public class EnemyController : MonoBehaviour
     {
         public float Speed = 2f;
+        public ParticleSystem BrokenEffect;
 
         private Rigidbody2D rbody;
         private float MoveActionChangeTimer;
@@ -66,6 +67,12 @@ namespace Assets.Script
 
         public void FixRobot()
         {
+            // remove effect
+            if (BrokenEffect.isPlaying == true)
+            {
+                BrokenEffect.Stop();
+            }
+
             isFixed = true;
             rbody.simulated = false;    //disable rigid body 2d physical effects
             animator.SetTrigger("Fixed"); // play fixed anime
