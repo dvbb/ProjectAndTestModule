@@ -1,21 +1,37 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Identity;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Network;
+using Azure.ResourceManager.Network.Models;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using NUnit.Framework;
+using Track2.Helper;
 
-namespace AzureSample
+namespace Track2
 {
-    internal class Program
+    public class ResourceManagerTests : Track2TestBase
     {
-        static async Task Main(string[] args)
+        [SetUp]
+        public void Setup()
         {
-            TestBase testbase = new TestBase();
-            Console.WriteLine("Hello World!");
+        }
 
-            var subscriptionCollection = testbase.Client.GetSubscriptions();
+        [Test]
+        public async Task SubscriptionTagTest()
+        {
+            var subscriptionCollection = Client.GetSubscriptions();
             var tagToLookFor = "TagKey-9823";
 
             var iterationCount = 0;
 
-            while (true)
+            int i = 10;
+
+            while (i-->0)
             {
                 Console.WriteLine($"Iteration #{iterationCount}");
 

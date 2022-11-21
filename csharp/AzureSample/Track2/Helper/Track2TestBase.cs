@@ -95,6 +95,12 @@ namespace Track2.Helper
             return rgLro.Value;
         }
 
+        protected async Task<ResourceGroupResource> GetResourceGroup(string resourceGroupName)
+        {
+            var rgLro = await DefaultSubscription.GetResourceGroups().GetAsync(resourceGroupName);
+            return rgLro.Value;
+        }
+
         protected async Task<VirtualNetworkResource> CreateDefaultNetwork(ResourceGroupResource resourceGroup, string vnetName)
         {
             // Create NSG

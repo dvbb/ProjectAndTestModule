@@ -1,5 +1,7 @@
 ﻿using Azure.Core;
 using Azure.Identity;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
@@ -16,12 +18,18 @@ namespace AzureSample
         public string tenantId => Environment.GetEnvironmentVariable("TENANT_ID");
         public string subscription => Environment.GetEnvironmentVariable("SUBSCRIPTION_ID");
 
+        public ArmClient Client { get; }
+        public SubscriptionResource DefaultSubscription { get; }
+
         public TestBase()
         {
             CheckEffective(clientId);
             CheckEffective(clientSecret);
             CheckEffective(tenantId);
             CheckEffective(subscription);
+
+            Client = new ArmClient(new ClientSecretCredential(tenantId, clientId, clientSecret), subscription);
+            DefaultSubscription = Client.GetDefaultSubscriptionAsync().Result;
         }
 
         private void CheckEffective(string value)
