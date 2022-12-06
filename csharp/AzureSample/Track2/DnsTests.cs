@@ -121,6 +121,92 @@ namespace Track2
             Assert.IsFalse(flag);
         }
 
+        [Test]
+        public async Task GetAllRecords()
+        {
+            string dnsZoneName = $"{Recording.GenerateAssetName("sample")}.com";
+            var dnszone = _dnsZone;
+
+            // Add some aaaaRecord
+            var aaaaRecord1 = dnszone.GetDnsAaaaRecords().CreateOrUpdateAsync(WaitUntil.Completed, Recording.GenerateAssetName("aaaa"), new DnsAaaaRecordData()
+            {
+                TtlInSeconds = 3600,
+                DnsAaaaRecords =
+                {
+                    new DnsAaaaRecordInfo()
+                    {
+                        IPv6Address = IPAddress.Parse("3f0d:8079:32a1:9c1d:dd7c:afc6:fc15:d55")
+                    },
+                    new DnsAaaaRecordInfo()
+                    {
+                        IPv6Address = IPAddress.Parse("3f0d:8079:32a1:9c1d:dd7c:afc6:fc15:d56")
+                    },
+                }
+            });
+            var aaaaRecord2 = dnszone.GetDnsAaaaRecords().CreateOrUpdateAsync(WaitUntil.Completed, Recording.GenerateAssetName("aaaa"), new DnsAaaaRecordData()
+            {
+                TtlInSeconds = 3600,
+                DnsAaaaRecords =
+                {
+                    new DnsAaaaRecordInfo()
+                    {
+                        IPv6Address = IPAddress.Parse("3f0d:8079:32a1:9c1d:dd7c:afc6:fc15:d57")
+                    },
+                    new DnsAaaaRecordInfo()
+                    {
+                        IPv6Address = IPAddress.Parse("3f0d:8079:32a1:9c1d:dd7c:afc6:fc15:d58")
+                    },
+                }
+            });
+
+            // Add some caaRecord
+            var caaRecord1 = dnszone.GetDnsCaaRecords().CreateOrUpdateAsync(WaitUntil.Completed, Recording.GenerateAssetName("caa"), new DnsCaaRecordData()
+            {
+                TtlInSeconds = 3600,
+                DnsCaaRecords =
+                {
+                    new DnsCaaRecordInfo()
+                    {
+                        Flags = 1,
+                        Tag = "test1",
+                        Value = "caa1.contoso.com"
+                    },
+                    new DnsCaaRecordInfo()
+                    {
+                        Flags = 2,
+                        Tag = "test2",
+                        Value = "caa2.contoso.com"
+                    }
+                }
+            });
+            var caaRecord2 = dnszone.GetDnsCaaRecords().CreateOrUpdateAsync(WaitUntil.Completed, Recording.GenerateAssetName("caa"), new DnsCaaRecordData()
+            {
+                TtlInSeconds = 3600,
+                DnsCaaRecords =
+                {
+                    new DnsCaaRecordInfo()
+                    {
+                        Flags = 3,
+                        Tag = "test3",
+                        Value = "caa3.contoso.com"
+                    },
+                    new DnsCaaRecordInfo()
+                    {
+                        Flags = 4,
+                        Tag = "test4",
+                        Value = "caa4.contoso.com"
+                    }
+                }
+            });
+
+            var recordSets = await dnszone.GetAllRecordDataAsync().ToEnumerableAsync();
+            Assert.IsNotEmpty(recordSets);
+            Console.WriteLine(recordSets[0].DnsNSRecords);
+            Console.WriteLine(recordSets[1].DnsSoaRecordInfo);
+            Console.WriteLine(recordSets[2].DnsAaaaRecords);
+            Console.WriteLine(recordSets[3].DnsCaaRecords);
+        }
+
         private void ValidateRecordBaseInfo(DnsBaseRecordData recordData, string recordName)
         {
             Assert.IsNotNull(recordData);

@@ -8,7 +8,8 @@ namespace Track2.Helper
     {
         public static string GenerateAssetName(string name)
         {
-            return $"{name}0000";
+            Random random = new Random();
+            return $"{name}{random.Next(9999)}";
         }
     }
 }
