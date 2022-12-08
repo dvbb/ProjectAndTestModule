@@ -151,3 +151,17 @@ $ git push [remote] --all
 # 撤销某一次提交的变动
 $ git revert [commit]
 ```
+
+### 同步远程仓库
+``` powershell
+$ git fetch upstream
+$ git merge upstream/main
+```
+``` powershell
+$ git fetch -r
+$ git pull
+```
+### 通用全局命令(RUN AS ADMINISTRATOR)
+``` powershell
+$ git config --system core.longpaths true
+```
