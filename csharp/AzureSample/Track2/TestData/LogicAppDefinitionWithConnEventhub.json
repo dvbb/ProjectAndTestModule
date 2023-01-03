@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "$connections": {
+      "defaultValue": {},
+      "type": "Object"
+    }
+  },
+  "triggers": {
+    "manual": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": {
+        "schema": {}
+      }
+    }
+  },
+  "actions": {
+    "Response": {
+      "runAfter": {},
+      "type": "Response",
+      "kind": "Http",
+      "inputs": {
+        "statusCode": 200
+      }
+    },
+    "Send_event": {
+      "runAfter": {
+        "Response": [
+          "Succeeded"
+        ]
+      },
+      "type": "ApiConnection",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "/subscriptions/db1ab6f0-4769-4b27-930e-01e2ef9c123c/resourceGroups/LogicAppRG-Custom-2000/providers/Microsoft.Web/connections/eventhubs"
+          }
+        },
+        "method": "post",
+        "path": "/@{encodeURIComponent('hub1')}/events"
+      }
+    }
+  },
+  "outputs": {}
+}
