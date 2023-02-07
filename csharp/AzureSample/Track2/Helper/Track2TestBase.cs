@@ -78,7 +78,6 @@ namespace Track2.Helper
         {
             string accessToken = await GetToken();
 
-            // Get a existing an ADF pipeline
             TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
             return bauthCredentials;
         }
