@@ -25,7 +25,7 @@ docker pull <user>/<iamgename>:1.0.0
 * docker run -d -p 8080:80 imagename
 
 Then can browse http://localhost:8080/ to check your website
->NOTE: This [link](https://docs.docker.com/engine/reference/commandline/run/#options) can look up all command parameters
-`-d		Run container in background and print container ID`
-`-p		Publish a container's port(s) to the host`
+>NOTE: This [link](https://docs.docker.com/engine/reference/commandline/run/#options) can look up all command parameters  
+`-d		Run container in background and print container ID`  
+`-p		Publish a container's port(s) to the host`  
 
