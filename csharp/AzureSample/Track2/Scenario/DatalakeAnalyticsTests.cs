@@ -22,8 +22,10 @@ namespace Track2
         public async Task GlobalSetUp()
         {
             // Create ArmClient
+            var options = new ArmClientOptions();
+            options.SetApiVersion("microsoft.DataLakeAnalytics/accounts", "2018-02-01-preview");
             ClientSecretCredential clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-            ArmClient armClient = new ArmClient(clientSecretCredential, subscription);
+            ArmClient armClient = new ArmClient(clientSecretCredential, subscription, options);
 
             // Create a resource group
             string rgName = "DataLakeAnalyticsCustomRG0000";

@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\dns\Azure.ResourceManager.Dns\src\Azure.ResourceManager.Dns.csproj" />
-    <ProjectReference Include="..\..\..\..\azure-sdk-for-net\sdk\securitycenter\Azure.ResourceManager.SecurityCenter\src\Azure.ResourceManager.SecurityCenter.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="TestData\definition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
