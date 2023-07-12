@@ -57,4 +57,4 @@ $buildAllSrc = @(
 $restoreAllRecordingFiles = @(
     "test-proxy restore -a ./assets.json"
 )
-Invoke-MGMTScript -cmd $restoreAllRecordingFiles
+Invoke-MGMTScript -cmds $restoreAllRecordingFiles
