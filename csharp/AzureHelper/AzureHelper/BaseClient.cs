@@ -2,7 +2,6 @@
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using Microsoft.Rest;
 
 namespace AzureHelper
 {
@@ -55,14 +54,6 @@ namespace AzureHelper
             return response.Token;
         }
 
-        public async Task<ServiceClientCredentials> GetDefaultCredentialAsync()
-        {
-            string accessToken = await GetToken();
-
-            TokenCredentials bauthCredentials = new TokenCredentials(accessToken);
-            return bauthCredentials;
-        }
-
         public string GetRandomNumber(string resource)
         {
             Random random = new Random();
@@ -86,5 +77,7 @@ namespace AzureHelper
             var rgLro = await DefaultSubscription.GetResourceGroups().GetAsync(resourceGroupName);
             return rgLro.Value;
         }
+
+
     }
 }

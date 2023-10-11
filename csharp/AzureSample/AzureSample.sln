@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Track1", "Track1\Track1.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Track2", "Track2\Track2.csproj", "{4031A33D-753E-4387-A01C-C95D5D06F8C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureWebApp", "AzureWebApp\AzureWebApp.csproj", "{B347A8A8-47F7-4145-B435-BD86C30A4422}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommenUtilities", "CommenUtilities\CommenUtilities.csproj", "{56888ABB-B01A-42CE-95F0-39F42521C575}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomationSample", "AutomationSample\AutomationSample.csproj", "{177EE315-4D74-4CE0-88FC-374109C5F89B}"
@@ -41,10 +39,6 @@ Global
 		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4031A33D-753E-4387-A01C-C95D5D06F8C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B347A8A8-47F7-4145-B435-BD86C30A4422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B347A8A8-47F7-4145-B435-BD86C30A4422}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B347A8A8-47F7-4145-B435-BD86C30A4422}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B347A8A8-47F7-4145-B435-BD86C30A4422}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56888ABB-B01A-42CE-95F0-39F42521C575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56888ABB-B01A-42CE-95F0-39F42521C575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56888ABB-B01A-42CE-95F0-39F42521C575}.Release|Any CPU.ActiveCfg = Release|Any CPU

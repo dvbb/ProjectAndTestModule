@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Track2.Helper
+namespace AzureHelper
 {
-    public static class TestAsyncEnumerableExtensions
+    public static class BaseClientExtension
     {
         public static async Task<List<T>> ToEnumerableAsync<T>(this IAsyncEnumerable<T> asyncEnumerable)
         {
