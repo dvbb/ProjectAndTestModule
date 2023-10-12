@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureHelper", "AzureHelper\AzureHelper.csproj", "{CF86F16F-3080-4CCC-996A-355E869C244B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InitializationBasicServices", "InitializationBasicServices\InitializationBasicServices.csproj", "{E90EBE14-7C6A-4E10-90E8-20DDFD0445EF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureWebApp", "AzureWebApp\AzureWebApp.csproj", "{CDB6E984-80A6-48F1-BAA9-31EAE30EF7FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicServices.Tests", "BasicServices.Test\BasicServices.Tests.csproj", "{BE443EF9-6ABB-4341-8D01-02A1A23E21C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deprecated.Tests", "Deprecated.Tests\Deprecated.Tests.csproj", "{E6F38139-505A-4B24-A4C0-E21BC76CF1FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{CF86F16F-3080-4CCC-996A-355E869C244B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF86F16F-3080-4CCC-996A-355E869C244B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF86F16F-3080-4CCC-996A-355E869C244B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E90EBE14-7C6A-4E10-90E8-20DDFD0445EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E90EBE14-7C6A-4E10-90E8-20DDFD0445EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E90EBE14-7C6A-4E10-90E8-20DDFD0445EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E90EBE14-7C6A-4E10-90E8-20DDFD0445EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CDB6E984-80A6-48F1-BAA9-31EAE30EF7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDB6E984-80A6-48F1-BAA9-31EAE30EF7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB6E984-80A6-48F1-BAA9-31EAE30EF7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB6E984-80A6-48F1-BAA9-31EAE30EF7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE443EF9-6ABB-4341-8D01-02A1A23E21C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE443EF9-6ABB-4341-8D01-02A1A23E21C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE443EF9-6ABB-4341-8D01-02A1A23E21C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE443EF9-6ABB-4341-8D01-02A1A23E21C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F38139-505A-4B24-A4C0-E21BC76CF1FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F38139-505A-4B24-A4C0-E21BC76CF1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F38139-505A-4B24-A4C0-E21BC76CF1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F38139-505A-4B24-A4C0-E21BC76CF1FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

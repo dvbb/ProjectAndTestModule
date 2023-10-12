@@ -54,12 +54,6 @@ namespace AzureHelper
             return response.Token;
         }
 
-        public string GetRandomNumber(string resource)
-        {
-            Random random = new Random();
-            return $"{resource}{random.Next(9999)}";
-        }
-
         public async Task<ResourceGroupResource> CreateResourceGroup(string resourceGroupName)
         {
             var rgLro = await DefaultSubscription.GetResourceGroups().CreateOrUpdateAsync(Azure.WaitUntil.Completed, resourceGroupName, new ResourceGroupData(DefaultLocation));
@@ -77,7 +71,5 @@ namespace AzureHelper
             var rgLro = await DefaultSubscription.GetResourceGroups().GetAsync(resourceGroupName);
             return rgLro.Value;
         }
-
-
     }
 }
