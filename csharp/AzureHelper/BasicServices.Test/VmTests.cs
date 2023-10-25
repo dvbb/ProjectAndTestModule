@@ -27,7 +27,7 @@ namespace BasicServices.Tests
         [SetUp]
         public async Task SetUp()
         {
-            _rgName = BaseClientExtension.CreateRandomName("VMRG");
+            _rgName = BaseClientExtension.CreateRandomName("ComputeRG");
             BaseClient baseClient = new BaseClient();
             resourceGroup = await baseClient.CreateResourceGroup(_rgName);
         }
