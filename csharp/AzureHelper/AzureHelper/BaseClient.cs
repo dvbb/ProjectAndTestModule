@@ -30,6 +30,15 @@ namespace AzureHelper
             DefaultSubscription = Client.GetDefaultSubscriptionAsync().Result;
         }
 
+        public BaseClient(string subscriptionId,string userAssignedIdentityClientId)
+        {
+            var credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions
+            {
+                ManagedIdentityClientId = userAssignedIdentityClientId
+            });
+            Client = new ArmClient(credential, subscriptionId);
+        }
+
         private async Task<TenantResource> GetTenant()
         {
             var tenants = await Client.GetTenants().GetAllAsync().ToEnumerableAsync();
