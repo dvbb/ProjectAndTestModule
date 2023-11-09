@@ -11,10 +11,10 @@ namespace ConsoleAppTests
         [Test]
         public void Serialize()
         {
-            var customers = Customer.Init();
+            List<Customer> customers = Customer.Init();
             Console.WriteLine($"direct output List<T>:\n{customers}");
 
-            var customersJson = JsonConvert.SerializeObject(customers);
+            string customersJson = JsonConvert.SerializeObject(customers);
             Console.WriteLine();
             Console.WriteLine($"Output Json object:\n{customersJson}");
         }
@@ -23,7 +23,7 @@ namespace ConsoleAppTests
         public void Deserialize()
         {
             string jsonStr = "[{\"customer_name\":\"Eric\",\"email\":\"eric@gmail.com\"},{\"customer_name\":\"Jack\",\"email\":\"jack@gmail.com\"},{\"customer_name\":\"Ford\",\"email\":\"ford@gmail.com\"}]";
-            var customers = JsonConvert.DeserializeObject<List<Customer>>(jsonStr);
+            List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(jsonStr);
 
             foreach (var customer in customers)
             {

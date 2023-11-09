@@ -40,6 +40,30 @@ namespace ConsoleAppTests.DataStructure
         }
 
         [Test]
+        public void ListObjectCommonTest()
+        {
+            List<object> list = new List<object>();
+            list.Add(1);
+            list.Add(true);
+            list.Add(new ArrayList() { });
+            list.Add("hi");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            List<object> list2 = new List<object>();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            for (int i = 0; i < 10000; i++)
+            {
+                list2.Add(0);
+            }
+            sw.Stop();
+            Console.WriteLine($"ArrayList add 10000 number. time cost: {sw.Elapsed}");
+        }
+
+        [Test]
         public void ListCommonTest()
         {
             List<int> list = new List<int>();

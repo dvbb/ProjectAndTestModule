@@ -27,6 +27,7 @@ namespace MyDelegateEvent
                 Console.WriteLine("\n\nuse muliticast delegate ");
                 mc.SayStartHandler = null;
                 mc.SayStartHandler += new Singer().Singing;
+                Console.WriteLine("\nInvoke [mc.SayStartHandler]");
                 mc.SayStartHandler.Invoke();
                 mc.SayStartHandler += new Audience().Listening;
                 mc.SayStartHandler += new Cat().Miao;
@@ -34,13 +35,19 @@ namespace MyDelegateEvent
                 mc.SayStartHandler += new Cat().Miao;
                 mc.SayStartHandler += new Cat().Miao;
                 mc.SayStartHandler += new Dog().Wang;
+                Console.WriteLine("\nInvoke [mc.SayStartVer2()]");
                 mc.SayStartVer2();
 
+                // 委托(Func & Action)可以直接执行Invoke(). 事件(Event)不可以直接执行Invoke().
                 // 由于event的限制，下面两行会报编译器异常
                 //mc.SayStartHandlerEvnet = new Cat().Miao;
                 //mc.SayStartHandlerEvnet.Invoke();
+                Console.WriteLine("\n\n event:");
                 mc.SayStartHandlerEvnet += new Cat().Miao;
                 mc.SayStartHandlerEvnet -= new Cat().Miao;
+                mc.SayStartHandlerEvnet += new Cat().Miao;
+                mc.SayStartHandlerEvnet += new Cat().Miao;
+                mc.SayStartVerEvent();
             }
             #endregion
         }
