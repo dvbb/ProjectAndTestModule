@@ -38,7 +38,7 @@ namespace ConsoleAppTests.DataStructure
             {
                 Console.WriteLine(item);
             }
-
+            hs.Contains(1);
             Console.WriteLine();
             Console.WriteLine($"hs.count: {hs.Count}");
             Console.WriteLine($"whether hs contain 1: {hs.Contains(1)}");
@@ -64,6 +64,7 @@ namespace ConsoleAppTests.DataStructure
             }
 
             Console.WriteLine();
+            Console.WriteLine($"dic[1]: {dic[1]}");
             Console.WriteLine($"dic.count: {dic.Count}");
             Console.WriteLine($"whether dic contain key 2: {dic.ContainsKey(2)}");
             Console.WriteLine($"whether dic contain value 2: {dic.ContainsValue("2")}");
