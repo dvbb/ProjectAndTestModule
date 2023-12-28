@@ -76,13 +76,6 @@ namespace BasicServices.Tests
             };
             ArmOperation<WebSiteResource> lro = await resourceGroup.GetWebSites().CreateOrUpdateAsync(WaitUntil.Completed, appName, data);
             WebSiteResource app = lro.Value;
-
-            // temp
-            var slotData = new SlotConfigNamesResourceData
-            {
-                AppSettingNames = { "Example" },
-            };
-            var slot = await app.GetSlotConfigNamesResource().CreateOrUpdateAsync(WaitUntil.Completed, slotData);
         }
     }
 }
