@@ -13,9 +13,67 @@ namespace JsonOrderbyTool
 
         static void Main(string[] args)
         {
+            SortPaths();
+
+            //FilterOpenApiByPartialPaths();
+        }
+
+        protected static void AddVerb(ref string verbs, string? verb)
+        {
+            if (verb != null)
+            {
+                verbs += verb + ",\n";
+            }
+        }
+
+        protected static void FilterOpenApiByPartialPaths()
+        {
+            string resourcefile;
+            StreamReader sr;
+            string str = "";
+
+            resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\openaip.json");
+            sr = new StreamReader(resourcefile);
+            while (!sr.EndOfStream)
+            {
+                str += sr.ReadLine();
+            }
+            JObject openapiJson = JObject.Parse(str);
+
+            str = "";
+            resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\partialPaths.json");
+            sr = new StreamReader(resourcefile);
+            while (!sr.EndOfStream)
+            {
+                str += sr.ReadLine();
+            }
+            JObject partialPathsJson = JObject.Parse(str);
+
+            // Select tsp paths
+            JObject outputJson = new JObject();
+            var selectedName = partialPathsJson.Properties().Select(item => item.Name);
+            Console.WriteLine("Partial paths number: " + selectedName.Count());
+            foreach (var name in selectedName)
+            {
+                var path = openapiJson.Properties().Where(item => item.Name == name);
+                outputJson.Add(path);
+            }
+            Console.WriteLine("Selected paths number: " + outputJson.Properties().Count());
+
+            // Output
+            string finalResult = outputJson.ToString();
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json");
+            using (StreamWriter sw = File.CreateText(outputPath))
+            {
+                sw.Write(finalResult);
+            }
+        }
+
+        protected static void SortPaths()
+        {
             string outputPath;
 
-            string resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\JsonStr1.txt");
+            string resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\OriginalSwagger.json");
             StreamReader sr = new StreamReader(resourcefile);
             string str = "";
             while (!sr.EndOfStream)
@@ -67,18 +125,10 @@ namespace JsonOrderbyTool
             finalResult += "\n}\n";
 
             // Output
-            outputPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.txt");
+            outputPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json");
             using (StreamWriter sw = File.CreateText(outputPath))
             {
                 sw.Write(finalResult);
-            }
-        }
-
-        protected static void AddVerb(ref string verbs, string? verb)
-        {
-            if (verb != null)
-            {
-                verbs += verb + ",\n";
             }
         }
 

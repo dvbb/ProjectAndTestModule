@@ -1,0 +1,1207 @@
+﻿{
+  "/providers/Microsoft.CostManagement/views": {
+    "get": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_List",
+      "description": "Lists all views by tenant and object.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "PrivateViewList": {
+          "$ref": "./examples/PrivateViewList.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/ViewListResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/views": {
+    "get": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_ListByScope",
+      "description": "Lists all views at the given scope.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ResourceGroupViewList": {
+          "$ref": "./examples/ViewListByResourceGroup.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeViewParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/ViewListResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/providers/Microsoft.CostManagement/views/{viewName}": {
+    "get": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_Get",
+      "description": "Gets the view by view name.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "PrivateView": {
+          "$ref": "./examples/PrivateView.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_CreateOrUpdate",
+      "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "CreateOrUpdatePrivateView": {
+          "$ref": "./examples/PrivateViewCreateOrUpdate.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/View"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate View operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "201": {
+          "description": "Created.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_Delete",
+      "description": "The operation to delete a view.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "DeletePrivateView": {
+          "$ref": "./examples/PrivateViewDelete.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded."
+        },
+        "204": {
+          "description": "NoContent. Resource is not available."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
+    "get": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_GetByScope",
+      "description": "Gets the view for the defined scope by view name.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ResourceGroupView": {
+          "$ref": "./examples/ViewByResourceGroup.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeViewParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_CreateOrUpdateByScope",
+      "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ResourceGroupCreateOrUpdateView": {
+          "$ref": "./examples/ViewCreateOrUpdateByResourceGroup.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeViewParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/View"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate View operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "201": {
+          "description": "Created.",
+          "schema": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "Views"
+      ],
+      "operationId": "Views_DeleteByScope",
+      "description": "The operation to delete a view.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ResourceGroupDeleteView": {
+          "$ref": "./examples/ViewDeleteByResourceGroup.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeViewParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/viewNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded."
+        },
+        "204": {
+          "description": "NoContent. Resource is not available."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/alerts": {
+    "get": {
+      "tags": [
+        "Alerts"
+      ],
+      "operationId": "Alerts_List",
+      "description": "Lists the alerts for scope defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "BillingAccountAlerts": {
+          "$ref": "./examples/BillingAccountAlerts.json"
+        },
+        "BillingProfileAlerts": {
+          "$ref": "./examples/BillingProfileAlerts.json"
+        },
+        "InvoiceSectionAlerts": {
+          "$ref": "./examples/InvoiceSectionAlerts.json"
+        },
+        "EnrollmentAccountAlerts": {
+          "$ref": "./examples/EnrollmentAccountAlerts.json"
+        },
+        "DepartmentAlerts": {
+          "$ref": "./examples/DepartmentAlerts.json"
+        },
+        "SubscriptionAlerts": {
+          "$ref": "./examples/SubscriptionAlerts.json"
+        },
+        "ResourceGroupAlerts": {
+          "$ref": "./examples/ResourceGroupAlerts.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/scopeAlertParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/AlertsResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+    "get": {
+      "tags": [
+        "Alerts"
+      ],
+      "operationId": "Alerts_Get",
+      "description": "Gets the alert for the scope by alert ID.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "SingleSubscriptionAlerts": {
+          "$ref": "./examples/SingleSubscriptionAlert.json"
+        },
+        "SingleResourceGroupAlerts": {
+          "$ref": "./examples/SingleResourceGroupAlert.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/scopeAlertParameter"
+        },
+        {
+          "$ref": "#/parameters/alertIdParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "patch": {
+      "tags": [
+        "Alerts"
+      ],
+      "operationId": "Alerts_Dismiss",
+      "description": "Dismisses the specified alert",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "PatchSubscriptionAlerts": {
+          "$ref": "./examples/DismissSubscriptionAlerts.json"
+        },
+        "PatchResourceGroupAlerts": {
+          "$ref": "./examples/DismissResourceGroupAlerts.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/scopeAlertParameter"
+        },
+        {
+          "$ref": "#/parameters/alertIdParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/DismissAlertPayload"
+          },
+          "description": "Parameters supplied to the Dismiss Alert operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/alerts": {
+    "get": {
+      "tags": [
+        "Alerts"
+      ],
+      "operationId": "Alerts_ListExternal",
+      "description": "Lists the Alerts for external cloud provider type defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ExternalBillingAccountAlerts": {
+          "$ref": "./examples/ExternalBillingAccountAlerts.json"
+        },
+        "ExternalSubscriptionAlerts": {
+          "$ref": "./examples/ExternalSubscriptionAlerts.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderTypeParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderIdParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/AlertsResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/forecast": {
+    "post": {
+      "tags": [
+        "Forecast"
+      ],
+      "operationId": "Forecast_Usage",
+      "description": "Lists the forecast charges for scope defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "BillingAccountForecast": {
+          "$ref": "./examples/BillingAccountForecast.json"
+        },
+        "BillingProfileForecast": {
+          "$ref": "./examples/BillingProfileForecast.json"
+        },
+        "InvoiceSectionForecast": {
+          "$ref": "./examples/InvoiceSectionForecast.json"
+        },
+        "EnrollmentAccountForecast": {
+          "$ref": "./examples/EnrollmentAccountForecast.json"
+        },
+        "DepartmentForecast": {
+          "$ref": "./examples/DepartmentForecast.json"
+        },
+        "SubscriptionForecast": {
+          "$ref": "./examples/SubscriptionForecast.json"
+        },
+        "ResourceGroupForecast": {
+          "$ref": "./examples/ResourceGroupForecast.json"
+        }
+      },
+      "parameters": [
+        {
+          "name": "$filter",
+          "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/scopeForecastParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ForecastDefinition"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate Forecast Config operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/ForecastResult"
+          }
+        },
+        "204": {
+          "description": "No Content. Resource is not available."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/forecast": {
+    "post": {
+      "tags": [
+        "Forecast"
+      ],
+      "operationId": "Forecast_ExternalCloudProviderUsage",
+      "description": "Lists the forecast charges for external cloud provider type defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ExternalBillingAccountForecast": {
+          "$ref": "./examples/ExternalBillingAccountForecast.json"
+        },
+        "ExternalSubscriptionForecast": {
+          "$ref": "./examples/ExternalSubscriptionForecast.json"
+        }
+      },
+      "parameters": [
+        {
+          "name": "$filter",
+          "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderTypeParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderIdParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ForecastDefinition"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate Forecast Config operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/ForecastResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/dimensions": {
+    "get": {
+      "tags": [
+        "Dimensions"
+      ],
+      "x-ms-odata": "#/definitions/Dimension",
+      "operationId": "Dimensions_List",
+      "description": "Lists the dimensions by the defined scope.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "SubscriptionDimensionsList-Legacy": {
+          "$ref": "./examples/SubscriptionDimensionsList.json"
+        },
+        "ResourceGroupDimensionsList-Legacy": {
+          "$ref": "./examples/ResourceGroupDimensionsList.json"
+        },
+        "ManagementGroupDimensionsList-Legacy": {
+          "$ref": "./examples/ManagementGroupDimensionsList.json"
+        },
+        "ManagementGroupDimensionsListExpandAndTop-Legacy": {
+          "$ref": "./examples/ManagementGroupDimensionsListExpandAndTop.json"
+        },
+        "ManagementGroupDimensionsListWithFilter-Legacy": {
+          "$ref": "./examples/ManagementGroupDimensionsListWithFilter.json"
+        },
+        "DepartmentDimensionsList-Legacy": {
+          "$ref": "./examples/DepartmentDimensionsList.json"
+        },
+        "DepartmentDimensionsListExpandAndTop-Legacy": {
+          "$ref": "./examples/DepartmentDimensionsListExpandAndTop.json"
+        },
+        "DepartmentDimensionsListWithFilter-Legacy": {
+          "$ref": "./examples/DepartmentDimensionsListWithFilter.json"
+        },
+        "EnrollmentAccountDimensionsList-Legacy": {
+          "$ref": "./examples/EnrollmentAccountDimensionsList.json"
+        },
+        "EnrollmentAccountDimensionsListExpandAndTop-Legacy": {
+          "$ref": "./examples/EnrollmentAccountDimensionsListExpandAndTop.json"
+        },
+        "EnrollmentAccountDimensionsListWithFilter-Legacy": {
+          "$ref": "./examples/EnrollmentAccountDimensionsListWithFilter.json"
+        },
+        "BillingAccountDimensionsList-Legacy": {
+          "$ref": "./examples/BillingAccountDimensionsList.json"
+        },
+        "BillingAccountDimensionsListExpandAndTop-Legacy": {
+          "$ref": "./examples/BillingAccountDimensionsListExpandAndTop.json"
+        },
+        "BillingAccountDimensionsListWithFilter-Legacy": {
+          "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
+        },
+        "BillingAccountDimensionsList-MCA": {
+          "$ref": "./examples/MCABillingAccountDimensionsList.json"
+        },
+        "BillingAccountDimensionsListExpandAndTop-MCA": {
+          "$ref": "./examples/MCABillingAccountDimensionsListExpandAndTop.json"
+        },
+        "BillingAccountDimensionsListWithFilter-MCA": {
+          "$ref": "./examples/MCABillingAccountDimensionsListWithFilter.json"
+        },
+        "BillingProfileDimensionsList-MCA": {
+          "$ref": "./examples/MCABillingProfileDimensionsList.json"
+        },
+        "BillingProfileDimensionsListExpandAndTop-MCA": {
+          "$ref": "./examples/MCABillingProfileDimensionsListExpandAndTop.json"
+        },
+        "BillingProfileDimensionsListWithFilter-MCA": {
+          "$ref": "./examples/MCABillingProfileDimensionsListWithFilter.json"
+        },
+        "InvoiceSectionDimensionsList-MCA": {
+          "$ref": "./examples/MCAInvoiceSectionDimensionsList.json"
+        },
+        "InvoiceSectionDimensionsListExpandAndTop-MCA": {
+          "$ref": "./examples/MCAInvoiceSectionDimensionsListExpandAndTop.json"
+        },
+        "InvoiceSectionDimensionsListWithFilter-MCA": {
+          "$ref": "./examples/MCAInvoiceSectionDimensionsListWithFilter.json"
+        },
+        "CustomerDimensionsList-MCA": {
+          "$ref": "./examples/MCACustomerDimensionsList.json"
+        },
+        "CustomerDimensionsListExpandAndTop-MCA": {
+          "$ref": "./examples/MCACustomerDimensionsListExpandAndTop.json"
+        },
+        "CustomerDimensionsListWithFilter-MCA": {
+          "$ref": "./examples/MCACustomerDimensionsListWithFilter.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeDimensionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "$filter",
+          "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$expand",
+          "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$skiptoken",
+          "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$top",
+          "description": "May be used to limit the number of results to the most recent N dimension data.",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "format": "int32"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/DimensionsListResult"
+          }
+        },
+        "204": {
+          "description": "No Content. Resource is not available."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": null
+      }
+    }
+  },
+  "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/dimensions": {
+    "get": {
+      "tags": [
+        "Dimensions"
+      ],
+      "x-ms-odata": "#/definitions/Dimension",
+      "operationId": "Dimensions_ByExternalCloudProviderType",
+      "description": "Lists the dimensions by the external cloud provider type.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ExternalBillingAccountDimensionList": {
+          "$ref": "./examples/ExternalBillingAccountsDimensions.json"
+        },
+        "ExternalSubscriptionDimensionList": {
+          "$ref": "./examples/ExternalSubscriptionsDimensions.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/externalCloudProviderTypeParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "$filter",
+          "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$expand",
+          "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$skiptoken",
+          "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+          "in": "query",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "$top",
+          "description": "May be used to limit the number of results to the most recent N dimension data.",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "format": "int32"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/DimensionsListResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": null
+      }
+    }
+  },
+  "/{scope}/providers/Microsoft.CostManagement/query": {
+    "post": {
+      "tags": [
+        "Query"
+      ],
+      "operationId": "Query_Usage",
+      "description": "Query the usage data for scope defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "SubscriptionQuery-Legacy": {
+          "$ref": "./examples/SubscriptionQuery.json"
+        },
+        "SubscriptionQueryGrouping-Legacy": {
+          "$ref": "./examples/SubscriptionQueryGrouping.json"
+        },
+        "ResourceGroupQuery-Legacy": {
+          "$ref": "./examples/ResourceGroupQuery.json"
+        },
+        "ResourceGroupQueryGrouping-Legacy": {
+          "$ref": "./examples/ResourceGroupQueryGrouping.json"
+        },
+        "BillingAccountQuery-Legacy": {
+          "$ref": "./examples/BillingAccountQuery.json"
+        },
+        "BillingAccountQueryGrouping-Legacy": {
+          "$ref": "./examples/BillingAccountQueryGrouping.json"
+        },
+        "EnrollmentAccountQuery-Legacy": {
+          "$ref": "./examples/EnrollmentAccountQuery.json"
+        },
+        "EnrollmentAccountQueryGrouping-Legacy": {
+          "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
+        },
+        "DepartmentQuery-Legacy": {
+          "$ref": "./examples/DepartmentQuery.json"
+        },
+        "DepartmentQueryGrouping-Legacy": {
+          "$ref": "./examples/DepartmentQueryGrouping.json"
+        },
+        "ManagementGroupQuery-Legacy": {
+          "$ref": "./examples/ManagementGroupQuery.json"
+        },
+        "ManagementGroupQueryGrouping-Legacy": {
+          "$ref": "./examples/ManagementGroupQueryGrouping.json"
+        },
+        "BillingAccountQuery-MCA": {
+          "$ref": "./examples/MCABillingAccountQuery.json"
+        },
+        "BillingAccountQueryGrouping-MCA": {
+          "$ref": "./examples/MCABillingAccountQueryGrouping.json"
+        },
+        "BillingProfileQuery-MCA": {
+          "$ref": "./examples/MCABillingProfileQuery.json"
+        },
+        "BillingProfileQueryGrouping-MCA": {
+          "$ref": "./examples/MCABillingProfileQueryGrouping.json"
+        },
+        "InvoiceSectionQuery-MCA": {
+          "$ref": "./examples/MCAInvoiceSectionQuery.json"
+        },
+        "InvoiceSectionQueryGrouping-MCA": {
+          "$ref": "./examples/MCAInvoiceSectionQueryGrouping.json"
+        },
+        "CustomerQuery-MCA": {
+          "$ref": "./examples/MCACustomerQuery.json"
+        },
+        "CustomerQueryGrouping-MCA": {
+          "$ref": "./examples/MCACustomerQueryGrouping.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/scopeQueryParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryDefinition"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate Query Config operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/QueryResult"
+          }
+        },
+        "204": {
+          "description": "No Content. Resource is not available."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/query": {
+    "post": {
+      "tags": [
+        "Query"
+      ],
+      "operationId": "Query_UsageByExternalCloudProviderType",
+      "description": "Query the usage data for external cloud provider type defined.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ExternalBillingAccountQueryList": {
+          "$ref": "./examples/ExternalBillingAccountsQuery.json"
+        },
+        "ExternalSubscriptionsQuery": {
+          "$ref": "./examples/ExternalSubscriptionsQuery.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/externalCloudProviderTypeParameter"
+        },
+        {
+          "$ref": "#/parameters/externalCloudProviderIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryDefinition"
+          },
+          "description": "Parameters supplied to the CreateOrUpdate Query Config operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/QueryResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+    "post": {
+      "tags": [
+        "ReservedInstances"
+      ],
+      "operationId": "GenerateReservationDetailsReport_ByBillingAccountId",
+      "description": "Generates the reservations details report for provided date range asynchronously based on enrollment id. The Reservation usage details can be viewed only by certain enterprise roles. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ReservationDetails": {
+          "$ref": "./examples/GenerateReservationDetailsReportByBillingAccount.json"
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/enrollmentIdParameter"
+        },
+        {
+          "$ref": "#/parameters/startDateParameter"
+        },
+        {
+          "$ref": "#/parameters/endDateParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Request processing completed.",
+          "schema": {
+            "$ref": "#/definitions/OperationStatus"
+          }
+        },
+        "202": {
+          "description": "Accepted. Request will be processed. Use the location header to check the status.",
+          "headers": {
+            "Location": {
+              "description": "The URL to check the status of the asynchronous operation.",
+              "type": "string"
+            },
+            "Retry-After": {
+              "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  },
+  "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport": {
+    "post": {
+      "tags": [
+        "ReservedInstances"
+      ],
+      "operationId": "GenerateReservationDetailsReport_ByBillingProfileId",
+      "description": "Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+      },
+      "x-ms-examples": {
+        "ReservationDetails": {
+          "$ref": "./examples/GenerateReservationDetailsReportByBillingProfile.json"
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "parameters": [
+        {
+          "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+        },
+        {
+          "$ref": "common-types.json#/parameters/billingProfileIdParameter"
+        },
+        {
+          "$ref": "#/parameters/startDateParameter"
+        },
+        {
+          "$ref": "#/parameters/endDateParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Request processing completed.",
+          "schema": {
+            "$ref": "#/definitions/OperationStatus"
+          }
+        },
+        "202": {
+          "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+          "headers": {
+            "Location": {
+              "description": "The URL to check the status of the asynchronous operation.",
+              "type": "string"
+            },
+            "Retry-After": {
+              "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "common-types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    }
+  }
+}
