@@ -86,8 +86,11 @@ namespace JsonOrderbyTool
 
             // order [paths] by descending
             var orderedNames = json.Properties().Select(item => item.Name).OrderBy(n => n);
+            Console.WriteLine("Paths number: " + orderedNames.Count());
+            Console.WriteLine("Paths name: ");
             foreach (var name in orderedNames)
             {
+                Console.WriteLine(name);
                 orderedJson.Add(json.Properties().Where(item => item.Name == name));
             }
 

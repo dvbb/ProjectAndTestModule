@@ -1,5 +1,5 @@
 ﻿{
-  "/providers/Azure.ResourceManager.CustomerInsights/operations": {
+  "/providers/Microsoft.ElasticSan/operations": {
     "get": {
       "operationId": "Operations_List",
       "tags": [
@@ -30,13 +30,13 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.CustomerInsights/hubs": {
+  "/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/elasticSans": {
     "get": {
-      "operationId": "Hubs_List",
+      "operationId": "ElasticSans_ListBySubscription",
       "tags": [
-        "Hubs"
+        "ElasticSans"
       ],
-      "description": "Gets all hubs in the specified subscription.",
+      "description": "Gets a list of ElasticSans in a subscription",
       "parameters": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -49,7 +49,7 @@
         "200": {
           "description": "ARM operation completed successfully.",
           "schema": {
-            "$ref": "#/definitions/HubListResult"
+            "$ref": "#/definitions/ElasticSanListResult"
           }
         },
         "default": {
@@ -57,6 +57,14 @@
           "schema": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_ListBySubscription_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_ListBySubscription_MaximumSet_Gen.json"
+        },
+        "ElasticSans_ListBySubscription_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_ListBySubscription_MinimumSet_Gen.json"
         }
       },
       "x-ms-pageable": {
@@ -64,3441 +72,28 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs": {
+  "/subscriptions/{subscriptionId}/providers/Microsoft.ElasticSan/skus": {
     "get": {
-      "operationId": "Hubs_ListByResourceGroup",
-      "tags": [
-        "Hubs"
-      ],
-      "description": "Gets all the hubs in a resource group.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/HubListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}": {
-    "get": {
-      "operationId": "Hubs_Get",
-      "tags": [
-        "Hubs"
-      ],
-      "description": "Gets information about the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Hubs_CreateOrUpdate",
-      "tags": [
-        "Hubs"
-      ],
-      "description": "Creates a hub, or updates an existing hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'Hub' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        },
-        "201": {
-          "description": "Resource 'Hub' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "patch": {
-      "operationId": "Hubs_Update",
-      "tags": [
-        "Hubs"
-      ],
-      "description": "Updates a Hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "properties",
-          "in": "body",
-          "description": "The resource properties to be updated.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/HubUpdate"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/Hub"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "delete": {
-      "operationId": "Hubs_Delete",
-      "tags": [
-        "Hubs"
-      ],
-      "description": "Deletes the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/authorizationPolicies": {
-    "get": {
-      "operationId": "AuthorizationPolicies_ListByHub",
-      "tags": [
-        "AuthorizationPolicies"
-      ],
-      "description": "Gets all the authorization policies in a specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicyResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}": {
-    "get": {
-      "operationId": "AuthorizationPolicies_Get",
-      "tags": [
-        "AuthorizationPolicies"
-      ],
-      "description": "Gets an authorization policy in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "authorizationPolicyName",
-          "in": "path",
-          "description": "The name of the policy.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicyResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "AuthorizationPolicies_CreateOrUpdate",
-      "tags": [
-        "AuthorizationPolicies"
-      ],
-      "description": "Creates an authorization policy or updates an existing authorization policy.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "authorizationPolicyName",
-          "in": "path",
-          "description": "The name of the policy.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicyResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'AuthorizationPolicyResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicyResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'AuthorizationPolicyResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicyResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}/regeneratePrimaryKey": {
-    "post": {
-      "operationId": "AuthorizationPolicies_RegeneratePrimaryKey",
-      "tags": [
-        "AuthorizationPolicies"
-      ],
-      "description": "Regenerates the primary policy key of the specified authorization policy.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "authorizationPolicyName",
-          "in": "path",
-          "description": "The name of the policy.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicy"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/authorizationPolicies/{authorizationPolicyName}/regenerateSecondaryKey": {
-    "post": {
-      "operationId": "AuthorizationPolicies_RegenerateSecondaryKey",
-      "tags": [
-        "AuthorizationPolicies"
-      ],
-      "description": "Regenerates the secondary policy key of the specified authorization policy.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "authorizationPolicyName",
-          "in": "path",
-          "description": "The name of the policy.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/AuthorizationPolicy"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/connectors": {
-    "get": {
-      "operationId": "Connectors_ListByHub",
-      "tags": [
-        "Connectors"
-      ],
-      "description": "Gets all the connectors in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ConnectorResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/connectors/{connectorName}": {
-    "get": {
-      "operationId": "Connectors_Get",
-      "tags": [
-        "Connectors"
-      ],
-      "description": "Gets a connector in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ConnectorResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Connectors_CreateOrUpdate",
-      "tags": [
-        "Connectors"
-      ],
-      "description": "Creates a connector or updates an existing connector in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ConnectorResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'ConnectorResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ConnectorResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'ConnectorResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ConnectorResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Connectors_Delete",
-      "tags": [
-        "Connectors"
-      ],
-      "description": "Deletes a connector in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/connectors/{connectorName}/mappings": {
-    "get": {
-      "operationId": "ConnectorMappings_ListByConnectorResourceFormat",
-      "tags": [
-        "ConnectorMappings"
-      ],
-      "description": "Gets all the connector mappings in the specified connector.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ConnectorMappingResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/connectors/{connectorName}/mappings/{mappingName}": {
-    "get": {
-      "operationId": "ConnectorMappings_Get",
-      "tags": [
-        "ConnectorMappings"
-      ],
-      "description": "Gets a connector mapping in the connector.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "mappingName",
-          "in": "path",
-          "description": "The name of the connector mapping.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ConnectorMappingResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "ConnectorMappings_CreateOrUpdate",
-      "tags": [
-        "ConnectorMappings"
-      ],
-      "description": "Creates a connector mapping or updates an existing connector mapping in the connector.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "mappingName",
-          "in": "path",
-          "description": "The name of the connector mapping.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ConnectorMappingResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'ConnectorMappingResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ConnectorMappingResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'ConnectorMappingResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ConnectorMappingResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "delete": {
-      "operationId": "ConnectorMappings_Delete",
-      "tags": [
-        "ConnectorMappings"
-      ],
-      "description": "Deletes a connector mapping in the connector.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "connectorName",
-          "in": "path",
-          "description": "The name of the connector.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "mappingName",
-          "in": "path",
-          "description": "The name of the connector mapping.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/getUploadUrlForData": {
-    "post": {
-      "operationId": "Images_GetUploadUrlForData",
-      "tags": [
-        "Images"
-      ],
-      "description": "Gets data image upload URL.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "body",
-          "in": "body",
-          "description": "The content of the action request",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GetImageUploadUrlInput"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ImageDefinition"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/getUploadUrlForEntityType": {
-    "post": {
-      "operationId": "Images_GetUploadUrlForEntityType",
-      "tags": [
-        "Images"
-      ],
-      "description": "Gets entity type (profile or interaction) image upload URL.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "body",
-          "in": "body",
-          "description": "The content of the action request",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GetImageUploadUrlInput"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ImageDefinition"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/interactions": {
-    "get": {
-      "operationId": "Interactions_ListByHub",
-      "tags": [
-        "Interactions"
-      ],
-      "description": "Gets all interactions in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "locale-code",
-          "in": "query",
-          "description": "Locale of interaction to retrieve, default is en-us.",
-          "required": false,
-          "type": "string",
-          "default": "en-us"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/InteractionResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/interactions/{interactionName}": {
-    "get": {
-      "operationId": "Interactions_Get",
-      "tags": [
-        "Interactions"
-      ],
-      "description": "Gets information about the specified interaction.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "locale-code",
-          "in": "query",
-          "description": "Locale of interaction to retrieve, default is en-us.",
-          "required": false,
-          "type": "string",
-          "default": "en-us"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "interactionName",
-          "in": "path",
-          "description": "The name of the interaction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/InteractionResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Interactions_CreateOrUpdate",
-      "tags": [
-        "Interactions"
-      ],
-      "description": "Creates an interaction or updates an existing interaction within a hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "interactionName",
-          "in": "path",
-          "description": "The name of the interaction.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/InteractionResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'InteractionResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/InteractionResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'InteractionResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/InteractionResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/interactions/{interactionName}/suggestRelationshipLinks": {
-    "post": {
-      "operationId": "Interactions_SuggestRelationshipLinks",
-      "tags": [
-        "Interactions"
-      ],
-      "description": "Suggests relationships to create relationship links.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "interactionName",
-          "in": "path",
-          "description": "The name of the interaction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/SuggestRelationshipLinksResponse"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/kpi": {
-    "get": {
-      "operationId": "Kpi_ListByHub",
-      "tags": [
-        "Kpi"
-      ],
-      "description": "Gets all the KPIs in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/KpiResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/kpi/{kpiName}": {
-    "get": {
-      "operationId": "Kpi_Get",
-      "tags": [
-        "Kpi"
-      ],
-      "description": "Gets a KPI in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "kpiName",
-          "in": "path",
-          "description": "The name of the KPI.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/KpiResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Kpi_CreateOrUpdate",
-      "tags": [
-        "Kpi"
-      ],
-      "description": "Creates a KPI or updates an existing KPI in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "kpiName",
-          "in": "path",
-          "description": "The name of the KPI.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/KpiResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'KpiResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/KpiResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'KpiResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/KpiResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Kpi_Delete",
-      "tags": [
-        "Kpi"
-      ],
-      "description": "Deletes a KPI in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "kpiName",
-          "in": "path",
-          "description": "The name of the KPI.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/kpi/{kpiName}/reprocess": {
-    "post": {
-      "operationId": "Kpi_Reprocess",
-      "tags": [
-        "Kpi"
-      ],
-      "description": "Reprocesses the Kpi values of the specified KPI.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "kpiName",
-          "in": "path",
-          "description": "The name of the KPI.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "Action completed successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/links": {
-    "get": {
-      "operationId": "Links_ListByHub",
-      "tags": [
-        "Links"
-      ],
-      "description": "Gets all the links in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/LinkResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/links/{linkName}": {
-    "get": {
-      "operationId": "Links_Get",
-      "tags": [
-        "Links"
-      ],
-      "description": "Gets a link in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "linkName",
-          "in": "path",
-          "description": "The name of the link.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/LinkResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Links_CreateOrUpdate",
-      "tags": [
-        "Links"
-      ],
-      "description": "Creates a link or updates an existing link in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "linkName",
-          "in": "path",
-          "description": "The name of the link.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/LinkResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'LinkResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/LinkResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'LinkResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/LinkResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Links_Delete",
-      "tags": [
-        "Links"
-      ],
-      "description": "Deletes a link in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "linkName",
-          "in": "path",
-          "description": "The name of the link.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/predictions": {
-    "get": {
-      "operationId": "Predictions_ListByHub",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Gets all the predictions in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/PredictionResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/predictions/{predictionName}": {
-    "get": {
-      "operationId": "Predictions_Get",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Gets a Prediction in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/PredictionResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Predictions_CreateOrUpdate",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Creates a Prediction or updates an existing Prediction in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/PredictionResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'PredictionResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/PredictionResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'PredictionResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/PredictionResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Predictions_Delete",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Deletes a Prediction in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/predictions/{predictionName}/getModelStatus": {
-    "post": {
-      "operationId": "Predictions_GetModelStatus",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Gets model status of the prediction.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/PredictionModelStatus"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/predictions/{predictionName}/getTrainingResults": {
-    "post": {
-      "operationId": "Predictions_GetTrainingResults",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Gets training results.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/PredictionTrainingResults"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/predictions/{predictionName}/modelStatus": {
-    "post": {
-      "operationId": "Predictions_ModelStatus",
-      "tags": [
-        "Predictions"
-      ],
-      "description": "Creates or updates the model status of prediction.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "predictionName",
-          "in": "path",
-          "description": "The name of the Prediction.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "body",
-          "in": "body",
-          "description": "The content of the action request",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/PredictionModelStatus"
-          }
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "ARM operation completed successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/profiles": {
-    "get": {
-      "operationId": "Profiles_ListByHub",
-      "tags": [
-        "Profiles"
-      ],
-      "description": "Gets all profile in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "locale-code",
-          "in": "query",
-          "description": "Locale of profile to retrieve, default is en-us.",
-          "required": false,
-          "type": "string",
-          "default": "en-us"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ProfileResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/profiles/{profileName}": {
-    "get": {
-      "operationId": "Profiles_Get",
-      "tags": [
-        "Profiles"
-      ],
-      "description": "Gets information about the specified profile.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "locale-code",
-          "in": "query",
-          "description": "Locale of profile to retrieve, default is en-us.",
-          "required": false,
-          "type": "string",
-          "default": "en-us"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "profileName",
-          "in": "path",
-          "description": "The name of the profile.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ProfileResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Profiles_CreateOrUpdate",
-      "tags": [
-        "Profiles"
-      ],
-      "description": "Creates a profile within a Hub, or updates an existing profile.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "profileName",
-          "in": "path",
-          "description": "The name of the profile.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProfileResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'ProfileResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ProfileResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'ProfileResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ProfileResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Profiles_Delete",
-      "tags": [
-        "Profiles"
-      ],
-      "description": "Deletes a profile within a hub",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "locale-code",
-          "in": "query",
-          "description": "Locale of profile to retrieve, default is en-us.",
-          "required": false,
-          "type": "string",
-          "default": "en-us"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "profileName",
-          "in": "path",
-          "description": "The name of the profile.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/profiles/{profileName}/getEnrichingKpis": {
-    "post": {
-      "operationId": "Profiles_GetEnrichingKpis",
-      "tags": [
-        "Profiles"
-      ],
-      "description": "Gets the KPIs that enrich the profile Type identified by the supplied name. Enrichment happens through participants of the Interaction on an Interaction KPI and through Relationships for Profile KPIs.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "profileName",
-          "in": "path",
-          "description": "The name of the profile.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "204": {
-          "description": "ARM operation completed successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/relationshipLinks": {
-    "get": {
-      "operationId": "RelationshipLinks_ListByHub",
-      "tags": [
-        "RelationshipLinks"
-      ],
-      "description": "Gets all relationship links in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RelationshipLinkResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/relationshipLinks/{relationshipLinkName}": {
-    "get": {
-      "operationId": "RelationshipLinks_Get",
-      "tags": [
-        "RelationshipLinks"
-      ],
-      "description": "Gets information about the specified relationship Link.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipLinkName",
-          "in": "path",
-          "description": "The name of the relationship link.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RelationshipLinkResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "RelationshipLinks_CreateOrUpdate",
-      "tags": [
-        "RelationshipLinks"
-      ],
-      "description": "Creates a relationship link or updates an existing relationship link within a hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipLinkName",
-          "in": "path",
-          "description": "The name of the relationship link.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/RelationshipLinkResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'RelationshipLinkResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RelationshipLinkResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'RelationshipLinkResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RelationshipLinkResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "RelationshipLinks_Delete",
-      "tags": [
-        "RelationshipLinks"
-      ],
-      "description": "Deletes a relationship link within a hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipLinkName",
-          "in": "path",
-          "description": "The name of the relationship link.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/relationships": {
-    "get": {
-      "operationId": "Relationships_ListByHub",
-      "tags": [
-        "Relationships"
-      ],
-      "description": "Gets all relationships in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RelationshipResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/relationships/{relationshipName}": {
-    "get": {
-      "operationId": "Relationships_Get",
-      "tags": [
-        "Relationships"
-      ],
-      "description": "Gets information about the specified relationship.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipName",
-          "in": "path",
-          "description": "The name of the relationship.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RelationshipResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Relationships_CreateOrUpdate",
-      "tags": [
-        "Relationships"
-      ],
-      "description": "Creates a relationship or updates an existing relationship within a hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipName",
-          "in": "path",
-          "description": "The name of the relationship.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/RelationshipResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'RelationshipResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RelationshipResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'RelationshipResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RelationshipResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "Relationships_Delete",
-      "tags": [
-        "Relationships"
-      ],
-      "description": "Deletes a relationship within a hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "relationshipName",
-          "in": "path",
-          "description": "The name of the relationship.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "202": {
-          "description": "Resource deletion accepted.",
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            },
-            "Location": {
-              "type": "string",
-              "description": "The Location header contains the URL where the status of the long running operation can be checked."
-            }
-          }
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      },
-      "x-ms-long-running-operation": true
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/roleAssignments": {
-    "get": {
-      "operationId": "RoleAssignments_ListByHub",
-      "tags": [
-        "RoleAssignments"
-      ],
-      "description": "Gets all the role assignments for the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RoleAssignmentResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/roleAssignments/{assignmentName}": {
-    "get": {
-      "operationId": "RoleAssignments_Get",
-      "tags": [
-        "RoleAssignments"
-      ],
-      "description": "Gets the role assignment in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "assignmentName",
-          "in": "path",
-          "description": "The name of the role assignment.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/RoleAssignmentResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "RoleAssignments_CreateOrUpdate",
-      "tags": [
-        "RoleAssignments"
-      ],
-      "description": "Creates or updates a role assignment in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "assignmentName",
-          "in": "path",
-          "description": "The name of the role assignment.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/RoleAssignmentResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'RoleAssignmentResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RoleAssignmentResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'RoleAssignmentResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/RoleAssignmentResourceFormat"
-          },
-          "headers": {
-            "Retry-After": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-            }
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
-      },
-      "x-ms-long-running-operation": true
-    },
-    "delete": {
-      "operationId": "RoleAssignments_Delete",
-      "tags": [
-        "RoleAssignments"
-      ],
-      "description": "Deletes the role assignment in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "assignmentName",
-          "in": "path",
-          "description": "The name of the role assignment.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/views": {
-    "get": {
-      "operationId": "Views_ListByHub",
-      "tags": [
-        "Views"
-      ],
-      "description": "Gets all available views for given user in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "userId",
-          "in": "query",
-          "description": "The user ID. Use * to retrieve hub level views.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ViewResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/views/{viewName}": {
-    "get": {
-      "operationId": "Views_Get",
-      "tags": [
-        "Views"
-      ],
-      "description": "Gets a view in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "userId",
-          "in": "query",
-          "description": "The user ID. Use * to retrieve hub level view.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "viewName",
-          "in": "path",
-          "description": "The name of the view.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/ViewResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "put": {
-      "operationId": "Views_CreateOrUpdate",
-      "tags": [
-        "Views"
-      ],
-      "description": "Creates a view or updates an existing view in the hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "viewName",
-          "in": "path",
-          "description": "The name of the view.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "resource",
-          "in": "body",
-          "description": "Resource create parameters.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ViewResourceFormat"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource 'ViewResourceFormat' update operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ViewResourceFormat"
-          }
-        },
-        "201": {
-          "description": "Resource 'ViewResourceFormat' create operation succeeded",
-          "schema": {
-            "$ref": "#/definitions/ViewResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "delete": {
-      "operationId": "Views_Delete",
-      "tags": [
-        "Views"
-      ],
-      "description": "Deletes a view in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "userId",
-          "in": "query",
-          "description": "The user ID. Use * to retrieve hub level view.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "viewName",
-          "in": "path",
-          "description": "The name of the view.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Resource deleted successfully."
-        },
-        "204": {
-          "description": "Resource deleted successfully."
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/widgetTypes": {
-    "get": {
-      "operationId": "WidgetTypes_ListByHub",
-      "tags": [
-        "WidgetTypes"
-      ],
-      "description": "Gets all available widget types in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/WidgetTypeResourceFormatListResult"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CustomerInsights/hubs/{hubName}/widgetTypes/{widgetTypeName}": {
-    "get": {
-      "operationId": "WidgetTypes_Get",
-      "tags": [
-        "WidgetTypes"
-      ],
-      "description": "Gets a widget type in the specified hub.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "widgetTypeName",
-          "in": "path",
-          "description": "The name of the widget type.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "ARM operation completed successfully.",
-          "schema": {
-            "$ref": "#/definitions/WidgetTypeResourceFormat"
-          }
-        },
-        "default": {
-          "description": "An unexpected error response.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerInsights/hubs/{hubName}/roles/{resourceGroupName}/{hubName}/{subscriptionId}": {
-    "get": {
-      "operationId": "Roles_ListByHub",
-      "tags": [
-        "Roles"
-      ],
-      "description": "Gets all the roles for the hub.",
+      "operationId": "SkusOperations_List",
+      "summary": "List all the available Skus in the region and information related to them",
+      "description": "List all the available Skus in the region and information related to them",
       "parameters": [
         {
           "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
         },
         {
-          "name": "resourceGroupName",
-          "in": "path",
-          "description": "The name of the resource group.",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "name": "hubName",
-          "in": "path",
-          "description": "The name of the hub.",
-          "required": true,
-          "type": "string"
-        },
-        {
           "name": "subscriptionId",
           "in": "path",
-          "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+          "description": "The ID of the target subscription.",
           "required": true,
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "name": "$filter",
+          "in": "query",
+          "description": "Specify $filter='location eq <location>' to filter on location.",
+          "required": false,
           "type": "string"
         }
       ],
@@ -3506,7 +101,7 @@
         "200": {
           "description": "The request has succeeded.",
           "schema": {
-            "$ref": "#/definitions/PagedRoleResourceFormat"
+            "$ref": "#/definitions/PagedSkuInformation"
           }
         },
         "default": {
@@ -3525,6 +120,1829 @@
       "x-ms-pageable": {
         "nextLinkName": "nextLink"
       }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans": {
+    "get": {
+      "operationId": "ElasticSans_ListByResourceGroup",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Gets a list of ElasticSan in a resource group.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/ElasticSanListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_ListByResourceGroup_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_ListByResourceGroup_MaximumSet_Gen.json"
+        },
+        "ElasticSans_ListByResourceGroup_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_ListByResourceGroup_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}": {
+    "get": {
+      "operationId": "ElasticSans_Get",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Get a ElasticSan.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/ElasticSan"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_Get_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Get_MaximumSet_Gen.json"
+        },
+        "ElasticSans_Get_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Get_MinimumSet_Gen.json"
+        }
+      }
+    },
+    "put": {
+      "operationId": "ElasticSans_Create",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Create ElasticSan.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Elastic San object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ElasticSan"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource 'ElasticSan' update operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/ElasticSan"
+          }
+        },
+        "201": {
+          "description": "Resource 'ElasticSan' create operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/ElasticSan"
+          },
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_Create_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Create_MaximumSet_Gen.json"
+        },
+        "ElasticSans_Create_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Create_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "patch": {
+      "operationId": "ElasticSans_Update",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Update a Elastic San.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Elastic San object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ElasticSanUpdate"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/ElasticSan"
+          }
+        },
+        "202": {
+          "description": "Resource update request accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_Update_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Update_MaximumSet_Gen.json"
+        },
+        "ElasticSans_Update_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Update_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "delete": {
+      "operationId": "ElasticSans_Delete",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Delete a Elastic San.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "202": {
+          "description": "Resource deletion accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "ElasticSans_Delete_MaximumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Delete_MaximumSet_Gen.json"
+        },
+        "ElasticSans_Delete_MinimumSet_Gen": {
+          "$ref": "./examples/ElasticSans_Delete_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections": {
+    "get": {
+      "operationId": "PrivateEndpointConnections_ListByElasticSan",
+      "tags": [
+        "PrivateEndpointConnections"
+      ],
+      "description": "List all Private Endpoint Connections associated with the Elastic San.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "get": {
+      "operationId": "PrivateEndpointConnections_Get",
+      "tags": [
+        "PrivateEndpointConnections"
+      ],
+      "description": "Gets the specified private endpoint connection associated with the Elastic San",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "description": "The name of the Private Endpoint connection.",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "PrivateEndpointConnections_Get_MaximumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Get_MaximumSet_Gen.json"
+        },
+        "PrivateEndpointConnections_Get_MinimumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Get_MinimumSet_Gen.json"
+        }
+      }
+    },
+    "put": {
+      "operationId": "PrivateEndpointConnections_Create",
+      "tags": [
+        "PrivateEndpointConnections"
+      ],
+      "description": "Update the state of specified private endpoint connection associated with the Elastic San",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "description": "The name of the Private Endpoint connection.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Private Endpoint Connection Approval object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "201": {
+          "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "PrivateEndpointConnections_Create_MaximumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Create_MaximumSet_Gen.json"
+        },
+        "PrivateEndpointConnections_Create_MinimumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Create_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "delete": {
+      "operationId": "PrivateEndpointConnections_Delete",
+      "tags": [
+        "PrivateEndpointConnections"
+      ],
+      "description": "Deletes the specified private endpoint connection associated with the Elastic San",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "privateEndpointConnectionName",
+          "in": "path",
+          "description": "The name of the Private Endpoint connection.",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "202": {
+          "description": "Resource deletion accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "PrivateEndpointConnections_Delete_MaximumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Delete_MaximumSet_Gen.json"
+        },
+        "PrivateEndpointConnections_Delete_MinimumSet_Gen": {
+          "$ref": "./examples/PrivateEndpointConnections_Delete_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateLinkResources/{subscriptionId}/{resourceGroupName}/{elasticSanName}": {
+    "get": {
+      "operationId": "PrivateLinkResources_ListByElasticSan",
+      "tags": [
+        "ElasticSans"
+      ],
+      "description": "Gets the private link resources that need to be created for a elastic San.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+        },
+        {
+          "name": "subscriptionId",
+          "in": "path",
+          "description": "The ID of the target subscription.",
+          "required": true,
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "description": "The name of the resource group. The name is case insensitive.",
+          "required": true,
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/PrivateLinkResourceListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+          },
+          "headers": {
+            "x-ms-error-code": {
+              "type": "string",
+              "description": "String error code indicating what went wrong."
+            }
+          }
+        }
+      },
+      "x-ms-examples": {
+        "PrivateLinkResources_ListByElasticSan_MaximumSet_Gen": {
+          "$ref": "./examples/PrivateLinkResources_ListByElasticSan_MaximumSet_Gen.json"
+        },
+        "PrivateLinkResources_ListByElasticSan_MinimumSet_Gen": {
+          "$ref": "./examples/PrivateLinkResources_ListByElasticSan_MinimumSet_Gen.json"
+        }
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups": {
+    "get": {
+      "operationId": "VolumeGroups_ListByElasticSan",
+      "tags": [
+        "VolumeGroups"
+      ],
+      "description": "List VolumeGroups.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/VolumeGroupListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeGroups_ListByElasticSan_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_ListByElasticSan_MaximumSet_Gen.json"
+        },
+        "VolumeGroups_ListByElasticSan_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_ListByElasticSan_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}": {
+    "get": {
+      "operationId": "VolumeGroups_Get",
+      "tags": [
+        "VolumeGroups"
+      ],
+      "description": "Get an VolumeGroups.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/VolumeGroup"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeGroups_Get_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Get_MaximumSet_Gen.json"
+        },
+        "VolumeGroups_Get_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Get_MinimumSet_Gen.json"
+        }
+      }
+    },
+    "put": {
+      "operationId": "VolumeGroups_Create",
+      "tags": [
+        "VolumeGroups"
+      ],
+      "description": "Create a Volume Group.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Volume Group object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/VolumeGroup"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource 'VolumeGroup' update operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/VolumeGroup"
+          }
+        },
+        "201": {
+          "description": "Resource 'VolumeGroup' create operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/VolumeGroup"
+          },
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeGroups_Create_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Create_MaximumSet_Gen.json"
+        },
+        "VolumeGroups_Create_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Create_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "patch": {
+      "operationId": "VolumeGroups_Update",
+      "tags": [
+        "VolumeGroups"
+      ],
+      "description": "Update an VolumeGroup.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Volume Group object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/VolumeGroupUpdate"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/VolumeGroup"
+          }
+        },
+        "202": {
+          "description": "Resource update request accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeGroups_Update_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Update_MaximumSet_Gen.json"
+        },
+        "VolumeGroups_Update_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Update_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "delete": {
+      "operationId": "VolumeGroups_Delete",
+      "tags": [
+        "VolumeGroups"
+      ],
+      "description": "Delete an VolumeGroup.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "202": {
+          "description": "Resource deletion accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeGroups_Delete_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Delete_MaximumSet_Gen.json"
+        },
+        "VolumeGroups_Delete_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeGroups_Delete_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots": {
+    "get": {
+      "operationId": "VolumeSnapshots_ListByVolumeGroup",
+      "tags": [
+        "Snapshots"
+      ],
+      "description": "List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using filter",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "$filter",
+          "in": "query",
+          "description": "Specify $filter='volumeName eq <volume name>' to filter on volume.",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/SnapshotListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeSnapshots_ListByVolumeGroup_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_ListByVolumeGroup_MaximumSet_Gen.json"
+        },
+        "VolumeSnapshots_ListByVolumeGroup_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_ListByVolumeGroup_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/snapshots/{snapshotName}": {
+    "get": {
+      "operationId": "VolumeSnapshots_Get",
+      "tags": [
+        "Snapshots"
+      ],
+      "description": "Get a Volume Snapshot.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "snapshotName",
+          "in": "path",
+          "description": "The name of the volume snapshot within the given volume group.",
+          "required": true,
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeSnapshots_Get_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Get_MaximumSet_Gen.json"
+        },
+        "VolumeSnapshots_Get_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Get_MinimumSet_Gen.json"
+        }
+      }
+    },
+    "put": {
+      "operationId": "VolumeSnapshots_Create",
+      "tags": [
+        "Snapshots"
+      ],
+      "description": "Create a Volume Snapshot.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "snapshotName",
+          "in": "path",
+          "description": "The name of the volume snapshot within the given volume group.",
+          "required": true,
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Snapshot object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource 'Snapshot' update operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/Snapshot"
+          }
+        },
+        "201": {
+          "description": "Resource 'Snapshot' create operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeSnapshots_Create_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Create_MaximumSet_Gen.json"
+        },
+        "VolumeSnapshots_Create_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Create_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "delete": {
+      "operationId": "VolumeSnapshots_Delete",
+      "tags": [
+        "Snapshots"
+      ],
+      "description": "Delete a Volume Snapshot.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "snapshotName",
+          "in": "path",
+          "description": "The name of the volume snapshot within the given volume group.",
+          "required": true,
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "202": {
+          "description": "Resource deletion accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "VolumeSnapshots_Delete_MaximumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Delete_MaximumSet_Gen.json"
+        },
+        "VolumeSnapshots_Delete_MinimumSet_Gen": {
+          "$ref": "./examples/VolumeSnapshots_Delete_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes": {
+    "get": {
+      "operationId": "Volumes_ListByVolumeGroup",
+      "tags": [
+        "Volumes"
+      ],
+      "description": "List Volumes in a VolumeGroup.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/VolumeListResult"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Volumes_ListByVolumeGroup_MaximumSet_Gen": {
+          "$ref": "./examples/Volumes_ListByVolumeGroup_MaximumSet_Gen.json"
+        },
+        "Volumes_ListByVolumeGroup_MinimumSet_Gen": {
+          "$ref": "./examples/Volumes_ListByVolumeGroup_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}": {
+    "get": {
+      "operationId": "Volumes_Get",
+      "tags": [
+        "Volumes"
+      ],
+      "description": "Get an Volume.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeName",
+          "in": "path",
+          "description": "The name of the Volume.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Volumes_Get_MaximumSet_Gen": {
+          "$ref": "./examples/Volumes_Get_MaximumSet_Gen.json"
+        },
+        "Volumes_Get_MinimumSet_Gen": {
+          "$ref": "./examples/Volumes_Get_MinimumSet_Gen.json"
+        }
+      }
+    },
+    "put": {
+      "operationId": "Volumes_Create",
+      "tags": [
+        "Volumes"
+      ],
+      "description": "Create a Volume.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeName",
+          "in": "path",
+          "description": "The name of the Volume.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Volume object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource 'Volume' update operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "201": {
+          "description": "Resource 'Volume' create operation succeeded",
+          "schema": {
+            "$ref": "#/definitions/Volume"
+          },
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Volumes_Create_MaximumSet_Gen": {
+          "$ref": "./examples/Volumes_Create_MaximumSet_Gen.json"
+        },
+        "Volumes_Create_MinimumSet_Gen": {
+          "$ref": "./examples/Volumes_Create_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "patch": {
+      "operationId": "Volumes_Update",
+      "tags": [
+        "Volumes"
+      ],
+      "description": "Update an Volume.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeName",
+          "in": "path",
+          "description": "The name of the Volume.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "description": "Volume object.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/VolumeUpdate"
+          },
+          "x-ms-client-name": "parameters"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "202": {
+          "description": "Resource update request accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Volumes_Update_MaximumSet_Gen": {
+          "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
+        },
+        "Volumes_Update_MinimumSet_Gen": {
+          "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
+    },
+    "delete": {
+      "operationId": "Volumes_Delete",
+      "tags": [
+        "Volumes"
+      ],
+      "description": "Delete an Volume.",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "x-ms-delete-snapshots",
+          "in": "header",
+          "description": "Optional, used to delete snapshots under volume. Allowed value are only true or false. Default value is false.",
+          "required": false,
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "XMsDeleteSnapshots",
+            "modelAsString": true
+          }
+        },
+        {
+          "name": "x-ms-force-delete",
+          "in": "header",
+          "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false.",
+          "required": false,
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "XMsForceDelete",
+            "modelAsString": true
+          }
+        },
+        {
+          "name": "elasticSanName",
+          "in": "path",
+          "description": "The name of the ElasticSan.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeGroupName",
+          "in": "path",
+          "description": "The name of the VolumeGroup.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+        },
+        {
+          "name": "volumeName",
+          "in": "path",
+          "description": "The name of the Volume.",
+          "required": true,
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "202": {
+          "description": "Resource deletion accepted.",
+          "headers": {
+            "Retry-After": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+            },
+            "Location": {
+              "type": "string",
+              "description": "The Location header contains the URL where the status of the long running operation can be checked."
+            }
+          }
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Volumes_Delete_MaximumSet_Gen": {
+          "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
+        },
+        "Volumes_Delete_MinimumSet_Gen": {
+          "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
+        }
+      },
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
+      },
+      "x-ms-long-running-operation": true
     }
   }
 }
