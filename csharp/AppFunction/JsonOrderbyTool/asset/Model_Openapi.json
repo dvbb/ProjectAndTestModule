@@ -1,192 +1,4 @@
 {
-  "Action": {
-    "type": "string",
-    "description": "The action of virtual network rule.",
-    "enum": [
-      "Allow"
-    ],
-    "x-ms-enum": {
-      "name": "Action",
-      "modelAsString": true
-    }
-  },
-  "Azure.Core.Foundations.Error": {
-    "type": "object",
-    "description": "The error object.",
-    "properties": {
-      "code": {
-        "type": "string",
-        "description": "One of a server-defined set of error codes."
-      },
-      "message": {
-        "type": "string",
-        "description": "A human-readable representation of the error."
-      },
-      "target": {
-        "type": "string",
-        "description": "The target of the error."
-      },
-      "details": {
-        "type": "array",
-        "description": "An array of details about specific errors that led to this reported error.",
-        "items": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error"
-        },
-        "x-ms-identifiers": []
-      },
-      "innererror": {
-        "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-        "description": "An object containing more specific information than the current object about the error."
-      }
-    },
-    "required": [
-      "code",
-      "message"
-    ]
-  },
-  "Azure.Core.Foundations.ErrorResponse": {
-    "type": "object",
-    "description": "A response containing error details.",
-    "properties": {
-      "error": {
-        "$ref": "#/definitions/Azure.Core.Foundations.Error",
-        "description": "The error object."
-      }
-    },
-    "required": [
-      "error"
-    ]
-  },
-  "Azure.Core.Foundations.InnerError": {
-    "type": "object",
-    "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-    "properties": {
-      "code": {
-        "type": "string",
-        "description": "One of a server-defined set of error codes."
-      },
-      "innererror": {
-        "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-        "description": "Inner error."
-      }
-    }
-  },
-  "Azure.ResourceManager.Foundations.ManagedIdentityProperties": {
-    "type": "object",
-    "description": "The properties of the managed service identities assigned to this resource.",
-    "properties": {
-      "tenantId": {
-        "type": "string",
-        "description": "The Active Directory tenant id of the principal.",
-        "readOnly": true
-      },
-      "principalId": {
-        "type": "string",
-        "description": "The active directory identifier of this principal.",
-        "readOnly": true
-      },
-      "type": {
-        "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
-        "description": "The type of managed identity assigned to this resource."
-      },
-      "userAssignedIdentities": {
-        "type": "object",
-        "description": "The identities assigned to this resource by the user.",
-        "additionalProperties": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-        }
-      }
-    },
-    "required": [
-      "type"
-    ]
-  },
-  "Azure.ResourceManager.Foundations.ManagedIdentityType": {
-    "type": "string",
-    "description": "The kind of managed identity assigned to this resource.",
-    "enum": [
-      "None",
-      "SystemAssigned",
-      "UserAssigned",
-      "SystemAssigned, UserAssigned"
-    ],
-    "x-ms-enum": {
-      "name": "ManagedIdentityType",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "None",
-          "value": "None",
-          "description": "No managed identity."
-        },
-        {
-          "name": "SystemAssigned",
-          "value": "SystemAssigned",
-          "description": "System assigned managed identity."
-        },
-        {
-          "name": "UserAssigned",
-          "value": "UserAssigned",
-          "description": "User assigned managed identity."
-        },
-        {
-          "name": "SystemAndUserAssigned",
-          "value": "SystemAssigned, UserAssigned",
-          "description": "System and user assigned managed identity."
-        }
-      ]
-    }
-  },
-  "Azure.ResourceManager.Foundations.SkuTier": {
-    "type": "string",
-    "description": "Available service tiers for the SKU.",
-    "enum": [
-      "Free",
-      "Basic",
-      "Standard",
-      "Premium"
-    ],
-    "x-ms-enum": {
-      "name": "SkuTier",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "Free",
-          "value": "Free",
-          "description": "The Free service tier."
-        },
-        {
-          "name": "Basic",
-          "value": "Basic",
-          "description": "The Basic service tier."
-        },
-        {
-          "name": "Standard",
-          "value": "Standard",
-          "description": "The Standard service tier."
-        },
-        {
-          "name": "Premium",
-          "value": "Premium",
-          "description": "The Premium service tier."
-        }
-      ]
-    }
-  },
-  "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-    "type": "object",
-    "description": "A managed identity assigned by the user.",
-    "properties": {
-      "clientId": {
-        "type": "string",
-        "description": "The active directory client identifier for this principal."
-      },
-      "principalId": {
-        "type": "string",
-        "description": "The active directory identifier for this principal."
-      }
-    }
-  },
   "ElasticSan": {
     "type": "object",
     "description": "Response for ElasticSan request.",
@@ -205,27 +17,6 @@
       {
         "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
       }
-    ]
-  },
-  "ElasticSanListResult": {
-    "type": "object",
-    "description": "The response of a ElasticSan list operation.",
-    "properties": {
-      "value": {
-        "type": "array",
-        "description": "The ElasticSan items on this page",
-        "items": {
-          "$ref": "#/definitions/ElasticSan"
-        }
-      },
-      "nextLink": {
-        "type": "string",
-        "format": "uri",
-        "description": "The link to the next page of items"
-      }
-    },
-    "required": [
-      "value"
     ]
   },
   "ElasticSanProperties": {
@@ -425,19 +216,6 @@
       }
     }
   },
-  "IdentityType": {
-    "type": "string",
-    "description": "The identity type.",
-    "enum": [
-      "None",
-      "SystemAssigned",
-      "UserAssigned"
-    ],
-    "x-ms-enum": {
-      "name": "IdentityType",
-      "modelAsString": true
-    }
-  },
   "IscsiTargetInfo": {
     "type": "object",
     "description": "Iscsi target information",
@@ -545,28 +323,6 @@
       "name": "OperationalStatus",
       "modelAsString": true
     }
-  },
-  "PagedSkuInformation": {
-    "type": "object",
-    "description": "List of SKU Information objects",
-    "properties": {
-      "value": {
-        "type": "array",
-        "description": "The SkuInformation items on this page",
-        "items": {
-          "$ref": "#/definitions/SkuInformation"
-        },
-        "x-ms-identifiers": []
-      },
-      "nextLink": {
-        "type": "string",
-        "format": "uri",
-        "description": "The link to the next page of items"
-      }
-    },
-    "required": [
-      "value"
-    ]
   },
   "PrivateEndpoint": {
     "type": "object",
@@ -740,62 +496,6 @@
       }
     }
   },
-  "ProvisioningStates": {
-    "type": "string",
-    "description": "Provisioning state of the iSCSI Target.",
-    "enum": [
-      "Invalid",
-      "Succeeded",
-      "Failed",
-      "Canceled",
-      "Pending",
-      "Creating",
-      "Updating",
-      "Deleting"
-    ],
-    "x-ms-enum": {
-      "name": "ProvisioningStates",
-      "modelAsString": true
-    }
-  },
-  "PublicNetworkAccess": {
-    "type": "string",
-    "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.",
-    "enum": [
-      "Enabled",
-      "Disabled"
-    ],
-    "x-ms-enum": {
-      "name": "PublicNetworkAccess",
-      "modelAsString": true
-    }
-  },
-  "Resource": {
-    "type": "object",
-    "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-        "readOnly": true
-      },
-      "name": {
-        "type": "string",
-        "description": "The name of the resource",
-        "readOnly": true
-      },
-      "type": {
-        "type": "string",
-        "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-        "readOnly": true
-      },
-      "systemData": {
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-        "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-        "readOnly": true
-      }
-    }
-  },
   "Sku": {
     "type": "object",
     "description": "The SKU name. Required for account creation; optional for update.",
@@ -953,27 +653,6 @@
       "sourceId"
     ]
   },
-  "SnapshotListResult": {
-    "type": "object",
-    "description": "The response of a Snapshot list operation.",
-    "properties": {
-      "value": {
-        "type": "array",
-        "description": "The Snapshot items on this page",
-        "items": {
-          "$ref": "#/definitions/Snapshot"
-        }
-      },
-      "nextLink": {
-        "type": "string",
-        "format": "uri",
-        "description": "The link to the next page of items"
-      }
-    },
-    "required": [
-      "value"
-    ]
-  },
   "SnapshotProperties": {
     "type": "object",
     "description": "Properties for Snapshot.",
@@ -1029,24 +708,6 @@
       "modelAsString": true
     }
   },
-  "Versions": {
-    "type": "string",
-    "description": "The available API versions.",
-    "enum": [
-      "2023-01-01"
-    ],
-    "x-ms-enum": {
-      "name": "Versions",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "v2023_01_01",
-          "value": "2023-01-01",
-          "description": "The 2023-01-01 API version."
-        }
-      ]
-    }
-  },
   "VirtualNetworkRule": {
     "type": "object",
     "description": "Virtual Network rule.",
@@ -1085,21 +746,6 @@
       }
     ]
   },
-  "VolumeCreateOption": {
-    "type": "string",
-    "description": "This enumerates the possible sources of a volume creation.",
-    "enum": [
-      "None",
-      "VolumeSnapshot",
-      "DiskSnapshot",
-      "Disk",
-      "DiskRestorePoint"
-    ],
-    "x-ms-enum": {
-      "name": "VolumeCreateOption",
-      "modelAsString": true
-    }
-  },
   "VolumeGroup": {
     "type": "object",
     "description": "Response for Volume Group request.",
@@ -1122,27 +768,6 @@
       {
         "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
       }
-    ]
-  },
-  "VolumeGroupListResult": {
-    "type": "object",
-    "description": "The response of a VolumeGroup list operation.",
-    "properties": {
-      "value": {
-        "type": "array",
-        "description": "The VolumeGroup items on this page",
-        "items": {
-          "$ref": "#/definitions/VolumeGroup"
-        }
-      },
-      "nextLink": {
-        "type": "string",
-        "format": "uri",
-        "description": "The link to the next page of items"
-      }
-    },
-    "required": [
-      "value"
     ]
   },
   "VolumeGroupProperties": {
@@ -1223,27 +848,6 @@
       }
     }
   },
-  "VolumeListResult": {
-    "type": "object",
-    "description": "The response of a Volume list operation.",
-    "properties": {
-      "value": {
-        "type": "array",
-        "description": "The Volume items on this page",
-        "items": {
-          "$ref": "#/definitions/Volume"
-        }
-      },
-      "nextLink": {
-        "type": "string",
-        "format": "uri",
-        "description": "The link to the next page of items"
-      }
-    },
-    "required": [
-      "value"
-    ]
-  },
   "VolumeProperties": {
     "type": "object",
     "description": "Volume response properties.",
@@ -1304,28 +908,6 @@
         "$ref": "#/definitions/ManagedByInfo",
         "description": "Parent resource information."
       }
-    }
-  },
-  "XMsDeleteSnapshots": {
-    "type": "string",
-    "enum": [
-      "true",
-      "false"
-    ],
-    "x-ms-enum": {
-      "name": "XMsDeleteSnapshots",
-      "modelAsString": true
-    }
-  },
-  "XMsForceDelete": {
-    "type": "string",
-    "enum": [
-      "true",
-      "false"
-    ],
-    "x-ms-enum": {
-      "name": "XMsForceDelete",
-      "modelAsString": true
     }
   }
 }

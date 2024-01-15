@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JsonOrderbyTool.Helper;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -13,9 +14,13 @@ namespace JsonOrderbyTool
 
         static void Main(string[] args)
         {
-            SortPaths();
+            //SortPaths();
+
+            //SortDefinition();
 
             //FilterOpenApiByPartialPaths();
+
+            SortTwoDefinitionBasedOnSwagger();
         }
 
         protected static void AddVerb(ref string verbs, string? verb)
@@ -28,26 +33,8 @@ namespace JsonOrderbyTool
 
         protected static void FilterOpenApiByPartialPaths()
         {
-            string resourcefile;
-            StreamReader sr;
-            string str = "";
-
-            resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\openaip.json");
-            sr = new StreamReader(resourcefile);
-            while (!sr.EndOfStream)
-            {
-                str += sr.ReadLine();
-            }
-            JObject openapiJson = JObject.Parse(str);
-
-            str = "";
-            resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\partialPaths.json");
-            sr = new StreamReader(resourcefile);
-            while (!sr.EndOfStream)
-            {
-                str += sr.ReadLine();
-            }
-            JObject partialPathsJson = JObject.Parse(str);
+            JObject partialPathsJson = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\partialPaths.json"));
+            JObject openapiJson = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\openaip.json"));
 
             // Select tsp paths
             JObject outputJson = new JObject();
@@ -61,37 +48,22 @@ namespace JsonOrderbyTool
             Console.WriteLine("Selected paths number: " + outputJson.Properties().Count());
 
             // Output
-            string finalResult = outputJson.ToString();
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json");
-            using (StreamWriter sw = File.CreateText(outputPath))
-            {
-                sw.Write(finalResult);
-            }
+            FileHelper.OutputContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json"), outputJson.ToString());
         }
 
         protected static void SortPaths()
         {
-            string outputPath;
-
-            string resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\OriginalSwagger.json");
-            StreamReader sr = new StreamReader(resourcefile);
-            string str = "";
-            while (!sr.EndOfStream)
-            {
-                str += sr.ReadLine();
-            }
-
-            JObject json = JObject.Parse(str);
+            JObject swagger = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\OriginalSwagger.json"));
             JObject orderedJson = new JObject();
 
             // order [paths] by descending
-            var orderedNames = json.Properties().Select(item => item.Name).OrderBy(n => n);
+            var orderedNames = swagger.Properties().Select(item => item.Name).OrderBy(n => n);
             Console.WriteLine("Paths number: " + orderedNames.Count());
             Console.WriteLine("Paths name: ");
             foreach (var name in orderedNames)
             {
                 Console.WriteLine(name);
-                orderedJson.Add(json.Properties().Where(item => item.Name == name));
+                orderedJson.Add(swagger.Properties().Where(item => item.Name == name));
             }
 
             // order [http verb] by: get, put, patch, delete (descending)
@@ -128,73 +100,40 @@ namespace JsonOrderbyTool
             finalResult += "\n}\n";
 
             // Output
-            outputPath = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json");
-            using (StreamWriter sw = File.CreateText(outputPath))
-            {
-                sw.Write(finalResult);
-            }
+            FileHelper.OutputContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json"), finalResult);
         }
 
-        protected void SortDefinition()
+        protected static void SortDefinition()
         {
-            string resourcefile = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\JsonStr1.txt");
-            StreamReader sr = new StreamReader(resourcefile);
-            string str = "";
-            while (!sr.EndOfStream)
-            {
-                str += sr.ReadLine();
-            }
+            JObject swagger = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\OriginalSwagger.json"));
+            JObject orderedJson = JsonHelper.Sort(swagger);
+            FileHelper.OutputContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.json"), orderedJson.ToString());
+        }
 
-            JObject json = JObject.Parse(str);
-            JObject orderedJson = new JObject();
+        protected static void SortTwoDefinitionBasedOnSwagger()
+        {
+            JObject swagger = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\OriginalSwagger.json"));
+            JObject openapi = FileHelper.GetFileContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\openaip.json"));
 
-            var orderedNames = json.Properties().Select(item => item.Name).OrderBy(n => n);
+            JObject sortedSwagger = new JObject();
+            JObject filteredOpenapi = new JObject();
+
+            // sort swagger
+            var orderedNames = swagger.Properties().Select(item => item.Name).OrderBy(n => n);
+            Console.WriteLine("Total: " + orderedNames.Count());
+            sortedSwagger = JsonHelper.Sort(swagger);
+
+            // filter
+            var selectedName = sortedSwagger.Properties().Select(item => item.Name);
             foreach (var name in orderedNames)
             {
-                orderedJson.Add(json.Properties().Where(item => item.Name == name));
+                var model = openapi.Properties().Where(item => item.Name == name);
+                filteredOpenapi.Add(model);
             }
 
-            string jsonText = orderedJson.ToString();
-            string path = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Output.txt");
-            using (StreamWriter sw = File.CreateText(path))
-            {
-                sw.Write(jsonText);
-            }
-        }
-
-        protected void SortTwoFiles()
-        {
-            Console.WriteLine("Please type original swagger path:");
-            string originalSwaggerPath = Console.ReadLine();
-
-            Console.WriteLine("Please type converted TSP swagger path:");
-            string tspConvertedSwaggerPath = Console.ReadLine();
-
-            if (string.IsNullOrEmpty(originalSwaggerPath) || string.IsNullOrEmpty(tspConvertedSwaggerPath))
-            {
-                throw new ArgumentException("Input paths cannot be null or empty");
-            }
-
-            // Get two json files
-            JObject originalSwagger = Helper.ReadPath(originalSwaggerPath);
-            JObject tspSwagger = Helper.ReadPath(originalSwaggerPath);
-
-            // Convert to contrast friendly json
-            var converted_origin = Helper.OutputContrastfriendlyJson(originalSwagger);
-            var converted_tsp = Helper.OutputContrastfriendlyJson(tspSwagger);
-
-            // output two json files
-            string outputFolder = originalSwaggerPath;
-            string directoryPath = Path.GetDirectoryName(outputFolder);
-
-            // 去掉最后的文件名
-            int index = directoryPath.LastIndexOf(Path.DirectorySeparatorChar);
-            if (index != -1)
-            {
-                directoryPath = directoryPath.Substring(0, index);
-            }
-
-            Console.WriteLine(directoryPath);
+            // output
+            FileHelper.OutputContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Model_Swagger.json"), sortedSwagger.ToString());
+            FileHelper.OutputContent(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\asset\Model_Openapi.json"), filteredOpenapi.ToString());
         }
     }
 }
