@@ -26,8 +26,18 @@ namespace ConsoleAppTests
         [Test]
         public void ValueTupleTest()
         {
-            var tuple2  = new ValueTuple<int, int, int, int, int, int, int, ValueTuple<int, int>>(1, 2, 3, 4, 5, 6, 7, new ValueTuple<int, int>(8, 9));
+            var tuple2 = new ValueTuple<int, int, int, int, int, int, int, ValueTuple<int, int>>(1, 2, 3, 4, 5, 6, 7, new ValueTuple<int, int>(8, 9));
             Console.WriteLine(tuple2.Item8);
+        }
+
+        [Test]
+        public void TupleSwap()
+        {
+            string x = "123456";
+            string y = "abcd";
+            Console.WriteLine($"x = {x}, y = {y}");
+            (x, y) = (y, x);
+            Console.WriteLine($"x = {x}, y = {y}");
         }
 
         /// <summary>
