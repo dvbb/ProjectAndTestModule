@@ -9,14 +9,15 @@ namespace MyDelegateEvent
         public static Action<string?> MyConsoleWrite()
         {
             string msg = "";
-            return (string info) =>
+            Action<string?> lambdaClosureAction = (string? info) =>
             {
                 msg = info ?? msg;
                 Console.WriteLine(msg);
             };
+            return lambdaClosureAction;
         }
 
-        public static Func <decimal?, decimal? , decimal?> Add(decimal? d1, decimal? d2)
+        public static Func<decimal?, decimal?, decimal?> Add(decimal? d1, decimal? d2)
         {
             decimal? oldD1 = 0;
             decimal? oldD2 = 0;
