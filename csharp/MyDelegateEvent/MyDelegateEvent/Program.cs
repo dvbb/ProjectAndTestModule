@@ -8,6 +8,23 @@ namespace MyDelegateEvent
     {
         static void Main(string[] args)
         {
+            #region LambdaClosure
+            {
+                Action<string> action = LambdaClosure.MyConsoleWrite();
+                action("hello!");
+                action(null);
+                action(null);
+                action("world");
+                action(null);
+                action(null);
+
+                Func<decimal?, decimal?, decimal?> func = LambdaClosure.Add(1.2m,2.2m);
+                Console.WriteLine(func(1.5m,2.5m));
+                Console.WriteLine(func(null,null));
+
+            }
+            #endregion
+
             //Console.WriteLine("Hello World!");
             //LambdaTest lambdaTest = new LambdaTest();
             //lambdaTest.Start();
