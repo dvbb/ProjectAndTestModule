@@ -1,4 +1,5 @@
 ﻿using BankApiServer.Models;
+using Microsoft.EntityFrameworkCore;
 using MyBankApiServerV2.Models;
 
 namespace MyBankApiServerV2.Repositories
@@ -20,22 +21,40 @@ namespace MyBankApiServerV2.Repositories
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            Employee? employee = _context.Employees.Find(id);
+            if (employee != null)
+            {
+                _context.Employees.Remove(employee);
+                _context.SaveChanges();
+            }
+            // check
+            employee = _context.Employees.Find(id);
+            if (employee != null)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
-        public Employee Get()
+        public Employee Get(int id)
         {
-            throw new NotImplementedException();
+            return _context.Employees.Find(id);
+
         }
 
-        public List<Employee> GetAll()
+        public IEnumerable<Employee> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Employees;
         }
 
         public int Update(Employee employee)
         {
-            throw new NotImplementedException();
+            var updated = _context.Employees.Attach(employee);
+            updated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            return _context.SaveChanges();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MyBankApiServerV2.Repositories
         int Add(Employee employee);
         int Delete(int id);
         int Update(Employee employee);
-        Employee Get();
-        List<Employee> GetAll();
+        Employee Get(int id);
+        IEnumerable<Employee> GetAll();
     }
 }

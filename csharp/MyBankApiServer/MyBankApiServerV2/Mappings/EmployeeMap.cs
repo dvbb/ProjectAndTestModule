@@ -8,9 +8,9 @@ namespace MyBankApiServerV2.Mappings
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            builder.Property(employee => employee.EId).HasMaxLength(50);
-            builder.Property(employee => employee.EName).HasMaxLength(50);
-            builder.Property(employee => employee.Pwd).HasMaxLength(50);
+            builder.Property(employee => employee.EId);
+            builder.Property(employee => employee.EName);
+            builder.Property(employee => employee.Pwd);
 
             builder.HasKey(employee => employee.EName);
 
