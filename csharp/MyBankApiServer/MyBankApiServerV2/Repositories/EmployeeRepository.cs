@@ -4,11 +4,11 @@ using MyBankApiServerV2.Models;
 
 namespace MyBankApiServerV2.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
         private readonly AppDbContext _context;
 
-        public EmployeeRepository(AppDbContext appDbContext)
+        public EmployeeRepository(AppDbContext appDbContext) : base(appDbContext)
         {
             _context = appDbContext;
         }
@@ -41,13 +41,12 @@ namespace MyBankApiServerV2.Repositories
 
         public Employee Get(int id)
         {
-            return _context.Employees.Find(id);
-
+            return this.FindByCondition(employee => employee.EId == id).FirstOrDefault();
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            return _context.Employees;
+            return this.FindAll().OrderBy(p => p.EId).ToList();
         }
 
         public int Update(Employee employee)

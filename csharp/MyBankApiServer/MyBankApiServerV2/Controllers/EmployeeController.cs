@@ -48,12 +48,18 @@ namespace MyBankApiServer.Controllers
             return _employeeRepository.Get(id);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<Employee> GetAll()
+        public IActionResult GetAll()
         {
-            return _employeeRepository.GetAll();
+            try
+            {
+                return Ok(_employeeRepository.GetAll());
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
-
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MyBankApiServerV2.Repositories
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         int Add(Employee employee);
         int Delete(int id);
