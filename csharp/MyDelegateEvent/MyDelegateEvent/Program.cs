@@ -8,6 +8,9 @@ namespace MyDelegateEvent
     {
         static void Main(string[] args)
         {
+
+
+
             #region LambdaClosure
             {
                 Action<string> action = LambdaClosure.MyConsoleWrite();
@@ -18,22 +21,26 @@ namespace MyDelegateEvent
                 action(null);
                 action(null);
 
-                Func<decimal?, decimal?, decimal?> func = LambdaClosure.Add(1.2m,2.2m);
-                Console.WriteLine(func(1.5m,2.5m));
-                Console.WriteLine(func(null,null));
+                Func<decimal?, decimal?, decimal?> func = LambdaClosure.Add(1.2m, 2.2m);
+                Console.WriteLine(func(1.5m, 2.5m));
+                Console.WriteLine(func(null, null));
 
             }
             #endregion
 
-            //Console.WriteLine("Hello World!");
-            //LambdaTest lambdaTest = new LambdaTest();
-            //lambdaTest.Start();
+            if (false)
+            {
+                Console.WriteLine("\n\n==========================");
+                LambdaTest lambdaTest = new LambdaTest();
+                lambdaTest.Start();
 
-            //LinqTest linqTest = new LinqTest();
-            //linqTest.CustomWhereTest();
+                LinqTest linqTest = new LinqTest();
+                linqTest.CustomWhereTest();
 
-            //MulticastDelegate eventTest = new MulticastDelegate();
-            //eventTest.Start();
+                MulticastDelegate eventTest = new MulticastDelegate();
+                eventTest.Start();
+            }
+
 
             #region Multicast usage
             {
