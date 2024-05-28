@@ -25,7 +25,9 @@ builder.Services.AddCors(option =>
 // EF Core
 builder.Services.AddDbContextPool<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyBankDBConnStr"));
+    string connStr = builder.Configuration.GetConnectionString("MyBankDBConnStr");
+    connStr = connStr.Replace("FOO", Environment.GetEnvironmentVariable("PWD"));
+    options.UseSqlServer();
 });
 
 var app = builder.Build();

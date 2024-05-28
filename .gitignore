@@ -9,15 +9,14 @@
 *.lock.json
 .vs/
 launch.json
-launchSettings.json
-appsettings.json
-appsettings.*.json
-
 
 # Build results
-csharp/*/*/bin
-csharp/*/*/obj
-csharp/*/packages
+binaries/
+[Dd]ebug*/
+[Rr]elease/
+build/
+bin/
+obj/
 
 # Visual Studio profiler
 *.psess
