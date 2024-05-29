@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameManagement.EntityFramework
 {
-    public class DataSeed
+    public static class DataSeed
     {
         private static readonly Guid[] _guids =
         {
