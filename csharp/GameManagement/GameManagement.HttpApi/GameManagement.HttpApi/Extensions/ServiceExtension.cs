@@ -1,4 +1,5 @@
-﻿using Microsoft.Identity.Client;
+﻿using GameManagement.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameManagement.Extensions
 {
@@ -17,6 +18,16 @@ namespace GameManagement.Extensions
                     .AllowAnyMethod()
                     .AllowAnyOrigin());
             });
+        }
+
+        public static void ConfigureSqlServerContext(this IServiceCollection services, IConfiguration config)
+        {
+            // Get connection string
+            var connStr = config.GetConnectionString("GameDb");
+            connStr = connStr.Replace("FOO", Environment.GetEnvironmentVariable("PWD"));
+
+            // Use Sql server 
+            services.AddDbContext<GameManagementDbContext>(builder => builder.UseSqlServer(connStr));
         }
     }
 }
