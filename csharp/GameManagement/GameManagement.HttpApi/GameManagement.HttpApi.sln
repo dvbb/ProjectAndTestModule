@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameManagement.HttpApi", "GameManagement.HttpApi\GameManagement.HttpApi.csproj", "{D561AA68-1AB4-4B4E-8D50-4226CDE94D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameManagement.HttpApi", "GameManagement.HttpApi\GameManagement.HttpApi.csproj", "{D561AA68-1AB4-4B4E-8D50-4226CDE94D6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameManagement.Entities", "GameMenagement.Entities\GameManagement.Entities.csproj", "{96F4B050-78FF-4146-8C81-FF8A89A669A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameManagement.Entities", "GameMenagement.Entities\GameManagement.Entities.csproj", "{96F4B050-78FF-4146-8C81-FF8A89A669A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameManagement.EntityFramework", "GameManagement.EntityFramework\GameManagement.EntityFramework.csproj", "{ED2C86B1-3A48-46DC-836C-C84610DC7B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameManagement.EntityFramework", "GameManagement.EntityFramework\GameManagement.EntityFramework.csproj", "{ED2C86B1-3A48-46DC-836C-C84610DC7B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameManagement.Contract", "GameManagement.Contract\GameManagement.Contract.csproj", "{136B9D91-280F-47B9-B72E-414A624A274A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{ED2C86B1-3A48-46DC-836C-C84610DC7B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED2C86B1-3A48-46DC-836C-C84610DC7B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED2C86B1-3A48-46DC-836C-C84610DC7B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{136B9D91-280F-47B9-B72E-414A624A274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136B9D91-280F-47B9-B72E-414A624A274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136B9D91-280F-47B9-B72E-414A624A274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136B9D91-280F-47B9-B72E-414A624A274A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

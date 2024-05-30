@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GameManagement.Contract\GameManagement.Contract.csproj" />
     <ProjectReference Include="..\GameManagement.EntityFramework\GameManagement.EntityFramework.csproj" />
     <ProjectReference Include="..\GameMenagement.Entities\GameManagement.Entities.csproj" />
   </ItemGroup>

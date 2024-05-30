@@ -15,6 +15,9 @@ builder.Services.ConfigureCors();
 // connect db
 builder.Services.ConfigureSqlServerContext(builder.Configuration);
 
+// Denpendency injection
+builder.Services.ConfigureWrapper();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

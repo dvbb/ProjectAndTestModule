@@ -1,4 +1,6 @@
-﻿using GameManagement.EntityFramework;
+﻿using GameManagement.Contract.IRepository;
+using GameManagement.EntityFramework;
+using GameManagement.EntityFramework.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameManagement.Extensions
@@ -28,6 +30,11 @@ namespace GameManagement.Extensions
 
             // Use Sql server 
             services.AddDbContext<GameManagementDbContext>(builder => builder.UseSqlServer(connStr));
+        }
+
+        public static void ConfigureWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper,RepositoryWrapper>();
         }
     }
 }
