@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using GameManagement.Contract.IRepository;
 using GameManagement.Entities.Dtos;
+using GameManagement.Entities.RequstFeatures;
 using GameMenagement.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GameManagement.HttpApi.Controllers
 {
@@ -22,12 +24,29 @@ namespace GameManagement.HttpApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("deprecated/all")]
         public async Task<IActionResult> GetAllPlayers()
         {
             try
             {
                 var players = await _repositoryWrapper.Player.GetAllPlayers();
+                var resuilt = _mapper.Map<IEnumerable<PlayerDto>>(players);
+                return Ok(resuilt);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPlayers([FromQuery] PlayerParameter parameter)
+        {
+            try
+            {
+                var players = await _repositoryWrapper.Player.GetPlayers(parameter);
+                Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(players.MetaData));
                 var resuilt = _mapper.Map<IEnumerable<PlayerDto>>(players);
                 return Ok(resuilt);
             }
@@ -167,7 +186,7 @@ namespace GameManagement.HttpApi.Controllers
                 }
 
                 _repositoryWrapper.Player.Delete(playerEntity);
-                int affectedRow = await  _repositoryWrapper.Save();
+                int affectedRow = await _repositoryWrapper.Save();
 
                 return Ok();
             }
