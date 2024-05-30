@@ -59,47 +59,47 @@ namespace GameManagement.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4c0fad31-4c9a-4880-8f1e-c31f1c4ddc34"),
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5839),
+                            Id = new Guid("b0464319-1102-4a6b-b25a-600e26d391e3"),
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7502),
                             Level = 99,
                             Nickname = "Code Man",
-                            PlayerId = new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"),
+                            PlayerId = new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"),
                             classes = "Mage"
                         },
                         new
                         {
-                            Id = new Guid("62ce51c8-5baa-4523-9396-25ad886593db"),
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5968),
+                            Id = new Guid("c37e010e-ad34-40e2-8150-95436b1647be"),
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7631),
                             Level = 99,
                             Nickname = "WZ",
-                            PlayerId = new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"),
+                            PlayerId = new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"),
                             classes = "Warrior"
                         },
                         new
                         {
-                            Id = new Guid("e7eed720-bc05-4fc9-9ded-cef58deb97ac"),
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5969),
+                            Id = new Guid("8b43ebef-15d7-4f1f-b967-ed665e5eb8e9"),
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7640),
                             Level = 29,
                             Nickname = "asaka",
-                            PlayerId = new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"),
+                            PlayerId = new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"),
                             classes = "Druid"
                         },
                         new
                         {
-                            Id = new Guid("22302531-0a2c-45ba-9e3f-030423d8ac8e"),
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5971),
+                            Id = new Guid("b52284ab-8e59-4d1a-b8e8-cc65af9e20c9"),
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7641),
                             Level = 5,
                             Nickname = "MyWon",
-                            PlayerId = new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"),
+                            PlayerId = new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"),
                             classes = "Mage"
                         },
                         new
                         {
-                            Id = new Guid("d7287182-6ce6-42ba-bf53-96d9d32f5304"),
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5979),
+                            Id = new Guid("e07576f4-5ece-418e-a1e0-a401812f5eaa"),
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7644),
                             Level = 95,
                             Nickname = "TBD",
-                            PlayerId = new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"),
+                            PlayerId = new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"),
                             classes = "Wizzard"
                         });
                 });
@@ -133,17 +133,17 @@ namespace GameManagement.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"),
+                            Id = new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"),
                             Account = "mw2021",
                             AccountType = "Free",
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(4941)
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(6634)
                         },
                         new
                         {
-                            Id = new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"),
+                            Id = new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"),
                             Account = "dc2021",
                             AccountType = "Free",
-                            DateCreated = new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(4959)
+                            DateCreated = new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(6645)
                         });
                 });
 

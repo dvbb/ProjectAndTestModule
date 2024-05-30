@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GameManagement.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class intialcreate : Migration
+    public partial class initalcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,8 +54,8 @@ namespace GameManagement.EntityFramework.Migrations
                 columns: new[] { "Id", "Account", "AccountType", "DateCreated" },
                 values: new object[,]
                 {
-                    { new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"), "mw2021", "Free", new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(4941) },
-                    { new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"), "dc2021", "Free", new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(4959) }
+                    { new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"), "mw2021", "Free", new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(6634) },
+                    { new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"), "dc2021", "Free", new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(6645) }
                 });
 
             migrationBuilder.InsertData(
@@ -63,11 +63,11 @@ namespace GameManagement.EntityFramework.Migrations
                 columns: new[] { "Id", "DateCreated", "Level", "Nickname", "PlayerId", "classes" },
                 values: new object[,]
                 {
-                    { new Guid("22302531-0a2c-45ba-9e3f-030423d8ac8e"), new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5971), 5, "MyWon", new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"), "Mage" },
-                    { new Guid("4c0fad31-4c9a-4880-8f1e-c31f1c4ddc34"), new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5839), 99, "Code Man", new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"), "Mage" },
-                    { new Guid("62ce51c8-5baa-4523-9396-25ad886593db"), new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5968), 99, "WZ", new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"), "Warrior" },
-                    { new Guid("d7287182-6ce6-42ba-bf53-96d9d32f5304"), new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5979), 95, "TBD", new Guid("f02a7e5a-0ea1-4c86-8106-cb6de77c4f22"), "Wizzard" },
-                    { new Guid("e7eed720-bc05-4fc9-9ded-cef58deb97ac"), new DateTime(2024, 5, 29, 10, 35, 21, 985, DateTimeKind.Local).AddTicks(5969), 29, "asaka", new Guid("6ab0d026-b026-4ef9-8727-2c19ba5c54d8"), "Druid" }
+                    { new Guid("8b43ebef-15d7-4f1f-b967-ed665e5eb8e9"), new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7640), 29, "asaka", new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"), "Druid" },
+                    { new Guid("b0464319-1102-4a6b-b25a-600e26d391e3"), new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7502), 99, "Code Man", new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"), "Mage" },
+                    { new Guid("b52284ab-8e59-4d1a-b8e8-cc65af9e20c9"), new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7641), 5, "MyWon", new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"), "Mage" },
+                    { new Guid("c37e010e-ad34-40e2-8150-95436b1647be"), new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7631), 99, "WZ", new Guid("621b65a6-6b42-4a1e-b8f6-5866ed523c9c"), "Warrior" },
+                    { new Guid("e07576f4-5ece-418e-a1e0-a401812f5eaa"), new DateTime(2024, 5, 30, 8, 52, 12, 254, DateTimeKind.Local).AddTicks(7644), 95, "TBD", new Guid("e5903e63-ce9a-4e42-886a-f4cbf7cff470"), "Wizzard" }
                 });
 
             migrationBuilder.CreateIndex(
