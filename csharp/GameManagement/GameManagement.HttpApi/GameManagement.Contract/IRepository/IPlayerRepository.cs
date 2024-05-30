@@ -10,5 +10,7 @@ namespace GameManagement.Contract.IRepository
     public interface IPlayerRepository : IBaseRepository<Player>
     {
         public Task<List<Player>> GetAllPlayers();
+        public Task<Player?> GetPlayerById(Guid playerId);
+        public Task<Player?> GetPlayerWithCharacters(Guid playerId);
     }
 }

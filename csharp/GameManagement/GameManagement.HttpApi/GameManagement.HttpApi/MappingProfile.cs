@@ -8,7 +8,14 @@ namespace GameManagement.HttpApi
     {
         public MappingProfile()
         {
+            // entity => dto
             CreateMap<Player, PlayerDto>();
+            CreateMap<Character, CharacterDto>();
+            CreateMap<Player, PlayerWithCharactersDto>();
+
+            // dto => entity
+            CreateMap<PlayerForCreationDto, Player>();
+            CreateMap<PlayerForUpdateDto, Player>();
         }
     }
 }

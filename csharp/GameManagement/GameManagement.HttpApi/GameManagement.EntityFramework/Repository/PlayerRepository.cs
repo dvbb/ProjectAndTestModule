@@ -15,9 +15,21 @@ namespace GameManagement.EntityFramework.Repository
         {
         }
 
-        public Task<List<Player>> GetAllPlayers()
+        public async Task<List<Player>> GetAllPlayers()
         {
-            return FindALL().OrderBy(p => p.Id).ToListAsync();
+            return await FindALL().OrderBy(p => p.Id).ToListAsync();
+        }
+
+        public async Task<Player?> GetPlayerById(Guid playerId)
+        {
+            return await FindByCondition(p => p.Id == playerId).FirstOrDefaultAsync();
+        }
+
+        public async Task<Player?> GetPlayerWithCharacters(Guid playerId)
+        {
+            return await FindByCondition(p => p.Id == playerId)
+                .Include(p=>p.Characters)
+                .FirstOrDefaultAsync();
         }
     }
 }
