@@ -13,6 +13,11 @@ namespace GameManagement.EntityFramework.Repository
         private IPlayerRepository _player;
         private ICharacterRepository _character;
 
+        public RepositoryWrapper(GameManagementDbContext context)
+        {
+            _context = context;
+        }
+
         public IPlayerRepository Player
         {
             get { return _player ??= new PlayerRepository(_context); }

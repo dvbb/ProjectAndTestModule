@@ -1,5 +1,6 @@
 ﻿using GameManagement.Contract.IRepository;
 using GameMenagement.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace GameManagement.EntityFramework.Repository
     {
         public PlayerRepository(GameManagementDbContext context) : base(context)
         {
+        }
+
+        public Task<List<Player>> GetAllPlayers()
+        {
+            return FindALL().OrderBy(p => p.Id).ToListAsync();
         }
     }
 }

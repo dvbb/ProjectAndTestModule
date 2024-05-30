@@ -2,7 +2,6 @@
 {
     public class Player
     {
-
         public Guid Id { get; set; }
         public string Account { get; set; }
         public string AccountType { get; set; }

@@ -1,4 +1,5 @@
 using GameManagement.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.ConfigureSqlServerContext(builder.Configuration);
 
 // Denpendency injection
 builder.Services.ConfigureWrapper();
+
+// AutoMapper
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
