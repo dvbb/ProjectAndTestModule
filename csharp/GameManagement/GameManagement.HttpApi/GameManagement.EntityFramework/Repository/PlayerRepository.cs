@@ -1,6 +1,7 @@
 ﻿using GameManagement.Contract.IRepository;
 using GameManagement.Entities.ReponseType;
 using GameManagement.Entities.RequstFeatures;
+using GameManagement.EntityFramework.Repository.Extension;
 using GameMenagement.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,10 +30,13 @@ namespace GameManagement.EntityFramework.Repository
 
         public async Task<PagedList<Player>> GetPlayers(PlayerParameter parameter)
         {
-            return await FindALL().
-                OrderBy(p => p.Id)
+            return await FindByCondition(player =>
+                    player.DateCreated >= parameter.MinDateCreate &&
+                    player.DateCreated <= parameter.MaxDateCreate
+                ).SearchByAccount(parameter.Account)
+                .OrderByQuery(parameter.OrderBy)
                 .Skip((parameter.PageNumber - 1) * parameter.PageSize)
-                .ToPagedList(parameter.PageNumber,parameter.PageSize);
+                .ToPagedList(parameter.PageNumber, parameter.PageSize);
         }
 
         public async Task<Player?> GetPlayerWithCharacters(Guid playerId)

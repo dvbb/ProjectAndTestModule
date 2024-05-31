@@ -17,5 +17,6 @@ namespace GameManagement.Entities.RequstFeatures
             get => _pagesize;
             set => _pagesize = value > _maxPageSize ? _maxPageSize : value;
         }
+        public string OrderBy { get; set; }
     }
 }
