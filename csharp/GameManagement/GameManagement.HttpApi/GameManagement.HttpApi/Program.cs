@@ -18,6 +18,7 @@ builder.Services.ConfigureSqlServerContext(builder.Configuration);
 
 // Denpendency injection
 builder.Services.ConfigureWrapper();
+//builder.Services.ConfigureRedis(builder.Configuration);
 
 // AutoMapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

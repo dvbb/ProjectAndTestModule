@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using CSRedis;
 using GameManagement.Contract.IRepository;
 using GameManagement.Entities.Dtos;
 using GameManagement.Entities.RequstFeatures;
+using GameManagement.HttpApi.Redis;
 using GameMenagement.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +61,33 @@ namespace GameManagement.HttpApi.Controllers
                 _logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("redis/test/{datas}")]
+        public async Task<IActionResult> RedisTest(string datas)
+        {
+            RedisClient client = new RedisClient("127.0.0.1", 6379);
+            Random random = new Random();
+            client.Set(random.Next(9999).ToString(), datas);
+
+          
+            //读取
+            string name = client.Get("name");
+            string pwd = client.Get("password");
+
+            //存储
+            client.Set("name", "11");
+            client.Set("password", "22");
+
+            //存list集合
+            List<int> ls = new List<int>();
+            ls.Add(131);
+            ls.Add(2564);
+            ls.Add(5465);
+            client.Set("1", ls);
+
+
+            return Ok("");
         }
     }
 }
