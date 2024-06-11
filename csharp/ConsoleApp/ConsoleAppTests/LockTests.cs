@@ -11,68 +11,43 @@ namespace ConsoleAppTests
     internal class LockTests
     {
         private static readonly object _lockme = new object();
-        private static List<string> strings = new List<string>();
+        private static int _i = 0;
 
         [SetUp]
         public void SetUp()
         {
-            strings.Clear();
+            _i = 0;
         }
 
         [Test]
         public async Task NoLockTest()
         {
-            List<Task> tasks = new List<Task>();
-            tasks.Add(AddNow());
-            tasks.Add(AddNow2());
-            tasks.Add(AddNow3());
-            Task.WaitAll(tasks.ToArray());
-
-            foreach (var item in strings)
+            for (int i = 0; i < 100; i++)
             {
-                await Console.Out.WriteLineAsync(item);
+                 Task.Run(() => { _i++; });
+                 Task.Run(() => { _i++; });
             }
+            Thread.Sleep(1000);
+            Console.Out.WriteLine(_i);
         }
 
         [Test]
         public async Task LockTest()
         {
-            List<Task> tasks = new List<Task>();
-            tasks.Add(AddNow_With_Lock());
-            tasks.Add(AddNow_With_Lock());
-            tasks.Add(AddNow_With_Lock());
-            tasks.Add(AddNow_With_Lock());
-            tasks.Add(AddNow_With_Lock());
-            Task.WaitAll(tasks.ToArray());
-
-            foreach (var item in strings)
+            for (int i = 0; i < 100; i++)
             {
-                await Console.Out.WriteLineAsync(item);
+                Task.Run(ISelfPlus);
+                Task.Run(ISelfPlus);
             }
+            Thread.Sleep(1000);
+            Console.Out.WriteLine(_i);
         }
 
-        public static async Task AddNow()
-        {
-            await Task.Delay(1000);
-            strings.Add(DateTime.Now.ToString());
-        }
-        public static async Task AddNow2()
-        {
-            await Task.Delay(2000);
-            strings.Add(DateTime.Now.ToString());
-        }
-        public static async Task AddNow3()
-        {
-            await Task.Delay(5000);
-            strings.Add(DateTime.Now.ToString());
-        }
-
-        public static async Task AddNow_With_Lock()
+        private void ISelfPlus()
         {
             lock (_lockme)
             {
-                Task.Delay(1000);
-                strings.Add(DateTime.Now.ToString());
+                _i++;
             }
         }
     }

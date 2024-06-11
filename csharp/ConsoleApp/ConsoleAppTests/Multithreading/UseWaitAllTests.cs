@@ -11,6 +11,7 @@ namespace ConsoleApp.Multithreading.Tests
     public class UseWaitAllTests
     {
         private static UseWaitAll _member;
+        private static int _i;
 
         [SetUp]
         public void SetUp()
@@ -30,6 +31,18 @@ namespace ConsoleApp.Multithreading.Tests
                Task.WaitAll(tasks);
             };
             Watch(action);
+        }
+
+        [Test]
+        public async Task NoAwait()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Task.Run(() => { _i++; });
+                Task.Run(() => { _i++; });
+            }
+            Thread.Sleep(1000);
+            Console.Out.WriteLine(_i); //有时候 _i 不等于 200
         }
 
         private static void Watch(Action action)
