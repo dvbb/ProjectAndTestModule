@@ -11,6 +11,14 @@ public class Plyaer : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float moveSpeed;
 
+    [Header("DashInfo")]
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float dashTime;
+
+    [SerializeField] private float dashColdDown;
+    private float dashColdDownTimer;
+
     private bool facingRight = true;
     private int facingDirection = 1;
     private float xInput;
@@ -28,6 +36,8 @@ public class Plyaer : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         jumpForce = 5;
         moveSpeed = 5;
+        dashSpeed = 15;
+        dashColdDown = 3;
     }
 
     // Update is called once per frame
@@ -36,6 +46,9 @@ public class Plyaer : MonoBehaviour
         Movement();
         CheckInput();
         CollisionChecks();
+
+        dashTime -= Time.deltaTime;
+        dashColdDownTimer -= Time.deltaTime;
 
         FlipContraller();
         AnimatorControllers();
@@ -58,11 +71,31 @@ public class Plyaer : MonoBehaviour
         {
             Jump();
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            DashAbility();
+        }
+    }
+
+    private void DashAbility()
+    {
+        if (dashColdDownTimer < 0)
+        {
+            dashColdDownTimer = dashColdDown;
+            dashTime = dashDuration;
+        }
     }
 
     private void Movement()
     {
-        rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
+        if (dashTime > 0)
+        {
+            rb.velocity = new Vector2(xInput * dashSpeed, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
+        }
     }
 
     private void Jump()
@@ -74,8 +107,10 @@ public class Plyaer : MonoBehaviour
     private void AnimatorControllers()
     {
         isMoving = rb.velocity.x != 0;
+        animator.SetFloat("yVelocity", rb.velocity.y);
         animator.SetBool("isGrounded", isGrounded);
         animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isDashing", dashTime > 0);
     }
 
     private void Flip()
