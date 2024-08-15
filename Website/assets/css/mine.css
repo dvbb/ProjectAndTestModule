@@ -1,0 +1,96 @@
+.video-container {
+    position: relative;
+    width: 100%;
+    /* 根据需要调整宽度 */
+}
+
+.video-container video {
+    width: 100%;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* 确保视频下方的交互，如点击事件，仍然发生在视频上 */
+}
+
+.overlay img {
+    width: 50%;
+    /* 根据需要调整图片大小 */
+    height: auto;
+    position: relative;
+    top: 50%;
+    /* 将图片垂直居中 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 使用CSS变换居中 */
+}
+
+
+.footer {
+    width: 100%;
+}
+
+.footer .left {
+    padding-top: 20px;
+    width: 50%;
+    float: left;
+}
+
+.footer .right {
+    padding-top: 20px;
+    text-align: center;
+    float: right;
+}
+
+.footer .right .block {
+    height: 100%;
+    width: 100px;
+    margin-right: 10px;
+    float: left;
+    text-align: center;
+}
+
+.footer .right .block img {
+    height: 100px;
+    width: 100px;
+}
+
+
+
+
+#container{
+    background-color: rgba(240, 240, 236, 0.781);
+    z-index: -1;/*设置图层为-2*/
+}
+
+
+
+/* 背景蒙版 */
+.mask_bg1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;/*设置图层为-2*/
+    width: 100%;
+    height: 320%;
+    /* background:  no-repeat 0 0; */
+    background-image: url("../img/background4.jpg");
+    background-size: cover;     /*背景size设置为：cover，可以填满屏幕*/
+    filter: blur(1px);     /*设置50px的模糊*/
+}
+
+body{
+    background-image: url("../img/repeat_background.jpg");
+    top: 0;
+    left: 0;
+    z-index: -3;/*设置图层为-2*/
+    width: 100%;
+    background-size: contain;     /*背景size设置为：cover，可以填满屏幕*/
+    background-repeat: repeat;
+}

@@ -1,0 +1,53 @@
+.mask_bg_product{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;/*设置图层为-2*/
+    width: 100%;
+    height: 180%;
+    /* background:  no-repeat 0 0; */
+    background-image: url("../img/background2.jpg");
+    background-size: cover;     /*背景size设置为：cover，可以填满屏幕*/
+    filter: blur(1px);     /*设置50px的模糊*/
+}
+
+body{
+    background-image: url("../img/repeat_background.jpg");
+    top: 0;
+    left: 0;
+    z-index: -2;/*设置图层为-2*/
+    width: 100%;
+    background-size: contain;     /*背景size设置为：cover，可以填满屏幕*/
+    background-repeat: repeat;
+}
+
+.container .product_Block{
+    height: 300px;
+    padding-top: 50px;
+    float: left;
+}
+
+.container .product_Block .left{
+    width: 30%;
+    float: left;
+}
+
+.container .product_Block .left img{
+    width: 100%;
+    height: 100%;
+}
+
+.container .product_Block .right{
+    padding-left: 20px;
+    width: 70%;
+    float: left;
+}
+
+.container .product_Block .right a{
+    font-size: 25px;
+}
+
+.container .product_Block .right span{
+    font-size: 25px;
+}
+

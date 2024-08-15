@@ -1,0 +1,33 @@
+body{
+    background-image: url("../img/repeat_background.jpg");
+    top: 0;
+    left: 0;
+    z-index: -2;/*设置图层为-2*/
+    width: 100%;
+    background-size: contain;     /*背景size设置为：cover，可以填满屏幕*/
+    background-repeat: repeat;
+}
+
+
+.news_info {
+    font-size: 18px;
+}
+
+.news_info p {
+    text-indent: 2em;
+}
+
+.news_img img {
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+}
+
+#container{
+    padding-bottom: 20px;
+}

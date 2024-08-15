@@ -1,0 +1,42 @@
+.mask_bg_culture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    /*设置图层为-2*/
+    width: 100%;
+    height: 170%;
+    /* background:  no-repeat 0 0; */
+    background-image: url("../img/background4.jpg");
+    background-size: cover;
+    /*背景size设置为：cover，可以填满屏幕*/
+    filter: blur(1px);
+    /*设置50px的模糊*/
+}
+
+.container .news_Block {
+    float: left;
+    background-color: rgba(240, 240, 236, 0.781);
+    z-index: -1;/*设置图层为-2*/
+    margin-top: 20px;
+}
+
+.container .news_Block .left {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 70%;
+    float: left;
+}
+
+.container .news_Block .left a {    
+    font-size: 25px;
+}
+
+.container .news_Block .left p {
+    font-size: 20px;
+}
+
+.container .news_Block .right {
+    width: 30%;
+    float: left;
+}
