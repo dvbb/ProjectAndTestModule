@@ -1,0 +1,42 @@
+.mask_bg_culture{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;/*设置图层为-2*/
+    width: 100%;
+    height: 200%;
+    /* background:  no-repeat 0 0; */
+    background-image: url("../img/background1.jpg");
+    background-size: cover;     /*背景size设置为：cover，可以填满屏幕*/
+    filter: blur(1px);     /*设置50px的模糊*/
+}
+
+.banner{
+    float:left;
+    width: 100%;
+}
+
+.mainContainer{
+    float:left;
+    width: 100%;
+    background-image: url("../img/background1.jpg");
+    z-index: -2;/*设置图层为-2*/
+    background-size: cover;     /*背景size设置为：cover，可以填满屏幕*/
+}
+
+.container .culture_title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color:rgb(58, 50, 3);
+}
+
+.container .cultureBlock{
+    padding: 50px;
+    font-size: 18px;
+}
+
+.container .cultureBlock span{
+    font-size: 22px;
+    color: gray;
+}
